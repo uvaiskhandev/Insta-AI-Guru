@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Free Instagram AI tool to generate captions, bios, hashtags, and post ideas with a premium mobile-friendly experience." />
+  <meta name="keywords" content="Instagram caption generator, Instagram bio generator, hashtag generator, AI Instagram tool, free caption maker" />
+  <meta name="author" content="Uvais Khan" />
+  <meta name="theme-color" content="#0b0b12" />
+  <title>Insta AI Guru | Caption, Bio & Hashtag Generator</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="bg-orb orb-1"></div>
+  <div class="bg-orb orb-2"></div>
+  <div class="grid-overlay"></div>
+
+  <header class="site-header">
+    <nav class="nav container">
+      <a href="#" class="brand">
+        <span class="brand-mark">✦</span>
+        <span>Insta AI Guru</span>
+      </a>
+
+      <div class="nav-links">
+        <a href="#features">Features</a>
+        <a href="#generator">Generator</a>
+        <a href="#trending">Trending</a>
+      </div>
+
+      <button id="themeToggle" class="theme-btn" aria-label="Toggle theme" type="button">🌙</button>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero container">
+      <div class="hero-left">
+        <span class="eyebrow">AI-powered Instagram growth toolkit</span>
+        <h1>Create <span class="gradient-text">captions, bios, hashtags</span> that feel premium.</h1>
+        <p class="hero-text">
+          Generate polished Instagram content in seconds with a clean, mobile-first experience.
+          Built for creators, brands, shops, and personal pages.
+        </p>
+
+        <div class="hero-actions">
+          <a href="#generator" class="btn btn-primary">Start Generating</a>
+          <a href="#features" class="btn btn-secondary">See Features</a>
+        </div>
+
+        <div class="stats-wrap">
+          <div class="stat-card glass">
+            <strong id="creditCount">2</strong>
+            <span>Free Credits</span>
+          </div>
+          <div class="stat-card glass">
+            <strong>AI</strong>
+            <span>Smart Suggestions</span>
+          </div>
+          <div class="stat-card glass">
+            <strong>SEO</strong>
+            <span>Fast & Responsive</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <div class="preview-card glass">
+          <div class="preview-top">
+            <span class="dot red"></span>
+            <span class="dot yellow"></span>
+            <span class="dot green"></span>
+          </div>
+          <div class="preview-body">
+            <p class="preview-label">Live AI Style Preview</p>
+            <h3 id="typingText">Captions that convert. Bios that impress.</h3>
+            <div class="preview-output">
+              ✨ Turning simple ideas into scroll-stopping Instagram content.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="features" class="features container">
+      <div class="section-heading">
+        <span class="section-tag">Features</span>
+        <h2>Everything needed for a strong Instagram content tool</h2>
+      </div>
+
+      <div class="feature-grid">
+        <article class="feature-card glass">
+          <h3>Caption Generator</h3>
+          <p>Generate engaging short, long, emotional, business, and viral-style captions.</p>
+        </article>
+        <article class="feature-card glass">
+          <h3>Bio Generator</h3>
+          <p>Create stylish bios for creator, business, influencer, student, fashion, and shop profiles.</p>
+        </article>
+        <article class="feature-card glass">
+          <h3>Hashtag Generator</h3>
+          <p>Get niche + trending hashtags that match your topic and improve discoverability.</p>
+        </article>
+        <article class="feature-card glass">
+          <h3>2-Credit Free Access</h3>
+          <p>Simple usage control with visible remaining credits and lock screen after limit.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="generator" class="generator container">
+      <div class="section-heading left-align">
+        <span class="section-tag">Generator</span>
+        <h2>Tell the AI what you need</h2>
+      </div>
+
+      <div class="generator-wrap">
+        <div class="form-card glass">
+          <div class="field-group">
+            <label for="toolType">Select Tool</label>
+            <select id="toolType">
+              <option value="caption">Caption Generator</option>
+              <option value="bio">Bio Generator</option>
+              <option value="hashtags">Hashtag Generator</option>
+              <option value="ideas">Post Ideas</option>
+            </select>
+          </div>
+
+          <div class="field-group">
+            <label for="tone">Choose Tone</label>
+            <select id="tone">
+              <option value="professional">Professional</option>
+              <option value="viral">Viral</option>
+              <option value="luxury">Luxury</option>
+              <option value="friendly">Friendly</option>
+              <option value="funny">Funny</option>
+              <option value="emotional">Emotional</option>
+            </select>
+          </div>
+
+          <div class="field-group">
+            <label for="category">Category</label>
+            <select id="category">
+              <option value="fashion">Fashion</option>
+              <option value="business">Business</option>
+              <option value="creator">Creator</option>
+              <option value="travel">Travel</option>
+              <option value="fitness">Fitness</option>
+              <option value="education">Education</option>
+              <option value="shop">Shop</option>
+              <option value="personal">Personal</option>
+            </select>
+          </div>
+
+          <div class="field-group">
+            <label for="inputText">Enter Topic / Details</label>
+            <textarea id="inputText" rows="7" placeholder="Example: Hand embroidered saree collection launch for wedding season, luxury and elegant tone, include emojis."></textarea>
+          </div>
+
+          <div class="form-bottom">
+            <button id="generateBtn" class="btn btn-primary full" type="button">Generate with AI</button>
+            <button id="clearBtn" class="btn btn-secondary full" type="button">Clear</button>
+          </div>
+
+          <p class="credit-note">Each generation uses 1 credit. New users get 2 free credits.</p>
+        </div>
+
+        <div class="output-card glass">
+          <div class="output-head">
+            <div>
+              <p class="output-title">Generated Output</p>
+              <span class="output-subtitle">Premium result will appear here</span>
+            </div>
+            <span id="statusBadge" class="status-badge idle">Idle</span>
+          </div>
+
+          <div id="outputArea" class="output-area">
+            <div class="placeholder-box">
+              <h3>Ready to create ✨</h3>
+              <p>Choose a tool, enter your topic, and get premium results.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="trending" class="trending container">
+      <div class="section-heading">
+        <span class="section-tag">Trending Bios</span>
+        <h2>Ready-made ideas users love</h2>
+      </div>
+
+      <div class="trend-grid">
+        <div class="trend-card glass">✨ Dream big. Post smart. Stay real. 💫</div>
+        <div class="trend-card glass">🚀 Building my vision one post at a time.</div>
+        <div class="trend-card glass">💼 Business mind. Creative heart. Digital soul.</div>
+        <div class="trend-card glass">📍Creating, learning, and glowing daily.</div>
+        <div class="trend-card glass">👑 Style, confidence, and a little chaos.</div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-wrap">
+      <p>© 2026 Insta AI Guru. Built for creators and brands.</p>
+      <a href="#generator">Use the Tool</a>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
