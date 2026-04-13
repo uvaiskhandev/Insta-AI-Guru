@@ -1,312 +1,341 @@
-const toolType = document.getElementById("toolType");
-const tone = document.getElementById("tone");
-const category = document.getElementById("category");
-const inputText = document.getElementById("inputText");
-const generateBtn = document.getElementById("generateBtn");
-const clearBtn = document.getElementById("clearBtn");
-const outputArea = document.getElementById("outputArea");
-const creditCount = document.getElementById("creditCount");
-const statusBadge = document.getElementById("statusBadge");
-const themeToggle = document.getElementById("themeToggle");
-const typingText = document.getElementById("typingText");
+"use strict";
 
-const CREDIT_KEY = "instaboost_credits";
-const THEME_KEY = "instaboost_theme";
-const DEFAULT_CREDITS = 2;
+document.addEventListener("DOMContentLoaded", () => {
+  /* =========================
+     Helpers
+  ========================= */
+  const $ = (selector, parent = document) => parent.querySelector(selector);
+  const $$ = (selector, parent = document) => [...parent.querySelectorAll(selector)];
 
-const previewTexts = [
-  "Captions that convert. Bios that impress.",
-  "Create premium Instagram content in seconds.",
-  "Hashtags, ideas, and bios — all in one place.",
-  "Give your Instagram a smarter AI-powered voice."
-];
+  const showToast = (message = "Done!") => {
+    let toast = $(".custom-toast");
 
-let isGenerating = false;
+    if (!toast) {
+      toast = document.createElement("div");
+      toast.className = "custom-toast";
+      document.body.appendChild(toast);
 
-function initCredits() {
-  const saved = localStorage.getItem(CREDIT_KEY);
+      Object.assign(toast.style, {
+        position: "fixed",
+        bottom: "20px",
+        right: "20px",
+        padding: "12px 18px",
+        borderRadius: "12px",
+        background: "rgba(0,0,0,0.85)",
+        color: "#fff",
+        fontSize: "14px",
+        fontWeight: "500",
+        zIndex: "9999",
+        opacity: "0",
+        transform: "translateY(20px)",
+        transition: "all 0.3s ease"
+      });
+    }
 
-  if (saved === null) {
-    localStorage.setItem(CREDIT_KEY, String(DEFAULT_CREDITS));
-    creditCount.textContent = DEFAULT_CREDITS;
-    return;
+    toast.textContent = message;
+    toast.style.opacity = "1";
+    toast.style.transform = "translateY(0)";
+
+    clearTimeout(toast._timer);
+    toast._timer = setTimeout(() => {
+      toast.style.opacity = "0";
+      toast.style.transform = "translateY(20px)";
+    }, 2200);
+  };
+
+  /* =========================
+     Sticky Header
+  ========================= */
+  const header = $("header");
+  const handleHeader = () => {
+    if (!header) return;
+    if (window.scrollY > 20) {
+      header.classList.add("scrolled");
+    } else {
+      header.classList.remove("scrolled");
+    }
+  };
+  handleHeader();
+  window.addEventListener("scroll", handleHeader);
+
+  /* =========================
+     Mobile Menu Toggle
+  ========================= */
+  const menuBtn = $("#menu-btn, .menu-btn, .hamburger");
+  const navMenu = $("#nav-menu, .nav-menu, nav ul, .navbar ul");
+
+  if (menuBtn && navMenu) {
+    menuBtn.addEventListener("click", () => {
+      navMenu.classList.toggle("active");
+      menuBtn.classList.toggle("active");
+      document.body.classList.toggle("menu-open");
+    });
+
+    $$("a", navMenu).forEach((link) => {
+      link.addEventListener("click", () => {
+        navMenu.classList.remove("active");
+        menuBtn.classList.remove("active");
+        document.body.classList.remove("menu-open");
+      });
+    });
   }
 
-  const parsed = Number(saved);
-  const safeCredits = Number.isFinite(parsed) && parsed >= 0 ? parsed : DEFAULT_CREDITS;
-  localStorage.setItem(CREDIT_KEY, String(safeCredits));
-  creditCount.textContent = safeCredits;
-}
+  /* =========================
+     Smooth Scroll
+  ========================= */
+  $$('a[href^="#"]').forEach((anchor) => {
+    anchor.addEventListener("click", function (e) {
+      const targetId = this.getAttribute("href");
+      if (!targetId || targetId === "#") return;
 
-function getCredits() {
-  const value = Number(localStorage.getItem(CREDIT_KEY));
-  return Number.isFinite(value) && value >= 0 ? value : DEFAULT_CREDITS;
-}
+      const target = $(targetId);
+      if (!target) return;
 
-function setCredits(value) {
-  const safeValue = Math.max(0, Number(value) || 0);
-  localStorage.setItem(CREDIT_KEY, String(safeValue));
-  creditCount.textContent = safeValue;
-}
+      e.preventDefault();
 
-function setStatus(type, text) {
-  statusBadge.className = `status-badge ${type}`;
-  statusBadge.textContent = text;
-}
+      const offset = header ? header.offsetHeight : 0;
+      const topPos = target.getBoundingClientRect().top + window.pageYOffset - offset;
 
-function showToast(message) {
-  const oldToast = document.querySelector(".toast");
-  if (oldToast) oldToast.remove();
-
-  const toast = document.createElement("div");
-  toast.className = "toast";
-  toast.textContent = message;
-  document.body.appendChild(toast);
-
-  setTimeout(() => {
-    toast.remove();
-  }, 2200);
-}
-
-function escapeHtml(text) {
-  const div = document.createElement("div");
-  div.textContent = String(text ?? "");
-  return div.innerHTML;
-}
-
-function renderPlaceholder(title, message) {
-  outputArea.innerHTML = `
-    <div class="placeholder-box">
-      <h3>${escapeHtml(title)}</h3>
-      <p>${escapeHtml(message)}</p>
-    </div>
-  `;
-}
-
-function renderResults(items) {
-  outputArea.innerHTML = "";
-
-  if (!Array.isArray(items) || items.length === 0) {
-    renderPlaceholder("No output received", "Please try again with a different prompt.");
-    return;
-  }
-
-  items.forEach((item, index) => {
-    const wrapper = document.createElement("div");
-    wrapper.className = "result-item";
-
-    wrapper.innerHTML = `
-      <p>${escapeHtml(item)}</p>
-      <div class="result-actions">
-        <button type="button" class="copy-btn" data-copy-index="${index}">Copy</button>
-      </div>
-    `;
-
-    outputArea.appendChild(wrapper);
+      window.scrollTo({
+        top: topPos,
+        behavior: "smooth"
+      });
+    });
   });
 
-  const copyButtons = document.querySelectorAll(".copy-btn");
-  copyButtons.forEach((button) => {
-    button.addEventListener("click", async () => {
-      const index = Number(button.dataset.copyIndex);
-      const text = items[index] || "";
+  /* =========================
+     Active Nav Link on Scroll
+  ========================= */
+  const sections = $$("section[id]");
+  const navLinks = $$('nav a[href^="#"], .nav-menu a[href^="#"], .navbar a[href^="#"]');
 
+  const activateNavLink = () => {
+    const scrollY = window.pageYOffset;
+    let currentId = "";
+
+    sections.forEach((section) => {
+      const sectionTop = section.offsetTop - 140;
+      const sectionHeight = section.offsetHeight;
+      if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
+        currentId = section.getAttribute("id");
+      }
+    });
+
+    navLinks.forEach((link) => {
+      link.classList.remove("active");
+      const href = link.getAttribute("href");
+      if (href === `#${currentId}`) {
+        link.classList.add("active");
+      }
+    });
+  };
+
+  activateNavLink();
+  window.addEventListener("scroll", activateNavLink);
+
+  /* =========================
+     Dark / Light Theme Toggle
+  ========================= */
+  const themeBtn = $("#theme-toggle, .theme-toggle");
+  const root = document.documentElement;
+  const savedTheme = localStorage.getItem("theme");
+
+  if (savedTheme === "light") {
+    root.classList.add("light-mode");
+  } else {
+    root.classList.remove("light-mode");
+  }
+
+  if (themeBtn) {
+    themeBtn.addEventListener("click", () => {
+      root.classList.toggle("light-mode");
+      const isLight = root.classList.contains("light-mode");
+      localStorage.setItem("theme", isLight ? "light" : "dark");
+      showToast(isLight ? "Light mode enabled" : "Dark mode enabled");
+    });
+  }
+
+  /* =========================
+     Reveal on Scroll
+  ========================= */
+  const revealElements = $$(".reveal, .card, .feature-card, .service-card, .box");
+
+  if (revealElements.length) {
+    const revealObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("show");
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
+
+    revealElements.forEach((el) => revealObserver.observe(el));
+  }
+
+  /* =========================
+     FAQ Toggle
+  ========================= */
+  const faqItems = $$(".faq-item");
+
+  faqItems.forEach((item) => {
+    const question = $(".faq-question", item);
+    if (!question) return;
+
+    question.addEventListener("click", () => {
+      item.classList.toggle("active");
+    });
+  });
+
+  /* =========================
+     Copy Buttons
+     HTML example:
+     <button class="copy-btn" data-copy="Text to copy">Copy</button>
+     or
+     <button class="copy-btn" data-target="#output1">Copy</button>
+  ========================= */
+  const copyButtons = $$(".copy-btn");
+
+  copyButtons.forEach((btn) => {
+    btn.addEventListener("click", async () => {
       try {
-        if (navigator.clipboard && window.isSecureContext) {
-          await navigator.clipboard.writeText(text);
-        } else {
-          const temp = document.createElement("textarea");
-          temp.value = text;
-          temp.setAttribute("readonly", "");
-          temp.style.position = "absolute";
-          temp.style.left = "-9999px";
-          document.body.appendChild(temp);
-          temp.select();
-          document.execCommand("copy");
-          temp.remove();
+        let textToCopy = btn.getAttribute("data-copy") || "";
+
+        const targetSelector = btn.getAttribute("data-target");
+        if (!textToCopy && targetSelector) {
+          const targetEl = $(targetSelector);
+          if (targetEl) {
+            textToCopy = targetEl.innerText.trim();
+          }
         }
 
-        showToast("Text copied ✅");
+        if (!textToCopy) {
+          showToast("Nothing to copy");
+          return;
+        }
+
+        await navigator.clipboard.writeText(textToCopy);
+
+        const oldText = btn.innerText;
+        btn.innerText = "Copied!";
+        btn.disabled = true;
+
+        showToast("Text copied successfully");
+
+        setTimeout(() => {
+          btn.innerText = oldText;
+          btn.disabled = false;
+        }, 1400);
       } catch (error) {
         console.error("Copy failed:", error);
-        showToast("Copy failed ❌");
+        showToast("Copy failed");
       }
     });
   });
-}
 
-function renderLimitReached() {
-  outputArea.innerHTML = `
-    <div class="limit-box">
-      <h3>Free credits finished</h3>
-      <p>You have used your 2 free credits. Add ads or payment unlock here later.</p>
-      <button type="button" id="resetCreditsBtn" class="small-btn">Reset Demo Credits</button>
-    </div>
-  `;
+  /* =========================
+     Simple Form Validation
+  ========================= */
+  const form = $("#contact-form, form");
 
-  const resetBtn = document.getElementById("resetCreditsBtn");
-  if (resetBtn) {
-    resetBtn.addEventListener("click", () => {
-      setCredits(DEFAULT_CREDITS);
-      setStatus("idle", "Idle");
-      renderPlaceholder("Credits restored ✨", "You can test the generator again.");
-      showToast("Demo credits restored");
+  if (form) {
+    form.addEventListener("submit", (e) => {
+      const requiredFields = $$("[required]", form);
+      let isValid = true;
+
+      requiredFields.forEach((field) => {
+        const value = field.value.trim();
+        field.classList.remove("input-error");
+
+        if (!value) {
+          isValid = false;
+          field.classList.add("input-error");
+        }
+
+        if (field.type === "email" && value) {
+          const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          if (!emailPattern.test(value)) {
+            isValid = false;
+            field.classList.add("input-error");
+          }
+        }
+      });
+
+      if (!isValid) {
+        e.preventDefault();
+        showToast("Please fill all required fields correctly");
+      }
     });
   }
-}
 
-function buildFallbackOutput(type, toneValue, categoryValue, prompt) {
-  const base = prompt.trim() || `${categoryValue} Instagram content`;
+  /* =========================
+     Scroll To Top Button
+  ========================= */
+  const topBtn = $("#scrollTopBtn, .scroll-top");
 
-  if (type === "caption") {
-    return [
-      `✨ ${base} — crafted with a ${toneValue} vibe to stand out and connect instantly.`,
-      `🔥 ${base} but make it ${toneValue}. Clean visuals, strong message, and the perfect vibe for your audience.`,
-      `💫 ${base} that feels ${toneValue}, stylish, and scroll-stopping from the first line.`
+  const handleTopBtn = () => {
+    if (!topBtn) return;
+    if (window.scrollY > 300) {
+      topBtn.classList.add("show");
+    } else {
+      topBtn.classList.remove("show");
+    }
+  };
+
+  if (topBtn) {
+    window.addEventListener("scroll", handleTopBtn);
+    handleTopBtn();
+
+    topBtn.addEventListener("click", () => {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+    });
+  }
+
+  /* =========================
+     Typing Effect
+     HTML example:
+     <span id="typing-text"></span>
+  ========================= */
+  const typingEl = $("#typing-text");
+
+  if (typingEl) {
+    const words = [
+      "Instagram Captions",
+      "Bio Generator",
+      "Hashtag Ideas",
+      "AI Content Tools"
     ];
-  }
 
-  if (type === "bio") {
-    return [
-      `✨ ${toneValue} ${categoryValue} account | Creating with purpose 💫`,
-      `🚀 ${categoryValue} vibes | ${toneValue} energy | Here to grow and inspire`,
-      `💼 ${categoryValue} focused | Smart content | Big vision | DM for collabs`
-    ];
-  }
+    let wordIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
 
-  if (type === "hashtags") {
-    return [
-      `#${categoryValue} #instagramgrowth #viralcontent #contentcreator #explorepage #trendingnow #socialmedia #instatips #digitalgrowth #reelsideas`,
-      `#${categoryValue}style #brandcontent #creativepost #growonline #instadaily #newpost #contentstrategy #audiencegrowth #foryou #aestheticcontent`,
-      `#${categoryValue}business #captionideas #bioideas #smartmarketing #creatorcommunity #engagementboost #socialsuccess #contentplan #instaai #postbetter`
-    ];
-  }
+    const typeEffect = () => {
+      const currentWord = words[wordIndex];
+      const visibleText = currentWord.substring(0, charIndex);
+      typingEl.textContent = visibleText;
 
-  return [
-    `1. Show behind-the-scenes of ${base}.`,
-    `2. Share a before/after post related to ${base}.`,
-    `3. Make a quick reel with 3 useful tips around ${base}.`
-  ];
-}
-
-async function safeReadJson(response) {
-  const raw = await response.text();
-
-  try {
-    return raw ? JSON.parse(raw) : {};
-  } catch {
-    return { error: raw || "Invalid server response" };
-  }
-}
-
-async function generateWithAI() {
-  if (isGenerating) return;
-
-  const credits = getCredits();
-  const text = inputText.value.trim();
-
-  if (!text) {
-    showToast("Please enter some details first.");
-    inputText.focus();
-    return;
-  }
-
-  if (credits <= 0) {
-    setStatus("error", "Limit Reached");
-    renderLimitReached();
-    return;
-  }
-
-  isGenerating = true;
-  generateBtn.disabled = true;
-  generateBtn.textContent = "Generating...";
-  setStatus("loading", "Generating...");
-  renderPlaceholder("Generating premium output...", "Please wait while the AI prepares your result.");
-
-  try {
-    const payload = {
-      tool: toolType.value,
-      tone: tone.value,
-      category: category.value,
-      prompt: text
+      if (!isDeleting && charIndex < currentWord.length) {
+        charIndex++;
+        setTimeout(typeEffect, 90);
+      } else if (isDeleting && charIndex > 0) {
+        charIndex--;
+        setTimeout(typeEffect, 45);
+      } else {
+        isDeleting = !isDeleting;
+        if (!isDeleting) {
+          wordIndex = (wordIndex + 1) % words.length;
+        }
+        setTimeout(typeEffect, isDeleting ? 1200 : 300);
+      }
     };
 
-    const response = await fetch("/api/generate", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(payload)
-    });
-
-    const data = await safeReadJson(response);
-
-    if (!response.ok) {
-      throw new Error(data.error || "Something went wrong.");
-    }
-
-    const items = Array.isArray(data.items) && data.items.length
-      ? data.items
-      : buildFallbackOutput(toolType.value, tone.value, category.value, text);
-
-    setCredits(credits - 1);
-    renderResults(items);
-    setStatus("success", "Done");
-    showToast("Output generated successfully ✨");
-  } catch (error) {
-    console.error("Generate error:", error);
-    const fallback = buildFallbackOutput(toolType.value, tone.value, category.value, text);
-    renderResults(fallback);
-    setStatus("error", "Fallback Used");
-    showToast("AI issue detected. Showing fallback output.");
-  } finally {
-    isGenerating = false;
-    generateBtn.disabled = false;
-    generateBtn.textContent = "Generate with AI";
+    typeEffect();
   }
-}
-
-function clearForm() {
-  inputText.value = "";
-  renderPlaceholder("Cleared ✨", "Enter a new topic to generate fresh results.");
-  setStatus("idle", "Idle");
-}
-
-function initTheme() {
-  const savedTheme = localStorage.getItem(THEME_KEY);
-
-  if (savedTheme === "light") {
-    document.body.classList.add("light");
-    themeToggle.textContent = "☀️";
-  } else {
-    themeToggle.textContent = "🌙";
-  }
-}
-
-function toggleTheme() {
-  document.body.classList.toggle("light");
-  const isLight = document.body.classList.contains("light");
-  localStorage.setItem(THEME_KEY, isLight ? "light" : "dark");
-  themeToggle.textContent = isLight ? "☀️" : "🌙";
-}
-
-function initTypingEffect() {
-  let index = 0;
-
-  setInterval(() => {
-    index = (index + 1) % previewTexts.length;
-    typingText.textContent = previewTexts[index];
-  }, 2400);
-}
-
-generateBtn.addEventListener("click", generateWithAI);
-clearBtn.addEventListener("click", clearForm);
-themeToggle.addEventListener("click", toggleTheme);
-
-initCredits();
-initTheme();
-initTypingEffect();
-
-if (getCredits() <= 0) {
-  renderLimitReached();
-}
+});
