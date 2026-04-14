@@ -22,20 +22,22 @@ const previewTexts = [
 ];
 
 let isGenerating = false;
+let previewInterval = null;
 
 function initCredits() {
   const saved = localStorage.getItem(CREDIT_KEY);
-
-  if (saved === null) {
-    localStorage.setItem(CREDIT_KEY, String(DEFAULT_CREDITS));
-    creditCount.textContent = DEFAULT_CREDITS;
-    return;
-  }
-
   const parsed = Number(saved);
-  const safeCredits = Number.isFinite(parsed) && parsed >= 0 ? parsed : DEFAULT_CREDITS;
+  const safeCredits =
+    saved === null
+      ? DEFAULT_CREDITS
+      : Number.isFinite(parsed) && parsed >= 0
+      ? parsed
+      : DEFAULT_CREDITS;
+
   localStorage.setItem(CREDIT_KEY, String(safeCredits));
-  creditCount.textContent = safeCredits;
+  if (creditCount) {
+    creditCount.textContent = safeCredits;
+  }
 }
 
 function getCredits() {
@@ -46,10 +48,13 @@ function getCredits() {
 function setCredits(value) {
   const safeValue = Math.max(0, Number(value) || 0);
   localStorage.setItem(CREDIT_KEY, String(safeValue));
-  creditCount.textContent = safeValue;
+  if (creditCount) {
+    creditCount.textContent = safeValue;
+  }
 }
 
 function setStatus(type, text) {
+  if (!statusBadge) return;
   statusBadge.className = `status-badge ${type}`;
   statusBadge.textContent = text;
 }
@@ -63,7 +68,7 @@ function showToast(message) {
   toast.textContent = message;
   document.body.appendChild(toast);
 
-  setTimeout(() => {
+  window.setTimeout(() => {
     toast.remove();
   }, 2200);
 }
@@ -75,6 +80,8 @@ function escapeHtml(text) {
 }
 
 function renderPlaceholder(title, message) {
+  if (!outputArea) return;
+
   outputArea.innerHTML = `
     <div class="placeholder-box">
       <h3>${escapeHtml(title)}</h3>
@@ -84,12 +91,16 @@ function renderPlaceholder(title, message) {
 }
 
 function renderResults(items) {
+  if (!outputArea) return;
+
   outputArea.innerHTML = "";
 
   if (!Array.isArray(items) || items.length === 0) {
     renderPlaceholder("No output received", "Please try again with a different prompt.");
     return;
   }
+
+  const fragment = document.createDocumentFragment();
 
   items.forEach((item, index) => {
     const wrapper = document.createElement("div");
@@ -102,40 +113,40 @@ function renderResults(items) {
       </div>
     `;
 
-    outputArea.appendChild(wrapper);
+    fragment.appendChild(wrapper);
   });
 
-  const copyButtons = document.querySelectorAll(".copy-btn");
-  copyButtons.forEach((button) => {
-    button.addEventListener("click", async () => {
-      const index = Number(button.dataset.copyIndex);
-      const text = items[index] || "";
+  outputArea.appendChild(fragment);
+}
 
-      try {
-        if (navigator.clipboard && window.isSecureContext) {
-          await navigator.clipboard.writeText(text);
-        } else {
-          const temp = document.createElement("textarea");
-          temp.value = text;
-          temp.setAttribute("readonly", "");
-          temp.style.position = "absolute";
-          temp.style.left = "-9999px";
-          document.body.appendChild(temp);
-          temp.select();
-          document.execCommand("copy");
-          temp.remove();
-        }
+async function copyText(text) {
+  try {
+    if (navigator.clipboard && window.isSecureContext) {
+      await navigator.clipboard.writeText(text);
+      return true;
+    }
 
-        showToast("Text copied ✅");
-      } catch (error) {
-        console.error("Copy failed:", error);
-        showToast("Copy failed ❌");
-      }
-    });
-  });
+    const temp = document.createElement("textarea");
+    temp.value = text;
+    temp.setAttribute("readonly", "");
+    temp.style.position = "absolute";
+    temp.style.left = "-9999px";
+    document.body.appendChild(temp);
+    temp.select();
+    temp.setSelectionRange(0, temp.value.length);
+
+    const success = document.execCommand("copy");
+    temp.remove();
+    return success;
+  } catch (error) {
+    console.error("Copy failed:", error);
+    return false;
+  }
 }
 
 function renderLimitReached() {
+  if (!outputArea) return;
+
   outputArea.innerHTML = `
     <div class="limit-box">
       <h3>Free credits finished</h3>
@@ -158,35 +169,35 @@ function renderLimitReached() {
 function buildFallbackOutput(type, toneValue, categoryValue, prompt) {
   const base = prompt.trim() || `${categoryValue} Instagram content`;
 
-  if (type === "caption") {
-    return [
-      `✨ ${base} — crafted with a ${toneValue} vibe to stand out and connect instantly.`,
-      `🔥 ${base} but make it ${toneValue}. Clean visuals, strong message, and the perfect vibe for your audience.`,
-      `💫 ${base} that feels ${toneValue}, stylish, and scroll-stopping from the first line.`
-    ];
-  }
+  switch (type) {
+    case "caption":
+      return [
+        `✨ ${base} — crafted with a ${toneValue} vibe to stand out and connect instantly.`,
+        `🔥 ${base} but make it ${toneValue}. Clean visuals, strong message, and the perfect vibe for your audience.`,
+        `💫 ${base} that feels ${toneValue}, stylish, and scroll-stopping from the first line.`
+      ];
 
-  if (type === "bio") {
-    return [
-      `✨ ${toneValue} ${categoryValue} account | Creating with purpose 💫`,
-      `🚀 ${categoryValue} vibes | ${toneValue} energy | Here to grow and inspire`,
-      `💼 ${categoryValue} focused | Smart content | Big vision | DM for collabs`
-    ];
-  }
+    case "bio":
+      return [
+        `✨ ${toneValue} ${categoryValue} account | Creating with purpose 💫`,
+        `🚀 ${categoryValue} vibes | ${toneValue} energy | Here to grow and inspire`,
+        `💼 ${categoryValue} focused | Smart content | Big vision | DM for collabs`
+      ];
 
-  if (type === "hashtags") {
-    return [
-      `#${categoryValue} #instagramgrowth #viralcontent #contentcreator #explorepage #trendingnow #socialmedia #instatips #digitalgrowth #reelsideas`,
-      `#${categoryValue}style #brandcontent #creativepost #growonline #instadaily #newpost #contentstrategy #audiencegrowth #foryou #aestheticcontent`,
-      `#${categoryValue}business #captionideas #bioideas #smartmarketing #creatorcommunity #engagementboost #socialsuccess #contentplan #instaai #postbetter`
-    ];
-  }
+    case "hashtags":
+      return [
+        `#${categoryValue} #instagramgrowth #viralcontent #contentcreator #explorepage #trendingnow #socialmedia #instatips #digitalgrowth #reelsideas`,
+        `#${categoryValue}style #brandcontent #creativepost #growonline #instadaily #newpost #contentstrategy #audiencegrowth #foryou #aestheticcontent`,
+        `#${categoryValue}business #captionideas #bioideas #smartmarketing #creatorcommunity #engagementboost #socialsuccess #contentplan #instaai #postbetter`
+      ];
 
-  return [
-    `1. Show behind-the-scenes of ${base}.`,
-    `2. Share a before/after post related to ${base}.`,
-    `3. Make a quick reel with 3 useful tips around ${base}.`
-  ];
+    default:
+      return [
+        `1. Show behind-the-scenes of ${base}.`,
+        `2. Share a before/after post related to ${base}.`,
+        `3. Make a quick reel with 3 useful tips around ${base}.`
+      ];
+  }
 }
 
 async function safeReadJson(response) {
@@ -203,11 +214,11 @@ async function generateWithAI() {
   if (isGenerating) return;
 
   const credits = getCredits();
-  const text = inputText.value.trim();
+  const text = inputText ? inputText.value.trim() : "";
 
   if (!text) {
     showToast("Please enter some details first.");
-    inputText.focus();
+    inputText?.focus();
     return;
   }
 
@@ -218,16 +229,20 @@ async function generateWithAI() {
   }
 
   isGenerating = true;
-  generateBtn.disabled = true;
-  generateBtn.textContent = "Generating...";
+
+  if (generateBtn) {
+    generateBtn.disabled = true;
+    generateBtn.textContent = "Generating...";
+  }
+
   setStatus("loading", "Generating...");
   renderPlaceholder("Generating premium output...", "Please wait while the AI prepares your result.");
 
   try {
     const payload = {
-      tool: toolType.value,
-      tone: tone.value,
-      category: category.value,
+      tool: toolType?.value || "caption",
+      tone: tone?.value || "professional",
+      category: category?.value || "creator",
       prompt: text
     };
 
@@ -245,9 +260,10 @@ async function generateWithAI() {
       throw new Error(data.error || "Something went wrong.");
     }
 
-    const items = Array.isArray(data.items) && data.items.length
-      ? data.items
-      : buildFallbackOutput(toolType.value, tone.value, category.value, text);
+    const items =
+      Array.isArray(data.items) && data.items.length
+        ? data.items
+        : buildFallbackOutput(payload.tool, payload.tone, payload.category, text);
 
     setCredits(credits - 1);
     renderResults(items);
@@ -255,57 +271,105 @@ async function generateWithAI() {
     showToast("Output generated successfully ✨");
   } catch (error) {
     console.error("Generate error:", error);
-    const fallback = buildFallbackOutput(toolType.value, tone.value, category.value, text);
+
+    const fallback = buildFallbackOutput(
+      toolType?.value || "caption",
+      tone?.value || "professional",
+      category?.value || "creator",
+      text
+    );
+
     renderResults(fallback);
     setStatus("error", "Fallback Used");
     showToast("AI issue detected. Showing fallback output.");
   } finally {
     isGenerating = false;
-    generateBtn.disabled = false;
-    generateBtn.textContent = "Generate with AI";
+
+    if (generateBtn) {
+      generateBtn.disabled = false;
+      generateBtn.textContent = "Generate with AI";
+    }
   }
 }
 
 function clearForm() {
-  inputText.value = "";
+  if (inputText) {
+    inputText.value = "";
+  }
+
   renderPlaceholder("Cleared ✨", "Enter a new topic to generate fresh results.");
   setStatus("idle", "Idle");
 }
 
 function initTheme() {
   const savedTheme = localStorage.getItem(THEME_KEY);
+  const isLight = savedTheme === "light";
 
-  if (savedTheme === "light") {
-    document.body.classList.add("light");
-    themeToggle.textContent = "☀️";
-  } else {
-    themeToggle.textContent = "🌙";
+  document.body.classList.toggle("light", isLight);
+
+  if (themeToggle) {
+    themeToggle.textContent = isLight ? "☀️" : "🌙";
   }
 }
 
 function toggleTheme() {
-  document.body.classList.toggle("light");
-  const isLight = document.body.classList.contains("light");
+  const isLight = document.body.classList.toggle("light");
   localStorage.setItem(THEME_KEY, isLight ? "light" : "dark");
-  themeToggle.textContent = isLight ? "☀️" : "🌙";
+
+  if (themeToggle) {
+    themeToggle.textContent = isLight ? "☀️" : "🌙";
+  }
 }
 
-function initTypingEffect() {
-  let index = 0;
+function startTypingEffect() {
+  if (!typingText || previewInterval) return;
 
-  setInterval(() => {
+  let index = 0;
+  previewInterval = window.setInterval(() => {
     index = (index + 1) % previewTexts.length;
     typingText.textContent = previewTexts[index];
-  }, 2400);
+  }, 5000);
 }
 
-generateBtn.addEventListener("click", generateWithAI);
-clearBtn.addEventListener("click", clearForm);
-themeToggle.addEventListener("click", toggleTheme);
+function stopTypingEffect() {
+  if (!previewInterval) return;
+  window.clearInterval(previewInterval);
+  previewInterval = null;
+}
+
+function handleVisibilityChange() {
+  if (document.hidden) {
+    stopTypingEffect();
+  } else {
+    startTypingEffect();
+  }
+}
+
+document.addEventListener("click", async (event) => {
+  const button = event.target.closest(".copy-btn");
+  if (!button) return;
+
+  const index = Number(button.dataset.copyIndex);
+  const resultItems = outputArea ? [...outputArea.querySelectorAll(".result-item p")] : [];
+  const text = resultItems[index]?.textContent || "";
+
+  if (!text) {
+    showToast("Nothing to copy");
+    return;
+  }
+
+  const copied = await copyText(text);
+  showToast(copied ? "Text copied ✅" : "Copy failed ❌");
+});
+
+generateBtn?.addEventListener("click", generateWithAI);
+clearBtn?.addEventListener("click", clearForm);
+themeToggle?.addEventListener("click", toggleTheme);
+document.addEventListener("visibilitychange", handleVisibilityChange);
 
 initCredits();
 initTheme();
-initTypingEffect();
+startTypingEffect();
 
 if (getCredits() <= 0) {
   renderLimitReached();
