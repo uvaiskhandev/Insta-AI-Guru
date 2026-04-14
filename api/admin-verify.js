@@ -1,41 +1,40 @@
-const crypto = require("crypto");
-
 function parseCookies(cookieHeader = "") {
-  return Object.fromEntries(
-    cookieHeader.split(";").map((c) => {
-      const [key, ...v] = c.trim().split("=");
-      return [key, v.join("=")];
-    })
-  );
+  const cookies = {};
+
+  cookieHeader.split(";").forEach((part) => {
+    const [key, ...rest] = part.trim().split("=");
+    if (!key) return;
+    cookies[key] = rest.join("=");
+  });
+
+  return cookies;
 }
 
-function verifyToken(token, secret) {
-  if (!token) return null;
+export default async function handler(req, res) {
+  try {
+    if (!process.env.ADMIN_SECRET) {
+      return res.status(500).json({
+        authenticated: false,
+        message: "Missing ADMIN_SECRET"
+      });
+    }
 
-  const [data, signature] = token.split(".");
-  if (!data || !signature) return null;
+    const cookies = parseCookies(req.headers.cookie || "");
+    const token = cookies.admin_session;
 
-  const expected = crypto
-    .createHmac("sha256", secret)
-    .update(data)
-    .digest("base64url");
+    if (token === process.env.ADMIN_SECRET) {
+      return res.status(200).json({
+        authenticated: true
+      });
+    }
 
-  if (expected !== signature) return null;
-
-  const payload = JSON.parse(Buffer.from(data, "base64url").toString());
-  if (Date.now() > payload.exp) return null;
-
-  return payload;
-}
-
-module.exports = async (req, res) => {
-  const cookies = parseCookies(req.headers.cookie || "");
-  const token = cookies.admin_session;
-  const payload = verifyToken(token, process.env.ADMIN_SECRET);
-
-  if (!payload) {
-    return res.status(200).json({ authenticated: false });
+    return res.status(200).json({
+      authenticated: false
+    });
+  } catch (error) {
+    return res.status(500).json({
+      authenticated: false,
+      message: error.message || "Server error"
+    });
   }
-
-  return res.status(200).json({ authenticated: true, user: payload.user });
-};
+}
