@@ -1,48 +1,37 @@
-import crypto from "crypto";
+const form = document.getElementById("adminLoginForm");
+const msg = document.getElementById("loginMsg");
 
-function createToken(payload, secret) {
-  const data = Buffer.from(JSON.stringify(payload)).toString("base64url");
-  const signature = crypto
-    .createHmac("sha256", secret)
-    .update(data)
-    .digest("base64url");
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
 
-  return `${data}.${signature}`;
-}
+  msg.style.color = "#ffffff";
+  msg.textContent = "Logging in...";
 
-export default async function handler(req, res) {
-  if (req.method !== "POST") {
-    return res.status(405).json({ success: false, message: "Method not allowed" });
-  }
+  const username = document.getElementById("username").value.trim();
+  const password = document.getElementById("password").value.trim();
 
   try {
-    const { username, password } = req.body || {};
-
-    if (
-      username === process.env.ADMIN_USERNAME &&
-      password === process.env.ADMIN_PASSWORD
-    ) {
-      const token = createToken(
-        {
-          user: username,
-          exp: Date.now() + 1000 * 60 * 60 * 24
-        },
-        process.env.ADMIN_SECRET
-      );
-
-      res.setHeader(
-        "Set-Cookie",
-        `admin_session=${token}; HttpOnly; Path=/; Max-Age=86400; SameSite=Lax; Secure`
-      );
-
-      return res.status(200).json({ success: true });
-    }
-
-    return res.status(401).json({ success: false, message: "Invalid credentials" });
-  } catch (error) {
-    return res.status(500).json({
-      success: false,
-      message: error.message || "Server error"
+    const res = await fetch("/api/admin-login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ username, password })
     });
+
+    const data = await res.json();
+
+    if (res.ok && data.success) {
+      msg.style.color = "#9cffb1";
+      msg.textContent = "Login successful...";
+      window.location.href = "/admin.html";
+    } else {
+      msg.style.color = "#ffb9b9";
+      msg.textContent = data.message || "Login failed";
+    }
+  } catch (error) {
+    msg.style.color = "#ffb9b9";
+    msg.textContent = "API not working or server error";
+    console.error(error);
   }
-}
+});
