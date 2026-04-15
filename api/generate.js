@@ -1,21 +1,5 @@
-import { createClient } from "@supabase/supabase-js";
 
-const supabase = createClient(
-  process.env.SUPABASE_URL,
-  process.env.SUPABASE_KEY
-);
 
-// jab bhi prompt generate ho:
-await supabase.from("requests").insert([
-  { created_at: new Date() }
-]);
-
-try {
-  if (supabase) {
-    await supabase.from("requests").insert([
-      { created_at: new Date().toISOString() }
-    ]);
-  }
 } catch (trackingError) {
   console.log("Tracking failed:", trackingError.message);
 }
