@@ -8,6 +8,7 @@
   <style>
     body {
       min-height: 100vh;
+      margin: 0;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -20,12 +21,12 @@
     }
 
     .admin-login-card {
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.08);
       backdrop-filter: blur(14px);
       border-radius: 20px;
       padding: 28px;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
     }
 
     .admin-login-card h1 {
@@ -55,8 +56,8 @@
       width: 100%;
       padding: 14px 15px;
       border-radius: 12px;
-      border: 1px solid rgba(255,255,255,0.12);
-      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(255, 255, 255, 0.08);
       color: #fff;
       outline: none;
       font-size: 15px;
@@ -64,7 +65,7 @@
     }
 
     .admin-field input::placeholder {
-      color: rgba(255,255,255,0.5);
+      color: rgba(255, 255, 255, 0.5);
     }
 
     .admin-btn {
@@ -83,6 +84,11 @@
     .admin-btn:hover {
       transform: translateY(-1px);
       opacity: 0.95;
+    }
+
+    .admin-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
     }
 
     .admin-error {
