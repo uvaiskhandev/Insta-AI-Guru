@@ -14,6 +14,8 @@ async function verifyAdmin() {
     return false;
   }
 }
+const supabaseUrl = "https://humiqxyftkfueqaooqdz.supabase.co";
+const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imh1bWlxeHlmdGtmdWVxYW9vcWR6Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NjEzNzIzNSwiZXhwIjoyMDkxNzEzMjM1fQ.Yq7Hu01B9Ga80G_0eZt5E8SX1ZpmI53RRFmJKR8d4Tk";
 
 async function loadStats() {
   try {
