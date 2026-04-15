@@ -84,35 +84,45 @@
       line-height: 1.6;
     }
   </style>
-<div class="admin-grid">
-  <div class="admin-card">
-    <h3>Total Visits</h3>
-    <div class="value" id="totalVisits">--</div>
+</head>
+<body>
+  <div class="admin-panel">
+    <div class="admin-topbar">
+      <h1>Admin Dashboard</h1>
+      <button id="logoutBtn" class="logout-btn">Logout</button>
+    </div>
+
+    <div class="admin-grid">
+      <div class="admin-card">
+        <h3>Total Visits</h3>
+        <div class="value" id="totalRequests">--</div>
+
+
+      <div class="admin-card">
+        <h3>Total Prompt Requests</h3>
+        <div class="value" id="todayRequests">--</div>
+      </div>
+
+      <div class="admin-card">
+        <h3>Active Users</h3>
+        <<div class="value" id="todayRequests">--</div>
+      </div>
+
+      <div class="admin-card">
+        <h3>Credits Used</h3>
+        <div class="value" id="todayRequests">--</div>
+      </div>
+    </div>
+
+    <div class="admin-box">
+      <h2>Admin Area Ready</h2>
+      <p class="admin-note">
+        Abhi ye secure admin entry ke saath ready hai. Iske baad hum isme analytics,
+        prompt history, users, credits aur traffic data connect karenge.
+      </p>
+    </div>
   </div>
 
-  <div class="admin-card">
-    <h3>Total Prompt Requests</h3>
-    <div class="value" id="totalRequests">--</div>
-  </div>
-
-  <div class="admin-card">
-    <h3>Today's Prompt Requests</h3>
-    <div class="value" id="todayRequests">--</div>
-  </div>
-
-  <div class="admin-card">
-    <h3>Credits Used</h3>
-    <div class="value" id="creditsUsed">--</div>
-  </div>
-</div>
-
-<div class="admin-box">
-  <h2>Admin Area Ready</h2>
-  <p class="admin-note">
-    Abhi ye secure admin entry ke saath ready hai. Iske baad hum isme analytics,
-    prompt history, users, credits aur traffic data connect karenge.
-  </p>
-</div>
   <script src="admin.js"></script>
 </body>
 </html>
