@@ -1,14 +1,14 @@
-const isAdminLoggedIn = localStorage.getItem("insta_ai_guru_admin");
+async function loadAnalytics() {
+  try {
+    const res = await fetch("/api/analytics");
+    const data = await res.json();
 
-if (isAdminLoggedIn !== "true") {
-  window.location.href = "/admin-login.html";
+    document.getElementById("totalRequests").textContent = data.total || 0;
+    document.getElementById("todayRequests").textContent = data.today || 0;
+
+  } catch (err) {
+    console.log("Analytics error");
+  }
 }
 
-const logoutBtn = document.getElementById("logoutBtn");
-
-if (logoutBtn) {
-  logoutBtn.addEventListener("click", () => {
-    localStorage.removeItem("insta_ai_guru_admin");
-    window.location.href = "/admin-login.html";
-  });
-}
+loadAnalytics();
