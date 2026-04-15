@@ -1,3 +1,15 @@
+import { createClient } from "@supabase/supabase-js";
+
+const supabase = createClient(
+  process.env.SUPABASE_URL,
+  process.env.SUPABASE_KEY
+);
+
+// jab bhi prompt generate ho:
+await supabase.from("requests").insert([
+  { created_at: new Date() }
+]);
+
 async function parseGeminiResponse(aiResponse) {
   if (!aiResponse || typeof aiResponse !== "object") {
     return [];
