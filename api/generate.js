@@ -10,6 +10,15 @@ await supabase.from("requests").insert([
   { created_at: new Date() }
 ]);
 
+try {
+  if (supabase) {
+    await supabase.from("requests").insert([
+      { created_at: new Date().toISOString() }
+    ]);
+  }
+} catch (trackingError) {
+  console.log("Tracking failed:", trackingError.message);
+}
 async function parseGeminiResponse(aiResponse) {
   if (!aiResponse || typeof aiResponse !== "object") {
     return [];
