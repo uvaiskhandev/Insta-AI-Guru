@@ -7,25 +7,33 @@ const supabase = createClient(
 
 export default async function handler(req, res) {
   try {
-    // total requests
-    const { count: total } = await supabase
+    const { count: total, error: totalError } = await supabase
       .from("requests")
       .select("*", { count: "exact", head: true });
 
-    // today's requests
-    const today = new Date().toISOString().split("T")[0];
+    if (totalError) {
+      return res.status(500).json({ error: totalError.message });
+    }
 
-    const { count: todayCount } = await supabase
+    const todayStart = new Date();
+    todayStart.setHours(0, 0, 0, 0);
+
+    const { count: todayCount, error: todayError } = await supabase
       .from("requests")
       .select("*", { count: "exact", head: true })
-      .gte("created_at", today);
+      .gte("created_at", todayStart.toISOString());
 
-    res.status(200).json({
-      total,
-      today: todayCount
+    if (todayError) {
+      return res.status(500).json({ error: todayError.message });
+    }
+
+    return res.status(200).json({
+      total: total || 0,
+      today: todayCount || 0
     });
-
-  } catch (err) {
-    res.status(500).json({ error: "Server error" });
+  } catch (error) {
+    return res.status(500).json({
+      error: error.message || "Server error"
+    });
   }
 }
