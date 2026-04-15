@@ -29,4 +29,18 @@ form.addEventListener("submit", async (e) => {
   } catch (error) {
     errorText.textContent = "API not working or server error";
   }
+
+  export default function handler(req, res) {
+  if (req.method !== "POST") {
+    return res.status(405).json({ message: "Method not allowed" });
+  }
+
+  const { username, password } = req.body;
+
+  if (username === "uvais" && password === "123456") {
+    return res.status(200).json({ success: true });
+  }
+
+  return res.status(401).json({ success: false, message: "Invalid credentials" });
+}
 });
