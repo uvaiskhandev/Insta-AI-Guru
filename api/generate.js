@@ -1,12 +1,5 @@
-
-
-} catch (trackingError) {
-  console.log("Tracking failed:", trackingError.message);
-}
 async function parseGeminiResponse(aiResponse) {
-  if (!aiResponse || typeof aiResponse !== "object") {
-    return [];
-  }
+  if (!aiResponse || typeof aiResponse !== "object") return [];
 
   if (typeof aiResponse.text === "string" && aiResponse.text.trim()) {
     return extractItems(aiResponse.text);
@@ -18,9 +11,7 @@ async function parseGeminiResponse(aiResponse) {
       if (typeof textValue === "string" && textValue.trim()) {
         return extractItems(textValue);
       }
-    } catch (error) {
-      // ignore
-    }
+    } catch {}
   }
 
   const candidates = Array.isArray(aiResponse.candidates) ? aiResponse.candidates : [];
@@ -43,20 +34,14 @@ async function parseGeminiResponse(aiResponse) {
 }
 
 function extractItems(text) {
-  if (!text || typeof text !== "string") {
-    return [];
-  }
+  if (!text || typeof text !== "string") return [];
 
   try {
     const parsed = JSON.parse(text);
     if (Array.isArray(parsed?.items)) {
-      return parsed.items
-        .filter((item) => typeof item === "string" && item.trim())
-        .slice(0, 3);
+      return parsed.items.filter((item) => typeof item === "string" && item.trim()).slice(0, 3);
     }
-  } catch (error) {
-    // continue
-  }
+  } catch {}
 
   const fenceStart = text.indexOf("```");
   const fenceEnd = text.lastIndexOf("```");
@@ -71,13 +56,9 @@ function extractItems(text) {
     try {
       const parsed = JSON.parse(fenced);
       if (Array.isArray(parsed?.items)) {
-        return parsed.items
-          .filter((item) => typeof item === "string" && item.trim())
-          .slice(0, 3);
+        return parsed.items.filter((item) => typeof item === "string" && item.trim()).slice(0, 3);
       }
-    } catch (error) {
-      // continue
-    }
+    } catch {}
   }
 
   const firstBrace = text.indexOf("{");
@@ -89,22 +70,17 @@ function extractItems(text) {
     try {
       const parsed = JSON.parse(possibleJson);
       if (Array.isArray(parsed?.items)) {
-        return parsed.items
-          .filter((item) => typeof item === "string" && item.trim())
-          .slice(0, 3);
+        return parsed.items.filter((item) => typeof item === "string" && item.trim()).slice(0, 3);
       }
-    } catch (error) {
-      // continue
-    }
+    } catch {}
   }
 
-  const lines = text
+  return text
     .split("\n")
     .map((line) => line.trim())
     .filter(Boolean)
-    .filter((line) => !line.startsWith("{") && !line.startsWith("}"));
-
-  return lines.slice(0, 3);
+    .filter((line) => !line.startsWith("{") && !line.startsWith("}"))
+    .slice(0, 3);
 }
 
 export default async function handler(req, res) {
@@ -122,23 +98,17 @@ export default async function handler(req, res) {
     const apiKey = process.env.GEMINI_API_KEY || process.env.GOOGLE_API_KEY;
 
     if (!apiKey) {
-      return res.status(500).json({
-        error: "Missing GEMINI_API_KEY or GOOGLE_API_KEY in environment variables"
-      });
+      return res.status(500).json({ error: "Missing GEMINI_API_KEY or GOOGLE_API_KEY" });
     }
 
     const { GoogleGenAI } = await import("@google/genai");
     const ai = new GoogleGenAI({ apiKey });
 
     const toolInstructions = {
-      caption:
-        "Generate 3 premium Instagram captions. Keep them polished, attractive, and ready to post. Include emojis where natural.",
-      bio:
-        "Generate 3 Instagram bios. Keep them stylish, compact, premium, and category-aware.",
-      hashtags:
-        "Generate 3 lines of Instagram hashtags. Each line should include 10 relevant hashtags mixing broad and niche reach.",
-      ideas:
-        "Generate 3 Instagram post or reel ideas that are practical and engaging for the given niche."
+      caption: "Generate 3 premium Instagram captions. Keep them polished, attractive, and ready to post. Include emojis where natural.",
+      bio: "Generate 3 Instagram bios. Keep them stylish, compact, premium, and category-aware.",
+      hashtags: "Generate 3 lines of Instagram hashtags. Each line should include 10 relevant hashtags mixing broad and niche reach.",
+      ideas: "Generate 3 Instagram post or reel ideas that are practical and engaging for the given niche."
     };
 
     const finalPrompt = `
@@ -161,16 +131,14 @@ Rules:
 `;
 
     const response = await ai.models.generateContent({
-      model: "gemini-3-flash-preview",
+      model: "gemini-2.5-flash",
       contents: finalPrompt
     });
 
     const items = await parseGeminiResponse(response);
 
     if (!items.length) {
-      return res.status(500).json({
-        error: "Gemini returned an invalid format"
-      });
+      return res.status(500).json({ error: "Gemini returned an invalid format" });
     }
 
     return res.status(200).json({ items });
