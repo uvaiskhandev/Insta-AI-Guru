@@ -20,7 +20,8 @@ export default async function handler(req, res) {
       postIdea = "",
       variants = "3",
       includeEmojis = true,
-      includeHashtags = true
+      includeHashtags = true,
+      image = null   // 🔥 ye add karo
     } = req.body || {};
 
     if (!postIdea || !String(postIdea).trim()) {
