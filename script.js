@@ -181,4 +181,41 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
   });
+  const imageInput = document.getElementById("imageInput");
+const uploadBtn = document.getElementById("uploadBtn");
+const fileName = document.getElementById("fileName");
+const imagePreview = document.getElementById("imagePreview");
+const imagePreviewBox = document.getElementById("imagePreviewBox");
+
+let selectedImageBase64 = "";
+
+if (uploadBtn && imageInput) {
+  uploadBtn.addEventListener("click", () => {
+    imageInput.click();
+  });
+
+  imageInput.addEventListener("change", () => {
+    const file = imageInput.files[0];
+
+    if (!file) {
+      fileName.textContent = "No image selected";
+      imagePreviewBox.style.display = "none";
+      imagePreview.src = "";
+      selectedImageBase64 = "";
+      return;
+    }
+
+    fileName.textContent = file.name;
+
+    const reader = new FileReader();
+
+    reader.onload = function (e) {
+      selectedImageBase64 = e.target.result;
+      imagePreview.src = selectedImageBase64;
+      imagePreviewBox.style.display = "block";
+    };
+
+    reader.readAsDataURL(file);
+  });
+}
 });
