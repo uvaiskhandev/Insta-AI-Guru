@@ -149,10 +149,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const result = await res.json().catch(() => null);
 
-      if (!res.ok || !result?.ok) {
-        setState(`❌ Error: ${result?.error || "Something went wrong."}`);
-        return;
-      }
+    if (!res.ok || !result?.ok) {
+  state.innerHTML = "❌ Error: " + (
+    result?.error ||
+    result?.raw?.error?.message ||
+    `HTTP ${res.status}`
+  );
+  console.error("Backend result:", result);
+  return;
 
       if (!Array.isArray(result.captions) || !result.captions.length) {
         setState("❌ No captions received.");
