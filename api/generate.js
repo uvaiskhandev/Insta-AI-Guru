@@ -1,3 +1,109 @@
+async function callGeminiWithRetry(url, options, retries = 3, delay = 1500) {
+  let lastData = null;
+  let lastStatus = 500;
+
+  for (let attempt = 1; attempt <= retries; attempt++) {
+    const response = await fetch(url, options);
+    const data = await response.json().catch(() => null);
+
+    lastData = data;
+    lastStatus = response.status;
+
+    if (response.ok) {
+      return { response, data };
+    }
+
+    const message = data?.error?.message || "";
+
+    const shouldRetry =
+      response.status === 429 ||
+      response.status === 500 ||
+      response.status === 503 ||
+      /high demand|overloaded|unavailable|temporarily/i.test(message);
+
+    if (!shouldRetry || attempt === retries) {
+      return { response, data };
+    }
+
+    await new Promise((resolve) => setTimeout(resolve, delay * attempt));
+  }
+
+  return {
+    response: { ok: false, status: lastStatus },
+    data: lastData
+  };
+}
+
+function extractCaptions(rawText, count) {
+  if (!rawText) return [];
+
+  const cleaned = String(rawText)
+    .replace(/^```json\s*/i, "")
+    .replace(/^```\s*/i, "")
+    .replace(/\s*```$/i, "")
+    .trim();
+
+  try {
+    const parsed = JSON.parse(cleaned);
+
+    if (Array.isArray(parsed)) {
+      return parsed
+        .map((item) => String(item || "").trim())
+        .filter(Boolean)
+        .slice(0, count);
+    }
+
+    if (Array.isArray(parsed?.captions)) {
+      return parsed.captions
+        .map((item) => String(item || "").trim())
+        .filter(Boolean)
+        .slice(0, count);
+    }
+  } catch (e) {}
+
+  try {
+    const match = cleaned.match(/\{[\s\S]*"captions"[\s\S]*\}/);
+    if (match) {
+      const parsed = JSON.parse(match[0]);
+      if (Array.isArray(parsed?.captions)) {
+        return parsed.captions
+          .map((item) => String(item || "").trim())
+          .filter(Boolean)
+          .slice(0, count);
+      }
+    }
+  } catch (e) {}
+
+  return cleaned
+    .split(/\n{2,}|\n(?=\d+[\).\-\s])/)
+    .map((line) => line.replace(/^\d+[\).\-\s]*/, "").trim())
+    .filter(Boolean)
+    .filter(
+      (line) =>
+        line !== "{" &&
+        line !== "}" &&
+        line !== "[" &&
+        line !== "]" &&
+        !line.startsWith('"captions"') &&
+        !line.startsWith('"captions":')
+    )
+    .map((line) => line.replace(/^"(.*)"[,]?$/, "$1").trim())
+    .filter(Boolean)
+    .slice(0, count);
+}
+
+function getImageInfoFromDataUrl(image) {
+  if (!image || typeof image !== "string") return null;
+
+  const match = image.match(/^data:(image\/[a-zA-Z0-9.+-]+);base64,(.+)$/);
+  if (!match) return null;
+
+  return {
+    mimeType: match[1],
+    base64Data: match[2]
+  };
+}
+
 export default async function handler(req, res) {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
@@ -9,76 +115,6 @@ export default async function handler(req, res) {
 
   if (req.method !== "POST") {
     return res.status(405).json({ ok: false, error: "Method not allowed" });
-  }
-
-  function extractCaptions(rawText, count) {
-    if (!rawText) return [];
-
-    const cleaned = String(rawText)
-      .replace(/^```json\s*/i, "")
-      .replace(/^```\s*/i, "")
-      .replace(/\s*```$/i, "")
-      .trim();
-
-    // 1) Direct JSON parse
-    try {
-      const parsed = JSON.parse(cleaned);
-
-      if (Array.isArray(parsed)) {
-        return parsed
-          .map((item) => String(item || "").trim())
-          .filter(Boolean)
-          .slice(0, count);
-      }
-
-      if (Array.isArray(parsed?.captions)) {
-        return parsed.captions
-          .map((item) => String(item || "").trim())
-          .filter(Boolean)
-          .slice(0, count);
-      }
-    } catch (e) {
-      // ignore
-    }
-
-    // 2) JSON block extraction if extra text exists around JSON
-    try {
-      const match = cleaned.match(/\{[\s\S]*"captions"[\s\S]*\}/);
-      if (match) {
-        const parsed = JSON.parse(match[0]);
-        if (Array.isArray(parsed?.captions)) {
-          return parsed.captions
-            .map((item) => String(item || "").trim())
-            .filter(Boolean)
-            .slice(0, count);
-        }
-      }
-    } catch (e) {
-      // ignore
-    }
-
-    // 3) Fallback for plain text captions
-    const lines = cleaned
-      .split(/\n{2,}|\n(?=\d+[\).\-\s])/)
-      .map((line) => line.replace(/^\d+[\).\-\s]*/, "").trim())
-      .filter(Boolean)
-      .filter(
-        (line) =>
-          line !== "{" &&
-          line !== "}" &&
-          line !== "[" &&
-          line !== "]" &&
-          !line.startsWith('"captions"') &&
-          !line.startsWith('"captions":') &&
-          !line.endsWith("[") &&
-          !line.endsWith("]") &&
-          !line.endsWith("{") &&
-          !line.endsWith("}")
-      )
-      .map((line) => line.replace(/^"(.*)"[,]?$/, "$1").trim())
-      .filter(Boolean);
-
-    return lines.slice(0, count);
   }
 
   try {
@@ -105,6 +141,8 @@ export default async function handler(req, res) {
 
     const count = Math.max(1, Math.min(3, Number(variants) || 1));
 
+    const imageInfo = getImageInfoFromDataUrl(image);
+
     const prompt = `
 You are a professional social media caption writer.
 
@@ -117,10 +155,18 @@ Requirements:
 - Language: ${language}
 - Include Emojis: ${includeEmojis ? "Yes" : "No"}
 - Include Hashtags: ${includeHashtags ? "Yes" : "No"}
-- Image Provided: ${image ? "Yes" : "No"}
 
-Post idea:
+User's post idea:
 ${postIdea}
+
+${
+  imageInfo
+    ? `Important:
+- Carefully analyze the uploaded image.
+- Understand the subject, mood, setting, style, and visual details of the image.
+- Write captions based on the actual image, not assumptions.`
+    : `No image is attached. Write captions only from the user's text idea.`
+}
 
 Return ONLY valid JSON in this exact format:
 {
@@ -134,12 +180,25 @@ Return ONLY valid JSON in this exact format:
 Rules:
 - Do not add markdown
 - Do not add triple backticks
-- Do not add explanation text
+- Do not add explanation
 - Do not add headings
-- Do not return anything except JSON
+- Return only JSON
 `.trim();
 
-    const response = await fetch(
+    const parts = [];
+
+    if (imageInfo) {
+      parts.push({
+        inline_data: {
+          mime_type: imageInfo.mimeType,
+          data: imageInfo.base64Data
+        }
+      });
+    }
+
+    parts.push({ text: prompt });
+
+    const { response, data } = await callGeminiWithRetry(
       "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent",
       {
         method: "POST",
@@ -150,23 +209,30 @@ Rules:
         body: JSON.stringify({
           contents: [
             {
-              parts: [{ text: prompt }]
+              parts
             }
           ],
           generationConfig: {
-            temperature: 0.9,
-            maxOutputTokens: 1000
+            temperature: 0.7,
+            maxOutputTokens: 700
           }
         })
-      }
+      },
+      3,
+      1500
     );
 
-    const data = await response.json();
-
     if (!response.ok) {
-      return res.status(response.status).json({
+      const msg = data?.error?.message || "AI service is temporarily busy";
+
+      const friendlyMessage =
+        /high demand|overloaded|unavailable|temporarily/i.test(msg)
+          ? "AI is busy right now. Please try again in a few seconds."
+          : msg;
+
+      return res.status(response.status || 500).json({
         ok: false,
-        error: data?.error?.message || "Gemini API request failed",
+        error: friendlyMessage,
         raw: data
       });
     }
