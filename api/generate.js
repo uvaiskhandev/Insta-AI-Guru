@@ -1,46 +1,72 @@
- async function generateCaptions() {
-  const output = document.getElementById("output");
-  const button = document.getElementById("generateBtn");
-  const promptInput = document.getElementById("prompt");
-
-  const prompt = promptInput?.value?.trim();
-
-  if (!prompt) {
-    output.innerText = "Please enter a prompt first.";
-    return;
-  }
-
+export default async function handler(req, res) {
   try {
-    button.disabled = true;
-    output.innerText = "Generating...";
+    if (req.method !== "POST") {
+      return res.status(405).json({ ok: false, error: "Method not allowed" });
+    }
 
-    const response = await fetch("/api/generate", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ prompt })
+    const { postIdea } = req.body;
+
+    if (!postIdea) {
+      return res.status(400).json({ ok: false, error: "Post idea required" });
+    }
+
+    const apiKey = process.env.GEMINI_API_KEY;
+
+    if (!apiKey) {
+      return res.status(500).json({
+        ok: false,
+        error: "API key missing"
+      });
+    }
+
+    const response = await fetch(
+      "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "x-goog-api-key": apiKey
+        },
+        body: JSON.stringify({
+          contents: [
+            {
+              parts: [
+                {
+                  text: `Generate 3 Instagram captions for: ${postIdea}`
+                }
+              ]
+            }
+          ]
+        })
+      }
+    );
+
+    const data = await response.json();
+
+    const text =
+      data?.candidates?.[0]?.content?.parts?.[0]?.text;
+
+    if (!text) {
+      return res.status(500).json({
+        ok: false,
+        error: "No response from AI"
+      });
+    }
+
+    // simple split
+    const captions = text.split("\n").filter(Boolean).slice(0, 3);
+
+    res.status(200).json({
+      ok: true,
+      captions
     });
 
-    const rawText = await response.text();
+  } catch (err) {
+    console.error("ERROR:", err);
 
-    let data;
-    try {
-      data = JSON.parse(rawText);
-    } catch (e) {
-      output.innerText = "Server returned invalid JSON:\n" + rawText;
-      return;
-    }
-
-    if (!response.ok) {
-      output.innerText = data.error || "Something went wrong.";
-      return;
-    }
-
-    output.innerText = data.result || "No result returned.";
-  } catch (error) {
-    output.innerText = "Request failed: " + error.message;
-  } finally {
-    button.disabled = false;
+    res.status(500).json({
+      ok: false,
+      error: err.message
+    });
   }
 }
