@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", () => {
           setTimeout(() => {
             copyBtn.textContent = "Copy";
           }, 1200);
-        } catch {
+        } catch (error) {
           copyBtn.textContent = "Failed";
           setTimeout(() => {
             copyBtn.textContent = "Copy";
@@ -75,7 +75,7 @@ document.addEventListener("DOMContentLoaded", () => {
       try {
         await navigator.clipboard.writeText(latestCaptions.join("\n\n"));
         setState("✅ All captions copied.");
-      } catch {
+      } catch (error) {
         setState("❌ Failed to copy captions.");
       }
     });
@@ -86,7 +86,11 @@ document.addEventListener("DOMContentLoaded", () => {
       document.body.classList.toggle("light-theme");
       const isLight = document.body.classList.contains("light-theme");
       const icon = themeToggle.querySelector(".theme-icon");
-      if (icon) icon.textContent = isLight ? "☀️" : "🌙";
+
+      if (icon) {
+        icon.textContent = isLight ? "☀️" : "🌙";
+      }
+
       localStorage.setItem("insta_ai_theme", isLight ? "light" : "dark");
     });
 
@@ -94,7 +98,9 @@ document.addEventListener("DOMContentLoaded", () => {
     if (savedTheme === "light") {
       document.body.classList.add("light-theme");
       const icon = themeToggle.querySelector(".theme-icon");
-      if (icon) icon.textContent = "☀️";
+      if (icon) {
+        icon.textContent = "☀️";
+      }
     }
   }
 
@@ -149,14 +155,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const result = await res.json().catch(() => null);
 
-    if (!res.ok || !result?.ok) {
-  state.innerHTML = "❌ Error: " + (
-    result?.error ||
-    result?.raw?.error?.message ||
-    `HTTP ${res.status}`
-  );
-  console.error("Backend result:", result);
-  return;
+      if (!res.ok || !result?.ok) {
+        setState(
+          "❌ Error: " +
+          (result?.error || result?.raw?.error?.message || `HTTP ${res.status}`)
+        );
+        console.error("Backend result:", result);
+        return;
+      }
 
       if (!Array.isArray(result.captions) || !result.captions.length) {
         setState("❌ No captions received.");
@@ -165,9 +171,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
       renderCaptions(result.captions);
       setState("✅ Captions generated successfully.");
-    } catch (err) {
-      console.error(err);
-      setState("❌ Failed to generate captions. Check API key or backend.");
+    } catch (error) {
+      console.error(error);
+      setState("❌ Failed to generate captions. Check backend.");
     } finally {
       if (submitBtn) {
         submitBtn.disabled = false;
