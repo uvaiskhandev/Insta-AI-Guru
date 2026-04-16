@@ -1,46 +1,174 @@
-async function generateCaptions() {
-  const output = document.getElementById("output");
-  const button = document.getElementById("generateBtn");
-  const promptInput = document.getElementById("prompt");
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("captionForm");
+  const output = document.getElementById("captionResults");
+  const state = document.getElementById("outputState");
+  const copyAllBtn = document.getElementById("copyAllBtn");
+  const themeToggle = document.getElementById("themeToggle");
+  const navToggle = document.getElementById("navToggle");
+  const mobileMenu = document.getElementById("mobileMenu");
 
-  const prompt = promptInput?.value?.trim();
+  let latestCaptions = [];
 
-  if (!prompt) {
-    output.innerText = "Please enter a prompt first.";
-    return;
+  function setState(message) {
+    state.textContent = message;
   }
 
-  try {
-    button.disabled = true;
-    output.innerText = "Generating...";
+  function escapeHtml(text) {
+    return text
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;");
+  }
 
-    const response = await fetch("/api/generate", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ prompt })
+  function renderCaptions(captions) {
+    output.innerHTML = "";
+    latestCaptions = captions;
+
+    captions.forEach((text, index) => {
+      const card = document.createElement("article");
+      card.className = "result-card";
+
+      const title = document.createElement("h4");
+      title.textContent = `Caption ${index + 1}`;
+
+      const para = document.createElement("p");
+      para.innerHTML = escapeHtml(text).replace(/\n/g, "<br>");
+
+      const actions = document.createElement("div");
+      actions.className = "result-actions";
+
+      const copyBtn = document.createElement("button");
+      copyBtn.className = "copy-btn";
+      copyBtn.type = "button";
+      copyBtn.textContent = "Copy";
+
+      copyBtn.addEventListener("click", async () => {
+        try {
+          await navigator.clipboard.writeText(text);
+          copyBtn.textContent = "Copied!";
+          setTimeout(() => {
+            copyBtn.textContent = "Copy";
+          }, 1200);
+        } catch {
+          copyBtn.textContent = "Failed";
+          setTimeout(() => {
+            copyBtn.textContent = "Copy";
+          }, 1200);
+        }
+      });
+
+      actions.appendChild(copyBtn);
+      card.appendChild(title);
+      card.appendChild(para);
+      card.appendChild(actions);
+      output.appendChild(card);
+    });
+  }
+
+  if (copyAllBtn) {
+    copyAllBtn.addEventListener("click", async () => {
+      if (!latestCaptions.length) {
+        setState("❌ No captions to copy yet.");
+        return;
+      }
+
+      try {
+        await navigator.clipboard.writeText(latestCaptions.join("\n\n"));
+        setState("✅ All captions copied.");
+      } catch {
+        setState("❌ Failed to copy captions.");
+      }
+    });
+  }
+
+  if (themeToggle) {
+    themeToggle.addEventListener("click", () => {
+      document.body.classList.toggle("light-theme");
+      const isLight = document.body.classList.contains("light-theme");
+      const icon = themeToggle.querySelector(".theme-icon");
+      if (icon) icon.textContent = isLight ? "☀️" : "🌙";
+      localStorage.setItem("insta_ai_theme", isLight ? "light" : "dark");
     });
 
-    const rawText = await response.text();
-
-    let data;
-    try {
-      data = JSON.parse(rawText);
-    } catch (e) {
-      output.innerText = "Server returned invalid JSON:\n" + rawText;
-      return;
+    const savedTheme = localStorage.getItem("insta_ai_theme");
+    if (savedTheme === "light") {
+      document.body.classList.add("light-theme");
+      const icon = themeToggle.querySelector(".theme-icon");
+      if (icon) icon.textContent = "☀️";
     }
-
-    if (!response.ok) {
-      output.innerText = data.error || "Something went wrong.";
-      return;
-    }
-
-    output.innerText = data.result || "No result returned.";
-  } catch (error) {
-    output.innerText = "Request failed: " + error.message;
-  } finally {
-    button.disabled = false;
   }
-}
+
+  if (navToggle && mobileMenu) {
+    navToggle.addEventListener("click", () => {
+      const isOpen = mobileMenu.classList.toggle("show");
+      navToggle.classList.toggle("active", isOpen);
+      navToggle.setAttribute("aria-expanded", String(isOpen));
+      mobileMenu.hidden = !isOpen;
+    });
+  }
+
+  if (!form) return;
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const data = {
+      platform: document.getElementById("platform").value,
+      tone: document.getElementById("tone").value,
+      length: document.getElementById("length").value,
+      language: document.getElementById("language").value,
+      postIdea: document.getElementById("postIdea").value.trim(),
+      variants: document.getElementById("variants").value,
+      includeEmojis: document.getElementById("includeEmojis").checked,
+      includeHashtags: document.getElementById("includeHashtags").checked
+    };
+
+    if (!data.postIdea) {
+      setState("❌ Please enter post idea.");
+      return;
+    }
+
+    setState("⏳ Generating captions...");
+    output.innerHTML = "";
+    latestCaptions = [];
+
+    const submitBtn = form.querySelector('button[type="submit"]');
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Generating...";
+    }
+
+    try {
+      const res = await fetch("/api/generate", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+      });
+
+      const result = await res.json().catch(() => null);
+
+      if (!res.ok || !result?.ok) {
+        setState(`❌ Error: ${result?.error || "Something went wrong."}`);
+        return;
+      }
+
+      if (!Array.isArray(result.captions) || !result.captions.length) {
+        setState("❌ No captions received.");
+        return;
+      }
+
+      renderCaptions(result.captions);
+      setState("✅ Captions generated successfully.");
+    } catch (err) {
+      console.error(err);
+      setState("❌ Failed to generate captions. Check API key or backend.");
+    } finally {
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Generate Captions";
+      }
+    }
+  });
+});
