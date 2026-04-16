@@ -1,75 +1,46 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const form = document.getElementById("captionForm");
-  const output = document.getElementById("captionResults");
-  const state = document.getElementById("outputState");
+async function generateCaptions() {
+  const output = document.getElementById("output");
+  const button = document.getElementById("generateBtn");
+  const promptInput = document.getElementById("prompt");
 
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
+  const prompt = promptInput?.value?.trim();
 
-    // 1. Form data lo
-    const data = {
-      platform: document.getElementById("platform").value,
-      tone: document.getElementById("tone").value,
-      length: document.getElementById("length").value,
-      language: document.getElementById("language").value,
-      postIdea: document.getElementById("postIdea").value,
-      variants: document.getElementById("variants").value,
-      includeEmojis: document.getElementById("includeEmojis").checked,
-      includeHashtags: document.getElementById("includeHashtags").checked
-    };
+  if (!prompt) {
+    output.innerText = "Please enter a prompt first.";
+    return;
+  }
 
-    if (!data.postIdea) {
-      state.innerHTML = "❌ Please enter post idea";
+  try {
+    button.disabled = true;
+    output.innerText = "Generating...";
+
+    const response = await fetch("/api/generate", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ prompt })
+    });
+
+    const rawText = await response.text();
+
+    let data;
+    try {
+      data = JSON.parse(rawText);
+    } catch (e) {
+      output.innerText = "Server returned invalid JSON:\n" + rawText;
       return;
     }
 
-    // 2. Loading state
-    state.innerHTML = "⏳ Generating captions...";
-    output.innerHTML = "";
-
-    try {
-      // 3. Backend ko request bhejo
-      const res = await fetch("/api/generate", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(data)
-      });
-
-      const result = await res.json();
-
-      // 4. Error check
-      if (!res.ok || !result.ok) {
-        state.innerHTML = "❌ Error: " + (result.error || "Something went wrong");
-        return;
-      }
-
-      // 5. Output show karo
-      state.innerHTML = "✅ Captions Generated";
-
-      result.captions.forEach((text, index) => {
-        const div = document.createElement("div");
-        div.style.marginBottom = "15px";
-        div.style.padding = "15px";
-        div.style.border = "1px solid #333";
-        div.style.borderRadius = "10px";
-
-        div.innerHTML = `
-          <b>Caption ${index + 1}</b><br><br>
-          ${text}
-          <br><br>
-          <button onclick="navigator.clipboard.writeText(\`${text}\`)">
-            Copy
-          </button>
-        `;
-
-        output.appendChild(div);
-      });
-
-    } catch (err) {
-      console.error(err);
-      state.innerHTML = "❌ Failed to generate captions";
+    if (!response.ok) {
+      output.innerText = data.error || "Something went wrong.";
+      return;
     }
-  });
-});
+
+    output.innerText = data.result || "No result returned.";
+  } catch (error) {
+    output.innerText = "Request failed: " + error.message;
+  } finally {
+    button.disabled = false;
+  }
+}
