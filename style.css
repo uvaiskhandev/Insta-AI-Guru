@@ -1090,7 +1090,59 @@ body.light-theme .site-header {
     display: none;
   }
 }
+.upload-wrap{
+  margin-top:20px;
+  padding:16px;
+  border:1px solid rgba(255,255,255,0.12);
+  border-radius:16px;
+  background:rgba(255,255,255,0.04);
+  backdrop-filter:blur(10px);
+}
 
+.upload-label{
+  display:block;
+  font-size:14px;
+  font-weight:600;
+  margin-bottom:10px;
+  color:#fff;
+}
+
+.upload-btn{
+  border:none;
+  outline:none;
+  padding:12px 18px;
+  border-radius:12px;
+  cursor:pointer;
+  font-weight:600;
+  transition:0.3s ease;
+}
+
+.upload-btn:hover{
+  transform:translateY(-2px);
+}
+
+.file-name{
+  margin-top:10px;
+  font-size:14px;
+  opacity:0.8;
+  word-break:break-word;
+}
+
+.image-preview-box{
+  margin-top:14px;
+  width:100%;
+  max-width:320px;
+  border-radius:14px;
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,0.12);
+  background:rgba(255,255,255,0.03);
+}
+
+.image-preview-box img{
+  width:100%;
+  display:block;
+  object-fit:cover;
+}
 @media (max-width: 520px) {
   .container {
     width: min(var(--container), calc(100% - 20px));
