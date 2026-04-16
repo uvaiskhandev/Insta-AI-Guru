@@ -1,5 +1,4 @@
-export default async function handler(req, res) {
-  // Basic CORS (optional but safe)
+module.exports = async function handler(req, res) {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
@@ -77,9 +76,6 @@ Rules:
   ]
 }
 - If variants are less than 3, return only that many captions.
-- Make captions engaging, polished, and suitable for social media.
-- If hashtags are enabled, include them naturally at the end of each caption.
-- If emojis are disabled, do not use emojis.
 `;
 
     const response = await fetch(
@@ -114,14 +110,11 @@ Rules:
     if (!response.ok) {
       return res.status(response.status).json({
         ok: false,
-        error: data?.error?.message || "Gemini API request failed.",
-        raw: data
+        error: data?.error?.message || "Gemini API request failed."
       });
     }
 
-    const text =
-      data?.candidates?.[0]?.content?.parts?.[0]?.text ||
-      "";
+    const text = data?.candidates?.[0]?.content?.parts?.[0]?.text || "";
 
     if (!text) {
       return res.status(500).json({
@@ -134,7 +127,7 @@ Rules:
 
     try {
       parsed = JSON.parse(text);
-    } catch (parseError) {
+    } catch (err) {
       return res.status(500).json({
         ok: false,
         error: "Failed to parse Gemini JSON response.",
@@ -143,16 +136,13 @@ Rules:
     }
 
     const captions = Array.isArray(parsed?.captions)
-      ? parsed.captions
-          .filter((item) => typeof item === "string" && item.trim())
-          .slice(0, safeVariants)
+      ? parsed.captions.filter(item => typeof item === "string" && item.trim()).slice(0, safeVariants)
       : [];
 
     if (!captions.length) {
       return res.status(500).json({
         ok: false,
-        error: "No captions returned by model.",
-        parsed
+        error: "No captions returned by model."
       });
     }
 
@@ -166,4 +156,4 @@ Rules:
       error: error?.message || "Internal server error."
     });
   }
-}
+};
