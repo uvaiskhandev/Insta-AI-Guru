@@ -126,7 +126,8 @@ document.addEventListener("DOMContentLoaded", () => {
       postIdea: document.getElementById("postIdea").value.trim(),
       variants: document.getElementById("variants").value,
       includeEmojis: document.getElementById("includeEmojis").checked,
-      includeHashtags: document.getElementById("includeHashtags").checked
+      includeHashtags: document.getElementById("includeHashtags").checked,
+      image: selectedImageBase64 || null
     };
 
     if (!data.postIdea) {
