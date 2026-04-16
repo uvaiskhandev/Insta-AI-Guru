@@ -8,10 +8,7 @@ export default async function handler(req, res) {
   }
 
   if (req.method !== "POST") {
-    return res.status(405).json({
-      ok: false,
-      error: "Method not allowed"
-    });
+    return res.status(405).json({ ok: false, error: "Method not allowed" });
   }
 
   try {
@@ -27,19 +24,12 @@ export default async function handler(req, res) {
     } = req.body || {};
 
     if (!postIdea || !String(postIdea).trim()) {
-      return res.status(400).json({
-        ok: false,
-        error: "Post idea is required"
-      });
+      return res.status(400).json({ ok: false, error: "Post idea is required" });
     }
 
     const apiKey = process.env.GEMINI_API_KEY;
-
     if (!apiKey) {
-      return res.status(500).json({
-        ok: false,
-        error: "Missing GEMINI_API_KEY"
-      });
+      return res.status(500).json({ ok: false, error: "Missing GEMINI_API_KEY" });
     }
 
     const count = Math.max(1, Math.min(3, Number(variants) || 1));
@@ -88,8 +78,7 @@ Do not add triple backticks.
           ],
           generationConfig: {
             temperature: 0.9,
-            maxOutputTokens: 1000,
-            responseMimeType: "application/json"
+            maxOutputTokens: 1000
           }
         })
       }
@@ -105,18 +94,7 @@ Do not add triple backticks.
       });
     }
 
-    const candidate = data?.candidates?.[0];
-
-    if (!candidate) {
-      return res.status(500).json({
-        ok: false,
-        error: "No candidates returned by Gemini",
-        raw: data
-      });
-    }
-
-    const finishReason = candidate?.finishReason;
-    const rawText = candidate?.content?.parts
+    const rawText = data?.candidates?.[0]?.content?.parts
       ?.map((part) => part?.text || "")
       .join("")
       .trim();
@@ -124,31 +102,38 @@ Do not add triple backticks.
     if (!rawText) {
       return res.status(500).json({
         ok: false,
-        error: `No text returned by Gemini${finishReason ? ` (${finishReason})` : ""}`,
+        error: "No text returned by Gemini",
         raw: data
       });
     }
 
-    let parsed;
-    try {
-      parsed = JSON.parse(rawText);
-    } catch (err) {
-      return res.status(500).json({
-        ok: false,
-        error: "Gemini returned invalid JSON",
-        rawText
-      });
-    }
+    let captions = [];
 
-    const captions = Array.isArray(parsed?.captions)
-      ? parsed.captions.map((x) => String(x || "").trim()).filter(Boolean)
-      : [];
+    try {
+      const cleaned = rawText
+        .replace(/^```json/i, "")
+        .replace(/^```/i, "")
+        .replace(/```$/i, "")
+        .trim();
+
+      const parsed = JSON.parse(cleaned);
+
+      if (Array.isArray(parsed?.captions)) {
+        captions = parsed.captions.map(x => String(x || "").trim()).filter(Boolean);
+      }
+    } catch {
+      captions = rawText
+        .split("\n")
+        .map(line => line.replace(/^\d+[\).\-\s]*/, "").trim())
+        .filter(Boolean)
+        .slice(0, count);
+    }
 
     if (!captions.length) {
       return res.status(500).json({
         ok: false,
         error: "No captions found in AI response",
-        parsed
+        rawText
       });
     }
 
@@ -158,7 +143,6 @@ Do not add triple backticks.
     });
   } catch (error) {
     console.error("SERVER ERROR:", error);
-
     return res.status(500).json({
       ok: false,
       error: error?.message || "Internal server error"
