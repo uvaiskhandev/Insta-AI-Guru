@@ -11,6 +11,76 @@ export default async function handler(req, res) {
     return res.status(405).json({ ok: false, error: "Method not allowed" });
   }
 
+  function extractCaptions(rawText, count) {
+    if (!rawText) return [];
+
+    const cleaned = String(rawText)
+      .replace(/^```json\s*/i, "")
+      .replace(/^```\s*/i, "")
+      .replace(/\s*```$/i, "")
+      .trim();
+
+    // 1) Direct JSON parse
+    try {
+      const parsed = JSON.parse(cleaned);
+
+      if (Array.isArray(parsed)) {
+        return parsed
+          .map((item) => String(item || "").trim())
+          .filter(Boolean)
+          .slice(0, count);
+      }
+
+      if (Array.isArray(parsed?.captions)) {
+        return parsed.captions
+          .map((item) => String(item || "").trim())
+          .filter(Boolean)
+          .slice(0, count);
+      }
+    } catch (e) {
+      // ignore
+    }
+
+    // 2) JSON block extraction if extra text exists around JSON
+    try {
+      const match = cleaned.match(/\{[\s\S]*"captions"[\s\S]*\}/);
+      if (match) {
+        const parsed = JSON.parse(match[0]);
+        if (Array.isArray(parsed?.captions)) {
+          return parsed.captions
+            .map((item) => String(item || "").trim())
+            .filter(Boolean)
+            .slice(0, count);
+        }
+      }
+    } catch (e) {
+      // ignore
+    }
+
+    // 3) Fallback for plain text captions
+    const lines = cleaned
+      .split(/\n{2,}|\n(?=\d+[\).\-\s])/)
+      .map((line) => line.replace(/^\d+[\).\-\s]*/, "").trim())
+      .filter(Boolean)
+      .filter(
+        (line) =>
+          line !== "{" &&
+          line !== "}" &&
+          line !== "[" &&
+          line !== "]" &&
+          !line.startsWith('"captions"') &&
+          !line.startsWith('"captions":') &&
+          !line.endsWith("[") &&
+          !line.endsWith("]") &&
+          !line.endsWith("{") &&
+          !line.endsWith("}")
+      )
+      .map((line) => line.replace(/^"(.*)"[,]?$/, "$1").trim())
+      .filter(Boolean);
+
+    return lines.slice(0, count);
+  }
+
   try {
     const {
       platform = "Instagram",
@@ -21,7 +91,7 @@ export default async function handler(req, res) {
       variants = "3",
       includeEmojis = true,
       includeHashtags = true,
-      image = null   // 🔥 ye add karo
+      image = null
     } = req.body || {};
 
     if (!postIdea || !String(postIdea).trim()) {
@@ -47,6 +117,7 @@ Requirements:
 - Language: ${language}
 - Include Emojis: ${includeEmojis ? "Yes" : "No"}
 - Include Hashtags: ${includeHashtags ? "Yes" : "No"}
+- Image Provided: ${image ? "Yes" : "No"}
 
 Post idea:
 ${postIdea}
@@ -59,8 +130,13 @@ Return ONLY valid JSON in this exact format:
     "caption 3"
   ]
 }
-Do not add markdown.
-Do not add triple backticks.
+
+Rules:
+- Do not add markdown
+- Do not add triple backticks
+- Do not add explanation text
+- Do not add headings
+- Do not return anything except JSON
 `.trim();
 
     const response = await fetch(
@@ -108,27 +184,7 @@ Do not add triple backticks.
       });
     }
 
-    let captions = [];
-
-    try {
-      const cleaned = rawText
-        .replace(/^```json/i, "")
-        .replace(/^```/i, "")
-        .replace(/```$/i, "")
-        .trim();
-
-      const parsed = JSON.parse(cleaned);
-
-      if (Array.isArray(parsed?.captions)) {
-        captions = parsed.captions.map(x => String(x || "").trim()).filter(Boolean);
-      }
-    } catch {
-      captions = rawText
-        .split("\n")
-        .map(line => line.replace(/^\d+[\).\-\s]*/, "").trim())
-        .filter(Boolean)
-        .slice(0, count);
-    }
+    const captions = extractCaptions(rawText, count);
 
     if (!captions.length) {
       return res.status(500).json({
@@ -140,7 +196,7 @@ Do not add triple backticks.
 
     return res.status(200).json({
       ok: true,
-      captions: captions.slice(0, count)
+      captions
     });
   } catch (error) {
     console.error("SERVER ERROR:", error);
