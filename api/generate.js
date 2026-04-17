@@ -1,5 +1,5 @@
 const GEMINI_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent";
-const MAX_VARIANTS = 3;
+const MAX_VARIANTS = 7;
 
 async function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -258,8 +258,8 @@ async function requestAI({ apiKey, action, count, platform, tone, length, langua
       body: JSON.stringify({
         contents: [{ parts }],
         generationConfig: {
-          temperature: strict ? 0.95 : 0.75,
-          maxOutputTokens: 1000,
+          temperature: strict ? 0.95 : 0.45,
+          maxOutputTokens: 1400,
           responseMimeType: "application/json"
         }
       })
