@@ -106,52 +106,109 @@ function extractItems(rawText, requestedCount) {
   ).slice(0, requestedCount);
 }
 
-function buildPrompt({ action, count, platform, tone, length, language, postIdea, includeEmojis, includeHashtags, hasImage }) {
+function buildPrompt({
+  action,
+  count,
+  platform,
+  tone,
+  length,
+  language,
+  postIdea,
+  includeEmojis,
+  includeHashtags,
+  hasImage
+}) {
   const taskMap = {
-    captions: `Generate exactly ${count} different social media captions.`,
-    bio: `Generate exactly ${count} different social media bios. Keep each bio compact and profile-ready.`,
-    hashtags: `Generate exactly ${count} different hashtag sets. Each set should be useful, non-spammy, and easy to copy.`,
-    reelIdeas: `Generate exactly ${count} different reel ideas. Each idea should include a hook, concept, and CTA in short form.`
+    captions: `Generate exactly ${count} high-quality social media captions.`,
+    bio: `Generate exactly ${count} premium social media bios.`,
+    hashtags: `Generate exactly ${count} hashtag sets.`,
+    reelIdeas: `Generate exactly ${count} reel ideas with hook, execution, and CTA.`
   };
 
-  const specialRules = {
-    captions: `Each result should feel natural, engaging, and platform-appropriate.`,
-    bio: `Each bio should sound premium, clear, and attractive for profile visitors.`,
-    hashtags: `Each hashtag set should be on one line and include 12-18 relevant hashtags max.`,
-    reelIdeas: `Each reel idea should be clear and actionable, not vague.`
+  const formatRules = {
+    captions: `
+For captions:
+- Make each caption feel premium, natural, and human-written
+- Make every caption clearly different in angle and wording
+- Match the selected platform and tone properly
+- If image exists, use visible details from the image naturally
+- Do NOT sound robotic or repetitive
+- Avoid generic lines like "elevate your feed" unless truly suitable
+- Add emojis only if requested
+- Add hashtags only if requested
+`,
+    bio: `
+For bios:
+- Make each bio short, profile-ready, and premium
+- Use strong niche identity
+- Keep it attractive and practical
+- Avoid generic overused phrases
+- Add emojis only if requested
+`,
+    hashtags: `
+For hashtags:
+- Each result must be a single line
+- Use 12 to 18 relevant hashtags only
+- Mix broad + niche + intent-based hashtags
+- Avoid spammy repeated hashtags
+`,
+    reelIdeas: `
+For reel ideas:
+- Each idea must include:
+  1. Hook
+  2. Execution
+  3. CTA
+- Keep ideas practical and easy to shoot
+- Avoid vague advice
+- Make each idea clearly different
+`
   };
 
   return `
-You are an expert social media content strategist.
+You are an elite social media strategist and copywriter.
 
 Task:
 ${taskMap[action] || taskMap.captions}
 
-Context:
+Input context:
 - Platform: ${platform}
 - Tone: ${tone}
 - Length: ${length}
 - Language: ${language}
-- Include Emojis: ${includeEmojis ? "Yes" : "No"}
-- Include Hashtags: ${includeHashtags ? "Yes" : "No"}
-- Topic / User input: ${postIdea}
+- User input: ${postIdea}
+- Emojis allowed: ${includeEmojis ? "Yes" : "No"}
+- Hashtags allowed: ${includeHashtags ? "Yes" : "No"}
 
-Image handling:
-${hasImage ? `An image is attached.
-- Carefully analyze the uploaded image.
-- Describe exactly what you SEE: people, clothing, objects, colors, setting, vibe, and mood.
-- Base the response on real visible content only.
-- Do not invent hidden details.
-- Blend the visible image details with the user's written topic.` : `No image is attached. Use only the written topic.`}
+Image instructions:
+${
+  hasImage
+    ? `
+An image is attached.
+You must carefully inspect the image and use ONLY visible details.
+Focus on:
+- subject or person
+- outfit / product / object details
+- colors
+- background / setting
+- mood / vibe
+- style / luxury / aesthetic feel
+Blend image details naturally with the user's text.
+Do not invent hidden details.
+`
+    : `No image is attached. Use only the written input.`
+}
 
-Rules:
+Quality rules:
 - Return exactly ${count} items
 - Every item must be meaningfully different
-- ${specialRules[action] || specialRules.captions}
-- No markdown
-- No explanations
-- No headings outside JSON
+- The writing must feel premium, specific, and realistic
+- Do not repeat the same opening style
+- Do not use filler
+- Do not use markdown
+- Do not include explanations
 - Return only valid JSON
+
+${formatRules[action] || formatRules.captions}
 
 Return exactly in this format:
 {
@@ -163,7 +220,6 @@ Return exactly in this format:
 }
 `.trim();
 }
-
 async function requestAI({ apiKey, action, count, platform, tone, length, language, postIdea, includeEmojis, includeHashtags, imageInfo, strict }) {
   const parts = [];
 
