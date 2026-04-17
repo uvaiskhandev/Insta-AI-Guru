@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Insta AI Guru - Free AI Caption, Bio, Hashtag & Reel Idea Generator</title>
+  <meta name="description" content="Generate Instagram captions, reel ideas, profile bios, and hashtag sets using AI with optional image understanding." />
+  <meta name="robots" content="index, follow, max-image-preview:large" />
+  <link rel="canonical" href="https://instaaiguru.vercel.app/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Insta AI Guru - Free AI Caption, Bio, Hashtag & Reel Idea Generator" />
+  <meta property="og:description" content="Generate Instagram captions, reel ideas, profile bios, and hashtag sets using AI with optional image understanding." />
+  <meta property="og:url" content="https://instaaiguru.vercel.app/" />
+  <meta property="og:image" content="https://instaaiguru.vercel.app/assets/og-image.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Insta AI Guru - Free AI Caption, Bio, Hashtag & Reel Idea Generator" />
+  <meta name="twitter:description" content="Generate Instagram captions, reel ideas, profile bios, and hashtag sets using AI with optional image understanding." />
+  <meta name="twitter:image" content="https://instaaiguru.vercel.app/assets/og-image.jpg" />
+  <meta name="theme-color" content="#09090f" />
+  <link rel="icon" href="favicon.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Insta AI Guru - Free AI Caption, Bio, Hashtag & Reel Idea Generator","description":"Generate Instagram captions, reel ideas, profile bios, and hashtag sets using AI with optional image understanding.","url":"https://instaaiguru.vercel.app/"}</script>
+  
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Insta AI Guru","url":"https://instaaiguru.vercel.app/","logo":"https://instaaiguru.vercel.app/assets/logo.png"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Insta AI Guru","applicationCategory":"BusinessApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <div class="site-bg"><span class="bg-orb orb-1"></span><span class="bg-orb orb-2"></span><span class="bg-orb orb-3"></span><span class="grid-overlay"></span></div>
+  
+  <header class="site-header" id="top">
+    <div class="container nav-wrap">
+      <a href="/" class="brand" aria-label="Insta AI Guru Home">
+        <span class="brand-icon">AI</span>
+        <span class="brand-name">Insta AI Guru</span>
+      </a>
+      <nav class="main-nav" aria-label="Main navigation">
+        <ul class="nav-links">
+          <li><a href="/instagram-caption-generator.html">Instagram Captions</a></li>
+          <li><a href="/reel-caption-generator.html">Reel Captions</a></li>
+          <li><a href="/bio-generator.html">Bio Generator</a></li>
+          <li><a href="/reel-ideas.html">Reel Ideas</a></li>
+          <li><a href="/hashtag-generator.html">Hashtag Generator</a></li>
+          <li><a href="/complaint.html">Complaint</a></li>
+        </ul>
+        <div class="nav-actions">
+          <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle theme">
+            <span class="theme-icon">🌙</span>
+          </button>
+          <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="mobileMenu" aria-label="Open menu" type="button">
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </nav>
+    </div>
+    <div class="mobile-menu" id="mobileMenu" hidden>
+      <a href="/instagram-caption-generator.html">Instagram Captions</a>
+      <a href="/reel-caption-generator.html">Reel Captions</a>
+      <a href="/bio-generator.html">Bio Generator</a>
+      <a href="/reel-ideas.html">Reel Ideas</a>
+      <a href="/hashtag-generator.html">Hashtag Generator</a>
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+      <a href="/complaint.html">Complaint</a>
+    </div>
+  </header>
+
+  
+<main id="main-content">
+  <section class="hero-section">
+    <div class="container hero-grid">
+      <div class="hero-left">
+        <div class="hero-badge">AI Powered Social Content Studio</div>
+        <h1 class="hero-title">Create <span class="gradient-text">viral captions</span>, bios, hooks & hashtags for your next post</h1>
+        <p class="hero-desc">
+          Insta AI Guru helps creators, brands, and marketers generate smart Instagram captions,
+          reel ideas, profile bios, and hashtag sets using AI with optional image understanding.
+        </p>
+        <div class="hero-buttons">
+          <a href="#tool" class="btn btn-primary">Start Generating</a>
+          <a href="/about.html" class="btn btn-secondary">Explore Pages</a>
+        </div>
+        <div class="hero-mini-cards">
+          <div class="mini-card"><strong>AI Image Analysis</strong><span>Captions based on real visible image content</span></div>
+          <div class="mini-card"><strong>SEO Ready</strong><span>Multiple landing pages for better Google reach</span></div>
+          <div class="mini-card"><strong>Fast UI</strong><span>Responsive premium interface with quick copy actions</span></div>
+        </div>
+      </div>
+      <div class="hero-right">
+        <div class="hero-stack">
+          <div class="hero-card top-card">
+            <div class="top-card-bar"><span></span><span></span><span></span></div>
+            <div class="top-card-body">
+              <p class="small-label">Instant AI Output</p>
+              <h2>Your content deserves better words</h2>
+              <p>Generate polished social content in seconds for Instagram, Reels, TikTok, Threads, LinkedIn, Facebook, and YouTube.</p>
+              <div class="chip-row"><span class="chip">Captions</span><span class="chip">Bios</span><span class="chip">Reel Ideas</span><span class="chip">Hashtags</span></div>
+            </div>
+          </div>
+          <div class="floating-box float-1"><span>Image Aware</span></div>
+          <div class="floating-box float-2"><span>3 Variants</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="logo-strip" aria-label="Platforms supported">
+    <div class="container logo-strip-inner"><span>Instagram</span><span>TikTok</span><span>Threads</span><span>Facebook</span><span>YouTube</span><span>LinkedIn</span></div>
+  </section>
+
+  <section class="section tool-section" id="tool">
+    <div class="container">
+      <div class="section-head center">
+        <p class="section-tag">Main AI Tool</p>
+        <h2>Generate smart captions with image understanding</h2>
+        <p>Select your platform, tone, language, upload an image if needed, and get multiple results instantly.</p>
+      </div>
+      <div class="tool-shell">
+        <div class="tool-left">
+          <form id="captionForm" data-action="captions" data-button-text="Generate Captions" novalidate>
+            <div class="form-grid">
+              <div class="form-group"><label for="platform">Platform</label><select id="platform" name="platform"><option>Instagram</option><option>TikTok</option><option>Threads</option><option>Facebook</option><option>YouTube</option><option>LinkedIn</option></select></div>
+              <div class="form-group"><label for="tone">Tone</label><select id="tone" name="tone"><option>Professional</option><option>Casual</option><option>Luxury</option><option>Funny</option><option>Motivational</option><option>Emotional</option></select></div>
+              <div class="form-group"><label for="length">Length</label><select id="length" name="length"><option>Short</option><option selected>Medium</option><option>Long</option></select></div>
+              <div class="form-group"><label for="language">Language</label><select id="language" name="language"><option>English</option><option>Hindi</option><option>Hinglish</option></select></div>
+            </div>
+
+            <div class="upload-wrap">
+              <label for="imageInput" class="upload-label">Upload Image (optional)</label>
+              <input type="file" id="imageInput" accept="image/*" hidden>
+              <button type="button" id="uploadBtn" class="upload-btn">Choose Image</button>
+              <p id="fileName" class="file-name">No image selected</p>
+              <div class="image-preview-box" id="imagePreviewBox" style="display:none;"><img id="imagePreview" alt="Preview"></div>
+            </div>
+
+            <div class="form-group"><label for="postIdea">What is your post about?</label><textarea id="postIdea" name="postIdea" rows="6" placeholder="Example: Elegant hand-embroidered saree collection for festive and wedding season"></textarea></div>
+
+            <div class="option-cards">
+              <label class="option-card"><div><strong>Include Emojis</strong><span>Add stylish emoji support</span></div><input id="includeEmojis" name="includeEmojis" type="checkbox" checked /></label>
+              <label class="option-card"><div><strong>Include Hashtags</strong><span>Generate hashtag-ready output</span></div><input id="includeHashtags" name="includeHashtags" type="checkbox" checked /></label>
+              <div class="form-group variants-group"><label for="variants">Variants</label><select id="variants" name="variants"><option value="1">1 Variant</option><option value="2">2 Variants</option><option value="3" selected>3 Variants</option></select></div>
+            </div>
+
+            <div class="form-actions"><button type="submit" class="btn btn-primary btn-full">Generate Captions</button><p class="helper-text">Works for product posts, personal branding, business promotions, reels, fashion content, and more.</p></div>
+          </form>
+        </div>
+        <div class="tool-right" id="resultsArea">
+          <div class="output-header">
+            <div><p class="section-tag">Generated Output</p><h3>Caption Results</h3></div>
+            <button id="copyAllBtn" class="btn btn-secondary btn-small" type="button">Copy All</button>
+          </div>
+          <div id="outputState" class="output-state">Your generated captions will appear here in a premium output layout.</div>
+          <div id="generatedText" class="caption-results" aria-live="polite"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="features">
+    <div class="container">
+      <div class="section-head center"><p class="section-tag">Premium Features</p><h2>Everything your AI content tool needs</h2><p>This version is designed like a polished SaaS product with strong structure and fast UI.</p></div>
+      <div class="feature-grid">
+        <article class="feature-card"><div class="feature-icon">🧠</div><h3>Image-Based Captions</h3><p>Upload an image and generate captions based on real visible details, mood, and setting.</p></article>
+        <article class="feature-card"><div class="feature-icon">🎯</div><h3>Dedicated SEO Pages</h3><p>Separate landing pages for bios, reels, hashtags, and captions improve long-tail search targeting.</p></article>
+        <article class="feature-card"><div class="feature-icon">⚡</div><h3>Fast API Flow</h3><p>Retry logic helps reduce failed responses when AI services are busy.</p></article>
+        <article class="feature-card"><div class="feature-icon">📱</div><h3>Mobile Ready</h3><p>Responsive layout built for phones, tablets, and desktop screens.</p></article>
+        <article class="feature-card"><div class="feature-icon">📝</div><h3>Multiple Variants</h3><p>Generate 1 to 3 unique results with easy copy buttons and clean cards.</p></article>
+        <article class="feature-card"><div class="feature-icon">🌙</div><h3>Dark and Light Mode</h3><p>Built-in theme toggle for a premium modern experience in both modes.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section alt-section" id="how-it-works">
+    <div class="container">
+      <div class="section-head center"><p class="section-tag">How It Works</p><h2>Simple flow, premium experience</h2><p>The UI is designed so users can quickly understand the tool and generate content without confusion.</p></div>
+      <div class="steps-grid">
+        <article class="step-card"><span class="step-number">01</span><h3>Choose platform and tone</h3><p>Select your platform, content mood, language, and output length.</p></article>
+        <article class="step-card"><span class="step-number">02</span><h3>Describe your content</h3><p>Enter what your post is about and optionally upload an image.</p></article>
+        <article class="step-card"><span class="step-number">03</span><h3>Generate and copy</h3><p>Get polished AI output and copy the result you like most.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section content-section">
+    <div class="container content-layout">
+      <article class="content-article">
+        <p class="section-tag">About Insta AI Guru</p>
+        <h2>A premium AI content generator for modern creators and brands</h2>
+        <p>Insta AI Guru is designed for creators, digital marketers, agencies, small businesses, fashion brands, product sellers, and personal brands who want better captions without wasting time.</p>
+        <p>Whether you create Instagram reels, launch products, post business promotions, write social media announcements, or need better hashtag support, this platform helps users generate stronger content in a clean and modern way.</p>
+      </article>
+      <aside class="use-case-panel">
+        <p class="section-tag">Use Cases</p>
+        <ul>
+          <li>Instagram post captions</li>
+          <li>Reel hooks and ideas</li>
+          <li>Luxury product captions</li>
+          <li>Fashion and saree posts</li>
+          <li>Business promotion lines</li>
+          <li>Profile bios and hashtag sets</li>
+        </ul>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section faq-section" id="faq">
+    <div class="container">
+      <div class="section-head center"><p class="section-tag">FAQ</p><h2>Frequently asked questions</h2><p>Common questions about Insta AI Guru and the AI content generation flow.</p></div>
+      <div class="faq-list">
+        <details class="faq-item"><summary>What is Insta AI Guru?</summary><p>Insta AI Guru is a web-based AI tool for captions, bios, hashtag sets, and reel ideas for major social platforms.</p></details>
+        <details class="faq-item"><summary>Can the AI use uploaded images?</summary><p>Yes. If you upload an image, the backend asks the model to analyze visible elements and use them in the output.</p></details>
+        <details class="faq-item"><summary>Can I use this for product and business posts?</summary><p>Yes, it works well for product captions, business promotions, fashion posts, creator workflows, and personal branding.</p></details>
+        <details class="faq-item"><summary>Does it support mobile devices?</summary><p>Yes, the layout is responsive and optimized for mobile, tablet, and desktop screens.</p></details>
+      </div>
+    </div>
+  </section>
+</main>
+
+  
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-shell">
+        <div class="footer-top">
+          <div class="footer-brand-block">
+            <a href="/" class="footer-brand-logo" aria-label="Insta AI Guru Home">
+              <span class="footer-brand-icon">AI</span>
+              <span class="footer-brand-text">Insta AI Guru</span>
+            </a>
+            <p class="footer-description">
+              Premium AI caption, bio, hashtag, and reel idea generator for Instagram, Reels, TikTok,
+              Threads, Facebook, YouTube, and LinkedIn.
+            </p>
+            <div class="footer-badges">
+              <span>SEO Friendly</span>
+              <span>Image Aware AI</span>
+              <span>Multi Tool</span>
+            </div>
+          </div>
+          <div class="footer-links-wrap">
+            <div class="footer-column">
+              <h3>Tools</h3>
+              <a href="/instagram-caption-generator.html">Instagram Caption Generator</a>
+              <a href="/reel-caption-generator.html">Reel Caption Generator</a>
+              <a href="/bio-generator.html">Bio Generator</a>
+            </div>
+            <div class="footer-column">
+              <h3>More</h3>
+              <a href="/reel-ideas.html">Reel Ideas</a>
+              <a href="/hashtag-generator.html">Hashtag Generator</a>
+              <a href="/complaint.html">Complaint & Suggestion</a>
+            </div>
+            <div class="footer-column">
+              <h3>Company</h3>
+              <a href="/about.html">About</a>
+              <a href="/contact.html">Contact</a>
+              <a href="/">Home</a>
+            </div>
+          </div>
+        </div>
+        <div class="footer-divider"></div>
+        <div class="footer-bottom">
+          <p class="footer-copy">© 2026 Insta AI Guru. All rights reserved.</p>
+          <div class="footer-bottom-links">
+            <a href="/">Home</a>
+            <a href="/contact.html">Contact</a>
+            <a href="/about.html">About</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

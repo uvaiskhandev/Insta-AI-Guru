@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bio Generator - Insta AI Guru</title>
+  <meta name="description" content="Generate AI bios for Instagram, creators, brands, businesses, and personal profiles." />
+  <meta name="robots" content="index, follow, max-image-preview:large" />
+  <link rel="canonical" href="https://instaaiguru.vercel.app/bio-generator.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Bio Generator - Insta AI Guru" />
+  <meta property="og:description" content="Generate AI bios for Instagram, creators, brands, businesses, and personal profiles." />
+  <meta property="og:url" content="https://instaaiguru.vercel.app/bio-generator.html" />
+  <meta property="og:image" content="https://instaaiguru.vercel.app/assets/og-image.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Bio Generator - Insta AI Guru" />
+  <meta name="twitter:description" content="Generate AI bios for Instagram, creators, brands, businesses, and personal profiles." />
+  <meta name="twitter:image" content="https://instaaiguru.vercel.app/assets/og-image.jpg" />
+  <meta name="theme-color" content="#09090f" />
+  <link rel="icon" href="favicon.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Bio Generator - Insta AI Guru","description":"Generate AI bios for Instagram, creators, brands, businesses, and personal profiles.","url":"https://instaaiguru.vercel.app/bio-generator.html"}</script>
+  
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <div class="site-bg"><span class="bg-orb orb-1"></span><span class="bg-orb orb-2"></span><span class="bg-orb orb-3"></span><span class="grid-overlay"></span></div>
+  
+  <header class="site-header" id="top">
+    <div class="container nav-wrap">
+      <a href="/" class="brand" aria-label="Insta AI Guru Home">
+        <span class="brand-icon">AI</span>
+        <span class="brand-name">Insta AI Guru</span>
+      </a>
+      <nav class="main-nav" aria-label="Main navigation">
+        <ul class="nav-links">
+          <li><a href="/instagram-caption-generator.html">Instagram Captions</a></li>
+          <li><a href="/reel-caption-generator.html">Reel Captions</a></li>
+          <li><a href="/bio-generator.html">Bio Generator</a></li>
+          <li><a href="/reel-ideas.html">Reel Ideas</a></li>
+          <li><a href="/hashtag-generator.html">Hashtag Generator</a></li>
+          <li><a href="/complaint.html">Complaint</a></li>
+        </ul>
+        <div class="nav-actions">
+          <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle theme">
+            <span class="theme-icon">🌙</span>
+          </button>
+          <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="mobileMenu" aria-label="Open menu" type="button">
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </nav>
+    </div>
+    <div class="mobile-menu" id="mobileMenu" hidden>
+      <a href="/instagram-caption-generator.html">Instagram Captions</a>
+      <a href="/reel-caption-generator.html">Reel Captions</a>
+      <a href="/bio-generator.html">Bio Generator</a>
+      <a href="/reel-ideas.html">Reel Ideas</a>
+      <a href="/hashtag-generator.html">Hashtag Generator</a>
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+      <a href="/complaint.html">Complaint</a>
+    </div>
+  </header>
+
+  
+<main id="main-content">
+  <section class="page-hero">
+    <div class="container">
+      <div class="page-pill">AI Tool Page</div>
+      <h1 class="page-title">AI Bio Generator</h1>
+      <p class="page-desc">Generate AI bios for Instagram, creators, brands, businesses, and personal profiles.</p>
+      <div class="page-links"><a class="btn btn-primary" href="#toolForm">Use This Tool</a><a class="btn btn-secondary" href="/">Back to Home</a></div>
+    </div>
+  </section>
+  <section class="section" id="toolForm">
+    <div class="container tool-shell">
+      <div class="tool-left">
+        <form id="aiForm" data-action="bio" data-button-text="Generate Now" novalidate>
+          <input type="hidden" id="toolAction" value="bio">
+          <div class="form-grid">
+            <div class="form-group"><label for="platform">Platform</label><select id="platform"><option>Instagram</option><option>TikTok</option><option>Threads</option><option>Facebook</option><option>YouTube</option><option>LinkedIn</option></select></div>
+            <div class="form-group"><label for="tone">Tone</label><select id="tone"><option>Professional</option><option>Casual</option><option>Luxury</option><option>Funny</option><option>Motivational</option><option>Emotional</option></select></div>
+            <div class="form-group"><label for="length">Length</label><select id="length"><option>Short</option><option selected>Medium</option><option>Long</option></select></div>
+            <div class="form-group"><label for="language">Language</label><select id="language"><option>English</option><option>Hindi</option><option>Hinglish</option></select></div>
+          </div>
+          <div class="upload-wrap">
+            <label for="imageInput" class="upload-label">Upload Image (optional)</label>
+            <input type="file" id="imageInput" accept="image/*" hidden>
+            <button type="button" id="uploadBtn" class="upload-btn">Choose Image</button>
+            <p id="fileName" class="file-name">No image selected</p>
+            <div class="image-preview-box" id="imagePreviewBox" style="display:none;"><img id="imagePreview" alt="Preview"></div>
+          </div>
+          <div class="form-group"><label for="topic">Tell us about your profile, brand, or niche</label><textarea id="topic" rows="6" placeholder="Example: Fashion brand selling embroidered sarees and festive wear with premium handcrafted style"></textarea></div>
+          <div class="option-cards">
+            <label class="option-card"><div><strong>Include Emojis</strong><span>Helpful for engaging content</span></div><input id="includeEmojis" type="checkbox" checked /></label>
+            <label class="option-card"><div><strong>Include Hashtags</strong><span>Useful for caption outputs</span></div><input id="includeHashtags" type="checkbox" checked /></label>
+            <div class="form-group variants-group"><label for="variants">Variants</label><select id="variants"><option value="1">1 Variant</option><option value="2">2 Variants</option><option value="3" selected>3 Variants</option></select></div>
+          </div>
+          <button type="submit" class="btn btn-primary btn-full">Generate Now</button>
+        </form>
+      </div>
+      <div class="tool-right" id="resultsArea">
+        <div class="output-header"><div><p class="section-tag">Generated Output</p><h3>Bio Results</h3></div><button id="copyAllBtn" class="btn btn-secondary btn-small" type="button">Copy All</button></div>
+        <div id="outputState" class="output-state">Your AI output will appear here.</div>
+        <div id="generatedText" class="caption-results" aria-live="polite"></div>
+      </div>
+    </div>
+  </section>
+  <section class="section alt-section">
+    <div class="container cards-grid">
+      <article class="page-panel"><h3>Profile Ready</h3><p>Each result is designed to be shorter and better suited for profile use.</p></article><article class="page-panel"><h3>Brand Friendly</h3><p>Works well for creators, businesses, freelancers, and stores.</p></article><article class="page-panel"><h3>Multi-Language</h3><p>Generate in English, Hindi, or Hinglish for your audience.</p></article>
+    </div>
+  </section>
+</main>
+
+  
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-shell">
+        <div class="footer-top">
+          <div class="footer-brand-block">
+            <a href="/" class="footer-brand-logo" aria-label="Insta AI Guru Home">
+              <span class="footer-brand-icon">AI</span>
+              <span class="footer-brand-text">Insta AI Guru</span>
+            </a>
+            <p class="footer-description">
+              Premium AI caption, bio, hashtag, and reel idea generator for Instagram, Reels, TikTok,
+              Threads, Facebook, YouTube, and LinkedIn.
+            </p>
+            <div class="footer-badges">
+              <span>SEO Friendly</span>
+              <span>Image Aware AI</span>
+              <span>Multi Tool</span>
+            </div>
+          </div>
+          <div class="footer-links-wrap">
+            <div class="footer-column">
+              <h3>Tools</h3>
+              <a href="/instagram-caption-generator.html">Instagram Caption Generator</a>
+              <a href="/reel-caption-generator.html">Reel Caption Generator</a>
+              <a href="/bio-generator.html">Bio Generator</a>
+            </div>
+            <div class="footer-column">
+              <h3>More</h3>
+              <a href="/reel-ideas.html">Reel Ideas</a>
+              <a href="/hashtag-generator.html">Hashtag Generator</a>
+              <a href="/complaint.html">Complaint & Suggestion</a>
+            </div>
+            <div class="footer-column">
+              <h3>Company</h3>
+              <a href="/about.html">About</a>
+              <a href="/contact.html">Contact</a>
+              <a href="/">Home</a>
+            </div>
+          </div>
+        </div>
+        <div class="footer-divider"></div>
+        <div class="footer-bottom">
+          <p class="footer-copy">© 2026 Insta AI Guru. All rights reserved.</p>
+          <div class="footer-bottom-links">
+            <a href="/">Home</a>
+            <a href="/contact.html">Contact</a>
+            <a href="/about.html">About</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
