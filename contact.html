@@ -1,77 +1,353 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<title>Contact - Insta AI Guru</title>
-<link rel="stylesheet" href="style.css">
+  <title>Contact Us - Insta AI Guru</title>
+  <meta
+    name="description"
+    content="Contact Insta AI Guru for support, business inquiries, feedback, collaborations, and help related to AI caption, bio, and reel idea tools."
+  />
+  <meta
+    name="keywords"
+    content="contact insta ai guru, support, business inquiry, contact page, ai caption generator support"
+  />
+  <meta name="robots" content="index, follow, max-image-preview:large" />
+  <link rel="canonical" href="https://insta-ai-guru.vercel.app/contact.html" />
 
-<style>
-body {
-  background:#09090f;
-  font-family: 'Inter', sans-serif;
-  color:white;
-}
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Contact Us - Insta AI Guru" />
+  <meta
+    property="og:description"
+    content="Get in touch with Insta AI Guru for support, feedback, collaborations, and business inquiries."
+  />
+  <meta property="og:url" content="https://insta-ai-guru.vercel.app/contact.html" />
+  <meta property="og:site_name" content="Insta AI Guru" />
+  <meta property="og:image" content="https://insta-ai-guru.vercel.app/assets/og-image.jpg" />
 
-.container {
-  max-width: 900px;
-  margin:auto;
-  padding:40px 20px;
-}
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Contact Us - Insta AI Guru" />
+  <meta
+    name="twitter:description"
+    content="Reach Insta AI Guru for support, suggestions, and collaboration opportunities."
+  />
+  <meta name="twitter:image" content="https://insta-ai-guru.vercel.app/assets/og-image.jpg" />
+  <meta name="theme-color" content="#09090f" />
 
-.form-box {
-  background: rgba(255,255,255,0.05);
-  padding:30px;
-  border-radius:20px;
-  backdrop-filter: blur(10px);
-}
+  <link rel="icon" href="favicon.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet"
+  />
 
-input, textarea {
-  width:100%;
-  padding:12px;
-  margin-top:10px;
-  border-radius:10px;
-  border:none;
-  background:#111;
-  color:white;
-}
+  <link rel="stylesheet" href="style.css" />
 
-button {
-  margin-top:15px;
-  padding:12px;
-  width:100%;
-  border:none;
-  border-radius:10px;
-  background:linear-gradient(45deg,#ff004c,#ff7a00);
-  color:white;
-  font-weight:bold;
-  cursor:pointer;
-}
-</style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ContactPage",
+    "name": "Contact Us - Insta AI Guru",
+    "url": "https://insta-ai-guru.vercel.app/contact.html",
+    "description": "Contact page for Insta AI Guru support, business queries, and feedback."
+  }
+  </script>
 </head>
-
 <body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
 
-<div class="container">
-  <h1>Contact Us</h1>
-  <p>Have questions or business inquiries? Send us a message.</p>
-
-  <div class="form-box">
-    <form>
-      <label>Name</label>
-      <input type="text" placeholder="Your Name" required>
-
-      <label>Email</label>
-      <input type="email" placeholder="Your Email" required>
-
-      <label>Message</label>
-      <textarea rows="5" placeholder="Write your message..." required></textarea>
-
-      <button type="submit">Send Message</button>
-    </form>
+  <div class="site-bg">
+    <span class="bg-orb orb-1"></span>
+    <span class="bg-orb orb-2"></span>
+    <span class="bg-orb orb-3"></span>
+    <span class="grid-overlay"></span>
   </div>
-</div>
 
+  <header class="site-header" id="top">
+    <div class="container nav-wrap">
+      <a href="/index.html" class="brand" aria-label="Insta AI Guru Home">
+        <span class="brand-icon">AI</span>
+        <span class="brand-name">Insta AI Guru</span>
+      </a>
+
+      <nav class="main-nav" aria-label="Main navigation">
+        <ul class="nav-links">
+          <li><a href="/index.html">Home</a></li>
+          <li><a href="/index.html#tool">Caption Tool</a></li>
+          <li><a href="/bio-generator.html">Bio Generator</a></li>
+          <li><a href="/reel-ideas.html">Reel Ideas</a></li>
+          <li><a href="/complaint.html">Complaint</a></li>
+          <li><a href="/contact.html" aria-current="page">Contact</a></li>
+        </ul>
+
+        <div class="nav-actions">
+          <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle theme">
+            <span class="theme-icon">🌙</span>
+          </button>
+
+          <button
+            class="nav-toggle"
+            id="navToggle"
+            aria-expanded="false"
+            aria-controls="mobileMenu"
+            aria-label="Open menu"
+            type="button"
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+        </div>
+      </nav>
+    </div>
+
+    <div class="mobile-menu" id="mobileMenu" hidden>
+      <a href="/index.html">Home</a>
+      <a href="/index.html#tool">Caption Tool</a>
+      <a href="/bio-generator.html">Bio Generator</a>
+      <a href="/reel-ideas.html">Reel Ideas</a>
+      <a href="/complaint.html">Complaint</a>
+      <a href="/contact.html">Contact</a>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <section class="page-hero">
+      <div class="container">
+        <div class="page-pill">Support & Business</div>
+        <h1 class="page-title">Let’s get in touch</h1>
+        <p class="page-desc">
+          Need support, want to report an issue, ask a question, or discuss a business idea?
+          Send your message and connect with Insta AI Guru easily.
+        </p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container tool-shell">
+        <div class="tool-left glass-panel">
+          <p class="section-tag">Contact Form</p>
+          <h2 class="panel-title">Send your message</h2>
+          <p class="panel-desc">
+            Use this form for general support, business inquiries, collaboration requests,
+            feature suggestions, or any help related to Insta AI Guru tools.
+          </p>
+
+          <form id="contactForm" novalidate>
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="contactName">Full Name</label>
+                <input
+                  id="contactName"
+                  name="contactName"
+                  type="text"
+                  placeholder="Enter your full name"
+                  required
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="contactEmail">Email Address</label>
+                <input
+                  id="contactEmail"
+                  name="contactEmail"
+                  type="email"
+                  placeholder="Enter your email address"
+                  required
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="contactTopic">Subject</label>
+                <select id="contactTopic" name="contactTopic" required>
+                  <option value="">Select a subject</option>
+                  <option value="General Support">General Support</option>
+                  <option value="Business Inquiry">Business Inquiry</option>
+                  <option value="Collaboration">Collaboration</option>
+                  <option value="Feature Request">Feature Request</option>
+                  <option value="Bug Report">Bug Report</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="contactPriority">Priority</label>
+                <select id="contactPriority" name="contactPriority">
+                  <option value="Normal">Normal</option>
+                  <option value="Important">Important</option>
+                  <option value="Urgent">Urgent</option>
+                </select>
+              </div>
+
+              <div class="form-group full-width">
+                <label for="contactMessage">Your Message</label>
+                <textarea
+                  id="contactMessage"
+                  name="contactMessage"
+                  rows="7"
+                  placeholder="Write your message here..."
+                  required
+                ></textarea>
+              </div>
+            </div>
+
+            <div class="option-row">
+              <label class="option-card">
+                <div>
+                  <strong>Need Quick Reply</strong>
+                  <span>Mark this if your issue needs faster attention</span>
+                </div>
+                <input type="checkbox" id="quickReply" name="quickReply" />
+              </label>
+
+              <label class="option-card">
+                <div>
+                  <strong>Business Purpose</strong>
+                  <span>Use this if your message is about paid work or partnership</span>
+                </div>
+                <input type="checkbox" id="businessPurpose" name="businessPurpose" />
+              </label>
+            </div>
+
+            <div class="form-actions">
+              <button type="submit" class="btn btn-primary btn-full">Send Message</button>
+              <p class="helper-text">
+                You can also use the complaint page for bug reports and suggestions.
+              </p>
+            </div>
+          </form>
+        </div>
+
+        <div class="tool-right glass-panel">
+          <div class="output-header">
+            <div>
+              <p class="section-tag">Contact Info</p>
+              <h3>Why contact us?</h3>
+            </div>
+          </div>
+
+          <div class="caption-results">
+            <article class="result-card">
+              <h4>General Support</h4>
+              <p>
+                Ask questions about caption generation, bio creation, reel ideas, or
+                anything related to using Insta AI Guru smoothly.
+              </p>
+            </article>
+
+            <article class="result-card">
+              <h4>Business & Collaboration</h4>
+              <p>
+                Reach out for promotions, collaborations, partnerships, freelance work,
+                tool improvements, or premium setup discussions.
+              </p>
+            </article>
+
+            <article class="result-card">
+              <h4>Feedback & Suggestions</h4>
+              <p>
+                Share ideas to improve the website, design, AI quality, user experience,
+                and upcoming features for creators and brands.
+              </p>
+            </article>
+          </div>
+
+          <div class="tips-panel">
+            <h3>Best way to write your message</h3>
+            <ul>
+              <li>Clearly mention your issue or requirement.</li>
+              <li>Include page name if reporting a bug.</li>
+              <li>Write complete details for faster help.</li>
+              <li>For business work, mention your goal clearly.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-head center">
+          <p class="section-tag">More Help</p>
+          <h2>Explore more Insta AI Guru pages</h2>
+          <p>
+            You can also jump to other tools and support pages directly from here.
+          </p>
+        </div>
+
+        <div class="feature-grid">
+          <article class="feature-card">
+            <div class="feature-icon">✍️</div>
+            <h3>Caption Tool</h3>
+            <p>Create AI captions using text or image input.</p>
+            <a href="/index.html#tool" class="btn btn-secondary btn-small">Open Tool</a>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-icon">🧠</div>
+            <h3>Bio Generator</h3>
+            <p>Generate profile bios with a premium and smart style.</p>
+            <a href="/bio-generator.html" class="btn btn-secondary btn-small">Open Page</a>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-icon">🎬</div>
+            <h3>Reel Ideas</h3>
+            <p>Get AI-powered reel concepts, hooks, and CTA ideas.</p>
+            <a href="/reel-ideas.html" class="btn btn-secondary btn-small">Open Page</a>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-icon">🛠️</div>
+            <h3>Complaint Page</h3>
+            <p>Report bugs, issues, complaints, and feature requests.</p>
+            <a href="/complaint.html" class="btn btn-secondary btn-small">Open Page</a>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <a href="/index.html" class="brand footer-brand">
+          <span class="footer-brand-icon">AI</span>
+          <span class="brand-name">Insta AI Guru</span>
+        </a>
+        <p class="footer-text">
+          Smart AI tools for captions, bios, reel ideas, and creator growth.
+        </p>
+      </div>
+
+      <div>
+        <h4>Quick Links</h4>
+        <ul class="footer-links">
+          <li><a href="/index.html">Home</a></li>
+          <li><a href="/bio-generator.html">Bio Generator</a></li>
+          <li><a href="/reel-ideas.html">Reel Ideas</a></li>
+          <li><a href="/complaint.html">Complaint</a></li>
+          <li><a href="/contact.html">Contact</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4>Support</h4>
+        <ul class="footer-links">
+          <li><a href="/index.html#tool">Caption Tool</a></li>
+          <li><a href="/complaint.html">Report Issue</a></li>
+          <li><a href="/contact.html">Get in Touch</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="container footer-bottom">
+      <p>© 2026 Insta AI Guru. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>
