@@ -3,174 +3,912 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <title>Reel Ideas Generator - Insta AI Guru</title>
-  <meta name="description" content="Generate viral reel ideas, content hooks, and simple execution concepts using AI." />
+  <meta
+    name="description"
+    content="Generate viral reel content ideas for Instagram, YouTube Shorts, and TikTok with Insta AI Guru. Get hooks, concepts, and content directions instantly."
+  />
+  <meta
+    name="keywords"
+    content="reel ideas generator, instagram reel ideas, viral reel ideas, youtube shorts ideas, tiktok content ideas, insta ai guru"
+  />
   <meta name="robots" content="index, follow, max-image-preview:large" />
-  <link rel="canonical" href="https://instaaiguru.vercel.app/reel-ideas.html" />
+  <link rel="canonical" href="https://insta-ai-guru.vercel.app/reel-ideas.html" />
+
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Reel Ideas Generator - Insta AI Guru" />
-  <meta property="og:description" content="Generate viral reel ideas, content hooks, and simple execution concepts using AI." />
-  <meta property="og:url" content="https://instaaiguru.vercel.app/reel-ideas.html" />
-  <meta property="og:image" content="https://instaaiguru.vercel.app/assets/og-image.jpg" />
+  <meta
+    property="og:description"
+    content="Generate smart reel ideas, hooks, and content directions for creators, brands, and businesses."
+  />
+  <meta property="og:url" content="https://insta-ai-guru.vercel.app/reel-ideas.html" />
+  <meta property="og:site_name" content="Insta AI Guru" />
+  <meta property="og:image" content="https://insta-ai-guru.vercel.app/assets/og-image.jpg" />
+
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Reel Ideas Generator - Insta AI Guru" />
-  <meta name="twitter:description" content="Generate viral reel ideas, content hooks, and simple execution concepts using AI." />
-  <meta name="twitter:image" content="https://instaaiguru.vercel.app/assets/og-image.jpg" />
+  <meta
+    name="twitter:description"
+    content="Generate reel ideas, hooks, and short-form video concepts with AI."
+  />
+  <meta name="twitter:image" content="https://insta-ai-guru.vercel.app/assets/og-image.jpg" />
   <meta name="theme-color" content="#09090f" />
+
   <link rel="icon" href="favicon.ico" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet"
+  />
   <link rel="stylesheet" href="style.css" />
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Reel Ideas Generator - Insta AI Guru","description":"Generate viral reel ideas, content hooks, and simple execution concepts using AI.","url":"https://instaaiguru.vercel.app/reel-ideas.html"}</script>
-  
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Reel Ideas Generator - Insta AI Guru",
+    "description": "Generate reel ideas, hooks, and viral short-video concepts for creators and brands.",
+    "url": "https://insta-ai-guru.vercel.app/reel-ideas.html"
+  }
+  </script>
+
+  <style>
+    .page-hero {
+      padding: 7.5rem 0 3rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .page-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 0.9rem;
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 999px;
+      background: rgba(255,255,255,0.04);
+      backdrop-filter: blur(12px);
+      font-size: 0.85rem;
+      color: var(--text-muted, #a1a1aa);
+      margin-bottom: 1rem;
+    }
+
+    .page-title {
+      font-size: clamp(2rem, 4vw, 3.6rem);
+      line-height: 1.05;
+      margin: 0 0 1rem;
+      letter-spacing: -0.03em;
+    }
+
+    .page-desc {
+      max-width: 780px;
+      color: var(--text-muted, #a1a1aa);
+      font-size: 1.05rem;
+      line-height: 1.8;
+      margin: 0;
+    }
+
+    .tool-shell.reel-page-shell {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 1.25rem;
+      align-items: start;
+    }
+
+    .glass-panel {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.28);
+      backdrop-filter: blur(16px);
+      border-radius: 24px;
+    }
+
+    .tool-panel,
+    .result-panel {
+      padding: 1.25rem;
+    }
+
+    .section-mini {
+      color: var(--text-muted, #a1a1aa);
+      font-size: 0.9rem;
+      margin-bottom: 0.4rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 700;
+    }
+
+    .panel-title {
+      margin: 0 0 0.7rem;
+      font-size: 1.55rem;
+      line-height: 1.2;
+    }
+
+    .panel-desc {
+      margin: 0 0 1.25rem;
+      color: var(--text-muted, #a1a1aa);
+      line-height: 1.7;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+      margin-bottom: 1rem;
+    }
+
+    .form-group label {
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 0.95rem 1rem;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(255,255,255,0.04);
+      color: inherit;
+      outline: none;
+      transition: border-color 0.2s ease, transform 0.2s ease, background 0.2s ease;
+      font: inherit;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: rgba(255,255,255,0.28);
+      background: rgba(255,255,255,0.07);
+      transform: translateY(-1px);
+    }
+
+    .full-width {
+      grid-column: 1 / -1;
+    }
+
+    .option-row {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+      margin-top: 0.25rem;
+      margin-bottom: 1rem;
+    }
+
+    .option-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1rem;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .option-card strong {
+      display: block;
+      margin-bottom: 0.2rem;
+      font-size: 0.96rem;
+    }
+
+    .option-card span {
+      display: block;
+      color: var(--text-muted, #a1a1aa);
+      font-size: 0.88rem;
+      line-height: 1.5;
+    }
+
+    .option-card input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      accent-color: #7c3aed;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    .actions-row {
+      display: flex;
+      gap: 0.9rem;
+      flex-wrap: wrap;
+      margin-top: 0.3rem;
+      align-items: center;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      border: 0;
+      cursor: pointer;
+      border-radius: 14px;
+      padding: 0.95rem 1.2rem;
+      font-weight: 700;
+      font-size: 0.95rem;
+      transition: transform 0.2s ease, opacity 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #7c3aed, #2563eb);
+      color: #fff;
+      box-shadow: 0 12px 30px rgba(37, 99, 235, 0.25);
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.06);
+      color: inherit;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .btn-small {
+      padding: 0.8rem 1rem;
+      font-size: 0.88rem;
+    }
+
+    .helper-note {
+      color: var(--text-muted, #a1a1aa);
+      font-size: 0.9rem;
+      margin: 0;
+    }
+
+    .status-box {
+      padding: 1rem;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: var(--text-muted, #a1a1aa);
+      margin-bottom: 1rem;
+      line-height: 1.7;
+    }
+
+    .result-list {
+      display: grid;
+      gap: 0.95rem;
+    }
+
+    .idea-card {
+      padding: 1rem;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .idea-card h3 {
+      margin: 0 0 0.75rem;
+      font-size: 1rem;
+      line-height: 1.4;
+    }
+
+    .idea-card p {
+      margin: 0 0 0.7rem;
+      color: var(--text-muted, #a1a1aa);
+      line-height: 1.7;
+      white-space: pre-line;
+    }
+
+    .idea-tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.55rem;
+      margin-top: 0.4rem;
+    }
+
+    .idea-tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.45rem 0.75rem;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: #d4d4d8;
+    }
+
+    .tips-panel {
+      margin-top: 1rem;
+      padding: 1rem;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .tips-panel h3 {
+      margin: 0 0 0.75rem;
+      font-size: 1rem;
+    }
+
+    .tips-panel ul {
+      margin: 0;
+      padding-left: 1.1rem;
+      color: var(--text-muted, #a1a1aa);
+      line-height: 1.8;
+    }
+
+    .footer-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.55rem;
+      margin-top: 1rem;
+    }
+
+    .footer-badges span {
+      display: inline-flex;
+      padding: 0.45rem 0.75rem;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.08);
+      font-size: 0.8rem;
+      color: var(--text-muted, #a1a1aa);
+    }
+
+    @media (max-width: 980px) {
+      .tool-shell.reel-page-shell {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .form-grid,
+      .option-row {
+        grid-template-columns: 1fr;
+      }
+
+      .page-hero {
+        padding-top: 6.5rem;
+      }
+
+      .tool-panel,
+      .result-panel {
+        padding: 1rem;
+      }
+
+      .actions-row {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .actions-row .btn {
+        width: 100%;
+      }
+    }
+  </style>
 </head>
 <body>
   <a class="skip-link" href="#main-content">Skip to content</a>
-  <div class="site-bg"><span class="bg-orb orb-1"></span><span class="bg-orb orb-2"></span><span class="bg-orb orb-3"></span><span class="grid-overlay"></span></div>
-  
+
+  <div class="site-bg">
+    <span class="bg-orb orb-1"></span>
+    <span class="bg-orb orb-2"></span>
+    <span class="bg-orb orb-3"></span>
+    <span class="grid-overlay"></span>
+  </div>
+
   <header class="site-header" id="top">
     <div class="container nav-wrap">
-      <a href="/" class="brand" aria-label="Insta AI Guru Home">
+      <a href="/index.html" class="brand" aria-label="Insta AI Guru Home">
         <span class="brand-icon">AI</span>
         <span class="brand-name">Insta AI Guru</span>
       </a>
+
       <nav class="main-nav" aria-label="Main navigation">
         <ul class="nav-links">
-          <li><a href="/instagram-caption-generator.html">Instagram Captions</a></li>
-          <li><a href="/reel-caption-generator.html">Reel Captions</a></li>
+          <li><a href="/index.html">Home</a></li>
+          <li><a href="/index.html#tool">Caption Tool</a></li>
+          <li><a href="/hashtag-generator.html">Hashtags</a></li>
           <li><a href="/bio-generator.html">Bio Generator</a></li>
-          <li><a href="/reel-ideas.html">Reel Ideas</a></li>
-          <li><a href="/hashtag-generator.html">Hashtag Generator</a></li>
+          <li><a href="/reel-ideas.html" aria-current="page">Reel Ideas</a></li>
           <li><a href="/complaint.html">Complaint</a></li>
+          <li><a href="/contact.html">Contact</a></li>
         </ul>
+
         <div class="nav-actions">
           <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle theme">
             <span class="theme-icon">🌙</span>
           </button>
-          <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="mobileMenu" aria-label="Open menu" type="button">
-            <span></span><span></span><span></span>
+
+          <button
+            class="nav-toggle"
+            id="navToggle"
+            aria-expanded="false"
+            aria-controls="mobileMenu"
+            aria-label="Open menu"
+            type="button"
+          >
+            <span></span>
+            <span></span>
+            <span></span>
           </button>
         </div>
       </nav>
     </div>
+
     <div class="mobile-menu" id="mobileMenu" hidden>
-      <a href="/instagram-caption-generator.html">Instagram Captions</a>
-      <a href="/reel-caption-generator.html">Reel Captions</a>
+      <a href="/index.html">Home</a>
+      <a href="/index.html#tool">Caption Tool</a>
+      <a href="/hashtag-generator.html">Hashtags</a>
       <a href="/bio-generator.html">Bio Generator</a>
       <a href="/reel-ideas.html">Reel Ideas</a>
-      <a href="/hashtag-generator.html">Hashtag Generator</a>
-      <a href="/about.html">About</a>
-      <a href="/contact.html">Contact</a>
       <a href="/complaint.html">Complaint</a>
+      <a href="/contact.html">Contact</a>
     </div>
   </header>
 
-  
-<main id="main-content">
-  <section class="page-hero">
-    <div class="container">
-      <div class="page-pill">AI Tool Page</div>
-      <h1 class="page-title">AI Reel Ideas Generator</h1>
-      <p class="page-desc">Generate viral reel ideas, content hooks, and simple execution concepts using AI.</p>
-      <div class="page-links"><a class="btn btn-primary" href="#toolForm">Use This Tool</a><a class="btn btn-secondary" href="/">Back to Home</a></div>
-    </div>
-  </section>
-  <section class="section" id="toolForm">
-    <div class="container tool-shell">
-      <div class="tool-left">
-        <form id="aiForm" data-action="reelIdeas" data-button-text="Generate Now" novalidate>
-          <input type="hidden" id="toolAction" value="reelIdeas">
-          <div class="form-grid">
-            <div class="form-group"><label for="platform">Platform</label><select id="platform"><option>Instagram</option><option>TikTok</option><option>Threads</option><option>Facebook</option><option>YouTube</option><option>LinkedIn</option></select></div>
-            <div class="form-group"><label for="tone">Tone</label><select id="tone"><option>Professional</option><option>Casual</option><option>Luxury</option><option>Funny</option><option>Motivational</option><option>Emotional</option></select></div>
-            <div class="form-group"><label for="length">Length</label><select id="length"><option>Short</option><option selected>Medium</option><option>Long</option></select></div>
-            <div class="form-group"><label for="language">Language</label><select id="language"><option>English</option><option>Hindi</option><option>Hinglish</option></select></div>
-          </div>
-          <div class="upload-wrap">
-            <label for="imageInput" class="upload-label">Upload Image (optional)</label>
-            <input type="file" id="imageInput" accept="image/*" hidden>
-            <button type="button" id="uploadBtn" class="upload-btn">Choose Image</button>
-            <p id="fileName" class="file-name">No image selected</p>
-            <div class="image-preview-box" id="imagePreviewBox" style="display:none;"><img id="imagePreview" alt="Preview"></div>
-          </div>
-          <div class="form-group"><label for="topic">What niche or topic do you want reel ideas for?</label><textarea id="topic" rows="6" placeholder="Example: Instagram growth tips, bridal fashion showcase, web design service promotion"></textarea></div>
-          <div class="option-cards">
-            <label class="option-card"><div><strong>Include Emojis</strong><span>Helpful for engaging content</span></div><input id="includeEmojis" type="checkbox" checked /></label>
-            <label class="option-card"><div><strong>Include Hashtags</strong><span>Useful for caption outputs</span></div><input id="includeHashtags" type="checkbox" checked /></label>
-            <div class="form-group variants-group"><label for="variants">Variants</label><select id="variants"><option value="1">1 Variant</option><option value="2">2 Variants</option><option value="3" selected>3 Variants</option></select></div>
-          </div>
-          <button type="submit" class="btn btn-primary btn-full">Generate Now</button>
-        </form>
+  <main id="main-content">
+    <section class="page-hero">
+      <div class="container">
+        <div class="page-pill">AI Short Video Planner</div>
+        <h1 class="page-title">Generate better reel ideas in seconds</h1>
+        <p class="page-desc">
+          Create reel concepts, hooks, content angles, and short-video directions for Instagram,
+          YouTube Shorts, and TikTok. Designed for creators, agencies, businesses, and personal brands.
+        </p>
       </div>
-      <div class="tool-right" id="resultsArea">
-        <div class="output-header"><div><p class="section-tag">Generated Output</p><h3>Reel Idea Results</h3></div><button id="copyAllBtn" class="btn btn-secondary btn-small" type="button">Copy All</button></div>
-        <div id="outputState" class="output-state">Your AI output will appear here.</div>
-        <div id="generatedText" class="caption-results" aria-live="polite"></div>
-      </div>
-    </div>
-  </section>
-  <section class="section alt-section">
-    <div class="container cards-grid">
-      <article class="page-panel"><h3>Hook Included</h3><p>Each result can include a scroll-stopping hook or opening angle.</p></article><article class="page-panel"><h3>Execution Friendly</h3><p>Ideas are kept simple enough to record without a huge setup.</p></article><article class="page-panel"><h3>Useful for Creators</h3><p>Great for marketing pages, brand pages, creators, and business accounts.</p></article>
-    </div>
-  </section>
-</main>
+    </section>
 
-  
+    <section class="section">
+      <div class="container tool-shell reel-page-shell">
+        <div class="tool-panel glass-panel">
+          <p class="section-mini">Idea Input</p>
+          <h2 class="panel-title">Tell AI what kind of reel you want</h2>
+          <p class="panel-desc">
+            Fill in your niche, audience, and content goal. The tool will generate multiple
+            ready-to-shoot reel ideas with hooks and execution directions.
+          </p>
+
+          <form id="reelIdeasForm" novalidate>
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="platform">Platform</label>
+                <select id="platform" name="platform">
+                  <option value="Instagram Reels">Instagram Reels</option>
+                  <option value="YouTube Shorts">YouTube Shorts</option>
+                  <option value="TikTok">TikTok</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="niche">Niche / Category</label>
+                <select id="niche" name="niche">
+                  <option value="Fashion">Fashion</option>
+                  <option value="Business">Business</option>
+                  <option value="Education">Education</option>
+                  <option value="Motivation">Motivation</option>
+                  <option value="Travel">Travel</option>
+                  <option value="Fitness">Fitness</option>
+                  <option value="Tech">Tech</option>
+                  <option value="Personal Brand">Personal Brand</option>
+                  <option value="Custom">Custom</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="goal">Content Goal</label>
+                <select id="goal" name="goal">
+                  <option value="Go Viral">Go Viral</option>
+                  <option value="Increase Followers">Increase Followers</option>
+                  <option value="Get More Engagement">Get More Engagement</option>
+                  <option value="Promote Product">Promote Product</option>
+                  <option value="Build Personal Brand">Build Personal Brand</option>
+                  <option value="Educate Audience">Educate Audience</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="duration">Video Duration</label>
+                <select id="duration" name="duration">
+                  <option value="8-10 seconds">8–10 seconds</option>
+                  <option value="10-15 seconds" selected>10–15 seconds</option>
+                  <option value="15-20 seconds">15–20 seconds</option>
+                  <option value="20-30 seconds">20–30 seconds</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="tone">Tone</label>
+                <select id="tone" name="tone">
+                  <option value="Professional">Professional</option>
+                  <option value="Luxury">Luxury</option>
+                  <option value="Emotional">Emotional</option>
+                  <option value="Funny">Funny</option>
+                  <option value="Bold">Bold</option>
+                  <option value="Motivational">Motivational</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="language">Language</label>
+                <select id="language" name="language">
+                  <option value="English">English</option>
+                  <option value="Hindi">Hindi</option>
+                  <option value="Hinglish" selected>Hinglish</option>
+                </select>
+              </div>
+
+              <div class="form-group full-width">
+                <label for="targetAudience">Target Audience</label>
+                <input
+                  id="targetAudience"
+                  name="targetAudience"
+                  type="text"
+                  placeholder="Example: small business owners, girls fashion audience, students, creators"
+                />
+              </div>
+
+              <div class="form-group full-width">
+                <label for="topic">What should the reel be about?</label>
+                <textarea
+                  id="topic"
+                  name="topic"
+                  rows="5"
+                  placeholder="Example: hand-embroidered saree collection launch, AI caption tool promo, motivational student reel, travel package offer"
+                ></textarea>
+              </div>
+            </div>
+
+            <div class="option-row">
+              <label class="option-card">
+                <div>
+                  <strong>Include Hooks</strong>
+                  <span>Add strong opening lines for better retention</span>
+                </div>
+                <input type="checkbox" id="includeHooks" checked />
+              </label>
+
+              <label class="option-card">
+                <div>
+                  <strong>Include CTA</strong>
+                  <span>Add call-to-action ideas like follow, DM, or comment</span>
+                </div>
+                <input type="checkbox" id="includeCTA" checked />
+              </label>
+            </div>
+
+            <div class="form-group">
+              <label for="variants">Number of Ideas</label>
+              <select id="variants" name="variants">
+                <option value="3">3 Ideas</option>
+                <option value="5" selected>5 Ideas</option>
+                <option value="7">7 Ideas</option>
+              </select>
+            </div>
+
+            <div class="actions-row">
+              <button type="submit" class="btn btn-primary">Generate Reel Ideas</button>
+              <button type="button" id="copyAllIdeasBtn" class="btn btn-secondary">Copy All</button>
+            </div>
+
+            <p class="helper-note">
+              Tip: specific topic + audience + goal = better reel ideas.
+            </p>
+          </form>
+        </div>
+
+        <div class="result-panel glass-panel">
+          <p class="section-mini">Generated Output</p>
+          <h2 class="panel-title">Reel ideas</h2>
+          <p class="panel-desc">
+            Your generated reel concepts will appear here with hook, idea direction, and CTA.
+          </p>
+
+          <div class="status-box" id="ideasStatus">
+            Fill the form and click <strong>Generate Reel Ideas</strong> to create smart short-video concepts.
+          </div>
+
+          <div class="result-list" id="ideasResults"></div>
+
+          <div class="tips-panel">
+            <h3>How to use these ideas better</h3>
+            <ul>
+              <li>Keep the first 2 seconds visually strong.</li>
+              <li>Use big on-screen text for the hook.</li>
+              <li>End with one clear CTA only.</li>
+              <li>Test multiple hooks on the same topic.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
   <footer class="site-footer">
     <div class="container">
       <div class="footer-shell">
         <div class="footer-top">
           <div class="footer-brand-block">
-            <a href="/" class="footer-brand-logo" aria-label="Insta AI Guru Home">
+            <a href="/index.html" class="footer-brand-logo" aria-label="Insta AI Guru Home">
               <span class="footer-brand-icon">AI</span>
               <span class="footer-brand-text">Insta AI Guru</span>
             </a>
+
             <p class="footer-description">
-              Premium AI caption, bio, hashtag, and reel idea generator for Instagram, Reels, TikTok,
-              Threads, Facebook, YouTube, and LinkedIn.
+              Premium AI tools for captions, hashtags, bios, and reel ideas for creators,
+              businesses, and brands.
             </p>
+
             <div class="footer-badges">
-              <span>SEO Friendly</span>
-              <span>Image Aware AI</span>
-              <span>Multi Tool</span>
+              <span>Reel Planning</span>
+              <span>Creator Friendly</span>
+              <span>SEO Ready</span>
             </div>
           </div>
+
           <div class="footer-links-wrap">
             <div class="footer-column">
               <h3>Tools</h3>
-              <a href="/instagram-caption-generator.html">Instagram Caption Generator</a>
-              <a href="/reel-caption-generator.html">Reel Caption Generator</a>
+              <a href="/index.html#tool">Caption Tool</a>
+              <a href="/hashtag-generator.html">Hashtag Generator</a>
               <a href="/bio-generator.html">Bio Generator</a>
             </div>
+
             <div class="footer-column">
               <h3>More</h3>
               <a href="/reel-ideas.html">Reel Ideas</a>
-              <a href="/hashtag-generator.html">Hashtag Generator</a>
-              <a href="/complaint.html">Complaint & Suggestion</a>
-            </div>
-            <div class="footer-column">
-              <h3>Company</h3>
-              <a href="/about.html">About</a>
+              <a href="/complaint.html">Complaint</a>
               <a href="/contact.html">Contact</a>
-              <a href="/">Home</a>
+            </div>
+
+            <div class="footer-column">
+              <h3>Site</h3>
+              <a href="/index.html">Home</a>
+              <a href="/index.html#features">Features</a>
+              <a href="/index.html#faq">FAQ</a>
             </div>
           </div>
         </div>
+
         <div class="footer-divider"></div>
+
         <div class="footer-bottom">
           <p class="footer-copy">© 2026 Insta AI Guru. All rights reserved.</p>
           <div class="footer-bottom-links">
-            <a href="/">Home</a>
+            <a href="/index.html">Home</a>
             <a href="/contact.html">Contact</a>
-            <a href="/about.html">About</a>
+            <a href="/complaint.html">Complaint</a>
           </div>
         </div>
       </div>
     </div>
   </footer>
 
-  <script src="script.js"></script>
+  <script>
+    (function () {
+      const navToggle = document.getElementById("navToggle");
+      const mobileMenu = document.getElementById("mobileMenu");
+      const themeToggle = document.getElementById("themeToggle");
+      const root = document.documentElement;
+
+      if (navToggle && mobileMenu) {
+        navToggle.addEventListener("click", function () {
+          const isHidden = mobileMenu.hasAttribute("hidden");
+          if (isHidden) {
+            mobileMenu.removeAttribute("hidden");
+            navToggle.setAttribute("aria-expanded", "true");
+          } else {
+            mobileMenu.setAttribute("hidden", "");
+            navToggle.setAttribute("aria-expanded", "false");
+          }
+        });
+      }
+
+      const savedTheme = localStorage.getItem("insta_ai_guru_theme");
+      if (savedTheme === "light") {
+        root.classList.add("light-theme");
+        if (themeToggle) themeToggle.querySelector(".theme-icon").textContent = "☀️";
+      }
+
+      if (themeToggle) {
+        themeToggle.addEventListener("click", function () {
+          root.classList.toggle("light-theme");
+          const isLight = root.classList.contains("light-theme");
+          localStorage.setItem("insta_ai_guru_theme", isLight ? "light" : "dark");
+          themeToggle.querySelector(".theme-icon").textContent = isLight ? "☀️" : "🌙";
+        });
+      }
+
+      const form = document.getElementById("reelIdeasForm");
+      const results = document.getElementById("ideasResults");
+      const status = document.getElementById("ideasStatus");
+      const copyBtn = document.getElementById("copyAllIdeasBtn");
+
+      function escapeHtml(str) {
+        return String(str)
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;")
+          .replace(/'/g, "&#039;");
+      }
+
+      function buildIdeas(data) {
+        const hooksByTone = {
+          Professional: [
+            "Most people are doing this wrong.",
+            "Here is a smarter way to create better content.",
+            "This one idea can improve your results fast."
+          ],
+          Luxury: [
+            "Not everything expensive feels premium. This does.",
+            "Luxury is in the details — watch this.",
+            "This is what premium looks like."
+          ],
+          Emotional: [
+            "Nobody talks about this part of the journey.",
+            "This might be exactly what someone needs today.",
+            "A small moment can change everything."
+          ],
+          Funny: [
+            "POV: you finally figured it out.",
+            "This is way too relatable.",
+            "Tell me this is not your sign to start."
+          ],
+          Bold: [
+            "Stop scrolling. This matters.",
+            "If you want growth, watch this.",
+            "This is your wake-up call."
+          ],
+          Motivational: [
+            "Start before you feel ready.",
+            "Your next level needs this mindset.",
+            "Small action today, big result tomorrow."
+          ]
+        };
+
+        const ctaByGoal = {
+          "Go Viral": "End with: 'Comment VIRAL and I’ll make part 2.'",
+          "Increase Followers": "End with: 'Follow for more reel ideas like this.'",
+          "Get More Engagement": "End with: 'Would you post this? Comment yes or no.'",
+          "Promote Product": "End with: 'DM us for details or visit the link in bio.'",
+          "Build Personal Brand": "End with: 'Follow to grow your personal brand smarter.'",
+          "Educate Audience": "End with: 'Save this for later and share it with a friend.'"
+        };
+
+        const nicheAngles = {
+          Fashion: "show product details, transformation shots, styling tips, texture close-ups",
+          Business: "show problem-solution format, client pain points, quick strategies, behind the scenes",
+          Education: "teach one simple concept quickly with bold text and examples",
+          Motivation: "use emotional text, relatable visuals, and a strong voiceover line",
+          Travel: "show destination visuals, quick itinerary highlights, and dreamy transitions",
+          Fitness: "use before/after angle, common mistakes, routine clips, and quick tips",
+          Tech: "show app/demo visuals, hacks, tutorials, and smart shortcuts",
+          "Personal Brand": "share opinions, routines, story moments, and lessons learned",
+          Custom: "use a unique storytelling angle based on your topic"
+        };
+
+        const platformStyle = {
+          "Instagram Reels": "Use punchy text overlays, smooth transitions, and a clean CTA.",
+          "YouTube Shorts": "Start instantly with the strongest point and keep the pace fast.",
+          "TikTok": "Make it trend-aware, relatable, and visually sticky from frame one."
+        };
+
+        const toneHooks = hooksByTone[data.tone] || hooksByTone.Professional;
+        const angleText = nicheAngles[data.niche] || nicheAngles.Custom;
+        const total = Number(data.variants) || 5;
+
+        const ideas = [];
+
+        for (let i = 0; i < total; i++) {
+          const hook = data.includeHooks
+            ? toneHooks[i % toneHooks.length]
+            : "Strong visual opening without spoken hook.";
+
+          const ideaTitle = `Idea ${i + 1}: ${data.goal} reel for ${data.niche}`;
+          const concept = [
+            `Topic: ${data.topic || "Create a reel around your main offer, story, or value."}`,
+            `Angle: ${angleText}.`,
+            `Audience focus: ${data.targetAudience || "target people interested in this niche"}.`,
+            `Structure: Hook → main visual point → fast explanation → result/value → CTA.`,
+            `Best duration: ${data.duration}.`,
+            platformStyle[data.platform]
+          ].join("\n");
+
+          const cta = data.includeCTA
+            ? (ctaByGoal[data.goal] || "End with one simple CTA.")
+            : "CTA not included.";
+
+          ideas.push({
+            title: ideaTitle,
+            hook,
+            concept,
+            cta
+          });
+        }
+
+        return ideas;
+      }
+
+      function renderIdeas(ideas, data) {
+        results.innerHTML = ideas.map(function (idea, index) {
+          return `
+            <article class="idea-card">
+              <h3>${escapeHtml(idea.title)}</h3>
+              <p><strong>Hook:</strong> ${escapeHtml(idea.hook)}</p>
+              <p><strong>Execution:</strong>\n${escapeHtml(idea.concept)}</p>
+              <p><strong>CTA:</strong> ${escapeHtml(idea.cta)}</p>
+              <div class="idea-tag-row">
+                <span class="idea-tag">${escapeHtml(data.platform)}</span>
+                <span class="idea-tag">${escapeHtml(data.niche)}</span>
+                <span class="idea-tag">${escapeHtml(data.goal)}</span>
+                <span class="idea-tag">${escapeHtml(data.language)}</span>
+                <span class="idea-tag">${escapeHtml("Idea " + (index + 1))}</span>
+              </div>
+            </article>
+          `;
+        }).join("");
+      }
+
+      function collectPlainText() {
+        const cards = Array.from(document.querySelectorAll(".idea-card"));
+        return cards.map(function (card, index) {
+          return `Idea ${index + 1}\n${card.innerText.trim()}`;
+        }).join("\n\n----------------------\n\n");
+      }
+
+      if (form) {
+        form.addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          const data = {
+            platform: document.getElementById("platform").value,
+            niche: document.getElementById("niche").value,
+            goal: document.getElementById("goal").value,
+            duration: document.getElementById("duration").value,
+            tone: document.getElementById("tone").value,
+            language: document.getElementById("language").value,
+            targetAudience: document.getElementById("targetAudience").value.trim(),
+            topic: document.getElementById("topic").value.trim(),
+            includeHooks: document.getElementById("includeHooks").checked,
+            includeCTA: document.getElementById("includeCTA").checked,
+            variants: document.getElementById("variants").value
+          };
+
+          if (!data.topic) {
+            status.innerHTML = "Please enter what the reel should be about before generating ideas.";
+            results.innerHTML = "";
+            return;
+          }
+
+          status.innerHTML = "Generating reel ideas...";
+          results.innerHTML = "";
+
+          setTimeout(function () {
+            const ideas = buildIdeas(data);
+            renderIdeas(ideas, data);
+            status.innerHTML = `Generated <strong>${ideas.length}</strong> reel ideas for <strong>${escapeHtml(data.platform)}</strong>.`;
+          }, 500);
+        });
+      }
+
+      if (copyBtn) {
+        copyBtn.addEventListener("click", async function () {
+          const text = collectPlainText();
+          if (!text.trim()) {
+            status.innerHTML = "Nothing to copy yet. Generate reel ideas first.";
+            return;
+          }
+
+          try {
+            await navigator.clipboard.writeText(text);
+            status.innerHTML = "All reel ideas copied successfully.";
+          } catch (error) {
+            status.innerHTML = "Copy failed. Please copy manually.";
+          }
+        });
+      }
+    })();
+  </script>
 </body>
 </html>
