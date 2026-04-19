@@ -2,7 +2,31 @@
  * script.js - Insta AI Guru PRO
  * Handles UI interactions, credit system, and API calls.
  */
+// 🔥 QUICK DEMO GENERATOR (Homepage)
 
+const quickBtn = document.getElementById("quick-generate");
+const quickInput = document.getElementById("quick-input");
+const quickOutput = document.getElementById("quick-output");
+
+if (quickBtn) {
+    quickBtn.addEventListener("click", () => {
+        const text = quickInput.value.trim();
+
+        if (!text) {
+            quickOutput.innerText = "❌ Please enter a post idea first";
+            return;
+        }
+
+        // Demo fake AI output (fast UX)
+        quickOutput.innerText = "⚡ Generating...";
+
+        setTimeout(() => {
+            quickOutput.innerText = `🔥 ${text} just got better!
+Stay consistent, stay creative, and let your content shine 🚀
+#InstagramGrowth #ContentCreator #ViralPost`;
+        }, 800);
+    });
+}
 // Apply theme immediately to prevent flash
 if (localStorage.getItem('theme') === 'light') {
     document.body.classList.add('light-mode');
