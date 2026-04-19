@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback & Complaints | Insta AI Guru PRO</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="mesh-bg"></div>
+
+    <nav class="navbar">
+        <a href="index.html" class="nav-brand">
+            <i class="fa-solid fa-fire"></i><span>Insta</span>AI Guru
+        </a>
+        <div class="nav-links">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="caption.html" class="nav-link">Captions</a>
+            <a href="hashtags.html" class="nav-link">Hashtags</a>
+            <a href="bio.html" class="nav-link">Bios</a>
+            <a href="reel-ideas.html" class="nav-link">Reels</a>
+        </div>
+        <div class="nav-actions">
+            <button id="theme-toggle" class="theme-toggle-btn" title="Toggle Light/Dark Mode">
+                <i class="fa-solid fa-sun"></i>
+            </button>
+            <div class="credit-badge" id="credit-count">
+                <i class="fa-solid fa-bolt"></i> -- Credits
+            </div>
+            <button class="mobile-menu-btn"><i class="fa-solid fa-bars"></i></button>
+        </div>
+    </nav>
+
+    <main class="section" style="padding-top: 8rem; min-height: 80vh; display: flex; align-items: center;">
+        <div style="max-width: 600px; margin: 0 auto; width: 100%;">
+            <div class="section-header reveal">
+                <h1 class="text-gradient">Feedback & Complaints</h1>
+                <p>Help us improve your PRO experience.</p>
+            </div>
+
+            <div class="glass-panel generator-form reveal" style="padding: 3rem;">
+                <form onsubmit="event.preventDefault(); alert('Feedback submitted. Thank you for helping us improve!'); this.reset();">
+                    <div class="form-group">
+                        <label for="type">Type of Feedback</label>
+                        <select id="type" name="type" class="form-control">
+                            <option value="bug">Report a Bug</option>
+                            <option value="feature">Feature Request</option>
+                            <option value="complaint">General Complaint</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group" style="margin-top: 1.5rem;">
+                        <label for="email">Email (Optional, if you want a reply)</label>
+                        <input type="email" id="email" name="email" class="form-control">
+                    </div>
+
+                    <div class="form-group" style="margin-top: 1.5rem;">
+                        <label for="details">Details</label>
+                        <textarea id="details" name="details" class="form-control" rows="5" placeholder="Please describe the issue or suggestion in detail..." required></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 2rem;">
+                        <i class="fa-solid fa-comment-dots"></i> Submit Feedback
+                    </button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

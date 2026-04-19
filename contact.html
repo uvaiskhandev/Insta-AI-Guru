@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | Insta AI Guru PRO</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="mesh-bg"></div>
+
+    <nav class="navbar">
+        <a href="index.html" class="nav-brand">
+            <i class="fa-solid fa-fire"></i><span>Insta</span>AI Guru
+        </a>
+        <div class="nav-links">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="caption.html" class="nav-link">Captions</a>
+            <a href="hashtags.html" class="nav-link">Hashtags</a>
+            <a href="bio.html" class="nav-link">Bios</a>
+            <a href="reel-ideas.html" class="nav-link">Reels</a>
+            <a href="contact.html" class="nav-link active">Contact</a>
+        </div>
+        <div class="nav-actions">
+            <button id="theme-toggle" class="theme-toggle-btn" title="Toggle Light/Dark Mode">
+                <i class="fa-solid fa-sun"></i>
+            </button>
+            <div class="credit-badge" id="credit-count">
+                <i class="fa-solid fa-bolt"></i> -- Credits
+            </div>
+            <button class="mobile-menu-btn"><i class="fa-solid fa-bars"></i></button>
+        </div>
+    </nav>
+
+    <main class="section" style="padding-top: 8rem; min-height: 80vh;">
+        <div class="section-header reveal">
+            <h1 class="text-gradient">Get In Touch</h1>
+            <p>Have questions about PRO? Connect with the developer.</p>
+        </div>
+
+        <div style="max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 3rem;" class="reveal">
+            
+            <!-- Contact Info -->
+            <div class="glass-panel contact-info-card" style="padding: 3rem; display: flex; flex-direction: column; gap: 2rem; height: fit-content; transition: var(--transition-smooth);">
+                <div>
+                    <h3 style="margin-bottom: 0.5rem; color: var(--color-primary);">Contact Information</h3>
+                    <p class="text-muted">Reach out through any of these platforms. I typically reply within 24 hours.</p>
+                </div>
+                
+                <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+                    <a href="tel:+917453082975" style="display: flex; align-items: center; gap: 1rem; color: var(--color-text); text-decoration: none;" onmouseover="this.querySelector('.icon-circle').style.background='var(--color-primary)'; this.querySelector('.icon-circle i').style.color='white';" onmouseout="this.querySelector('.icon-circle').style.background='rgba(230, 0, 35, 0.1)'; this.querySelector('.icon-circle i').style.color='var(--color-primary)';">
+                        <div class="icon-circle" style="width: 45px; height: 45px; border-radius: 50%; background: rgba(230, 0, 35, 0.1); color: var(--color-primary); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; transition: var(--transition-smooth);">
+                            <i class="fa-solid fa-phone"></i>
+                        </div>
+                        <div>
+                            <p style="font-size: 0.85rem; color: var(--color-text-muted); margin-bottom: 0.2rem;">Mobile</p>
+                            <p style="font-weight: 500;">+91 74530 82975</p>
+                        </div>
+                    </a>
+
+                    <a href="https://instagram.com/codebyuvais" target="_blank" style="display: flex; align-items: center; gap: 1rem; color: var(--color-text); text-decoration: none;" onmouseover="this.querySelector('.icon-circle').style.background='var(--color-primary)'; this.querySelector('.icon-circle i').style.color='white';" onmouseout="this.querySelector('.icon-circle').style.background='rgba(230, 0, 35, 0.1)'; this.querySelector('.icon-circle i').style.color='var(--color-primary)';">
+                        <div class="icon-circle" style="width: 45px; height: 45px; border-radius: 50%; background: rgba(230, 0, 35, 0.1); color: var(--color-primary); display: flex; align-items: center; justify-content: center; font-size: 1.3rem; transition: var(--transition-smooth);">
+                            <i class="fa-brands fa-instagram"></i>
+                        </div>
+                        <div>
+                            <p style="font-size: 0.85rem; color: var(--color-text-muted); margin-bottom: 0.2rem;">Instagram</p>
+                            <p style="font-weight: 500;">@codebyuvais</p>
+                        </div>
+                    </a>
+
+                    <a href="https://github.com/uvaiskhandev" target="_blank" style="display: flex; align-items: center; gap: 1rem; color: var(--color-text); text-decoration: none;" onmouseover="this.querySelector('.icon-circle').style.background='var(--color-primary)'; this.querySelector('.icon-circle i').style.color='white';" onmouseout="this.querySelector('.icon-circle').style.background='rgba(230, 0, 35, 0.1)'; this.querySelector('.icon-circle i').style.color='var(--color-primary)';">
+                        <div class="icon-circle" style="width: 45px; height: 45px; border-radius: 50%; background: rgba(230, 0, 35, 0.1); color: var(--color-primary); display: flex; align-items: center; justify-content: center; font-size: 1.3rem; transition: var(--transition-smooth);">
+                            <i class="fa-brands fa-github"></i>
+                        </div>
+                        <div>
+                            <p style="font-size: 0.85rem; color: var(--color-text-muted); margin-bottom: 0.2rem;">GitHub</p>
+                            <p style="font-weight: 500;">uvaiskhandev</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Contact Form -->
+            <div class="glass-panel generator-form" style="padding: 3rem; display: flex; flex-direction: column;">
+                <form onsubmit="event.preventDefault(); alert('Message sent successfully! I will get back to you soon.'); this.reset();" style="display: flex; flex-direction: column; flex-grow: 1;">
+                    <div class="form-group">
+                        <label for="name">Your Name</label>
+                        <input type="text" id="name" name="name" class="form-control" placeholder="John Doe" required>
+                    </div>
+
+                    <div class="form-group" style="margin-top: 1.5rem;">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" class="form-control" placeholder="john@example.com" required>
+                    </div>
+
+                    <div class="form-group" style="margin-top: 1.5rem; flex-grow: 1; display: flex; flex-direction: column;">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" class="form-control" rows="5" placeholder="How can I help you?" style="flex-grow: 1;" required></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 2rem;">
+                        <i class="fa-solid fa-paper-plane"></i> Send Message
+                    </button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

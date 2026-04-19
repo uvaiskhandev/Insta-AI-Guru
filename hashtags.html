@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hashtag Generator | Insta AI Guru PRO</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="mesh-bg"></div>
+
+    <nav class="navbar">
+        <a href="index.html" class="nav-brand">
+            <i class="fa-solid fa-fire"></i><span>Insta</span>AI Guru
+        </a>
+        <div class="nav-links">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="caption.html" class="nav-link">Captions</a>
+            <a href="hashtags.html" class="nav-link active">Hashtags</a>
+            <a href="bio.html" class="nav-link">Bios</a>
+            <a href="reel-ideas.html" class="nav-link">Reels</a>
+        </div>
+        <div class="nav-actions">
+            <button id="theme-toggle" class="theme-toggle-btn" title="Toggle Light/Dark Mode">
+                <i class="fa-solid fa-sun"></i>
+            </button>
+            <div class="credit-badge" id="credit-count">
+                <i class="fa-solid fa-bolt"></i> -- Credits
+            </div>
+            <button class="mobile-menu-btn"><i class="fa-solid fa-bars"></i></button>
+        </div>
+    </nav>
+
+    <main class="section" style="padding-top: 8rem;">
+        <div class="section-header reveal">
+            <h1 class="text-gradient">Hashtag Matrix</h1>
+            <p>Generate optimized hashtag clusters for maximum algorithm reach.</p>
+        </div>
+
+        <div class="generator-layout reveal">
+            <div class="glass-panel generator-form">
+                <form id="generate-form" data-mode="hashtags">
+                    <div class="form-group">
+                        <label for="topic">Main Topic or Niche</label>
+                        <input type="text" id="topic" name="topic" class="form-control" placeholder="e.g., Street Photography, Keto Diet" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="count">Amount</label>
+                        <select id="count" name="count" class="form-control">
+                            <option value="15">15 Hashtags (Safe)</option>
+                            <option value="30" selected>30 Hashtags (Max Reach)</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">
+                        <i class="fa-solid fa-hashtag"></i> Generate Matrix
+                    </button>
+                </form>
+            </div>
+
+            <div class="generator-result-area">
+                <div class="glass-panel result-card">
+                    <div class="result-header">
+                        <h3>Hashtag Clusters</h3>
+                    </div>
+                    <div class="loader" id="loader"></div>
+                    <div id="result-content" class="result-content"></div>
+                    <div class="empty-state" id="empty-state">
+                        <i class="fa-solid fa-hashtag"></i>
+                        <p>Enter your topic to get trending and niche-specific tags.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

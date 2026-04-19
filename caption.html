@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Caption Generator | Insta AI Guru PRO</title>
+    <meta name="description" content="Generate highly engaging Instagram captions using AI. Upload an image or describe your post to get viral captions tailored to your niche.">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="mesh-bg"></div>
+
+    <nav class="navbar">
+        <a href="index.html" class="nav-brand">
+            <i class="fa-solid fa-fire"></i><span>Insta</span>AI Guru
+        </a>
+        <div class="nav-links">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="caption.html" class="nav-link active">Captions</a>
+            <a href="hashtags.html" class="nav-link">Hashtags</a>
+            <a href="bio.html" class="nav-link">Bios</a>
+            <a href="reel-ideas.html" class="nav-link">Reels</a>
+        </div>
+        <div class="nav-actions">
+            <button id="theme-toggle" class="theme-toggle-btn" title="Toggle Light/Dark Mode">
+                <i class="fa-solid fa-sun"></i>
+            </button>
+            <div class="credit-badge" id="credit-count">
+                <i class="fa-solid fa-bolt"></i> -- Credits
+            </div>
+            <button class="mobile-menu-btn"><i class="fa-solid fa-bars"></i></button>
+        </div>
+    </nav>
+
+    <main class="section" style="padding-top: 8rem;">
+        <div class="section-header reveal">
+            <h1 class="text-gradient">Caption Generator</h1>
+            <p>Craft the perfect hook and caption for your next post.</p>
+        </div>
+
+        <div class="generator-layout reveal">
+            <!-- Input Area -->
+            <div class="glass-panel generator-form">
+                <form id="generate-form" data-mode="caption">
+                    <div class="form-group">
+                        <label for="image-upload">Upload Image (Optional for AI Context)</label>
+                        <div class="file-upload-wrapper">
+                            <i class="fa-solid fa-cloud-arrow-up text-primary" style="font-size: 2rem;"></i>
+                            <span>Drag & Drop or Click to Upload</span>
+                            <input type="file" id="image-upload" name="image" accept="image/*">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="description">What is this post about?</label>
+                        <textarea id="description" name="description" class="form-control" placeholder="e.g., A photo of my morning coffee with my new laptop working from a cafe..." required></textarea>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                        <div class="form-group">
+                            <label for="niche">Niche</label>
+                            <input type="text" id="niche" name="niche" class="form-control" placeholder="e.g., Fitness, Tech, Lifestyle">
+                        </div>
+                        <div class="form-group">
+                            <label for="tone">Tone of Voice</label>
+                            <select id="tone" name="tone" class="form-control">
+                                <option value="viral">🔥 Viral / Engaging</option>
+                                <option value="professional">💼 Professional</option>
+                                <option value="funny">😂 Funny / Witty</option>
+                                <option value="luxury">✨ Luxury / Premium</option>
+                                <option value="motivational">💪 Motivational</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                        <div class="form-group">
+                            <label for="length">Length</label>
+                            <select id="length" name="length" class="form-control">
+                                <option value="short">Short</option>
+                                <option value="medium" selected>Medium</option>
+                                <option value="long">Long (Micro-blog)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="emojis">Include Emojis?</label>
+                            <select id="emojis" name="emojis" class="form-control">
+                                <option value="yes">Yes</option>
+                                <option value="no">No</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i> Generate Captions
+                    </button>
+                </form>
+            </div>
+
+            <!-- Output Area -->
+            <div class="generator-result-area">
+                <div class="glass-panel result-card">
+                    <div class="result-header">
+                        <h3>AI Results</h3>
+                        <span class="text-muted" style="font-size: 0.9rem;">Multiple variants</span>
+                    </div>
+                    
+                    <div class="loader" id="loader"></div>
+                    
+                    <div id="result-content" class="result-content"></div>
+
+                    <div class="empty-state" id="empty-state">
+                        <i class="fa-solid fa-robot"></i>
+                        <p>Fill out the form and hit generate to see AI magic here.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
