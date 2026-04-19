@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://insta-ai-guru.vercel.app/sitemap.xml
