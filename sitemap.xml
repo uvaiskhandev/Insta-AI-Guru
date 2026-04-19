@@ -1,51 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://yourdomain.com/</loc>
-    <lastmod>2024-05-20</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
-  </url>
-  <url>
-    <loc>https://yourdomain.com/index.html</loc>
-    <lastmod>2024-05-20</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://yourdomain.com/caption.html</loc>
-    <lastmod>2024-05-20</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://yourdomain.com/hashtags.html</loc>
-    <lastmod>2024-05-20</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://yourdomain.com/bio.html</loc>
-    <lastmod>2024-05-20</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://yourdomain.com/reel-ideas.html</loc>
-    <lastmod>2024-05-20</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://yourdomain.com/contact.html</loc>
-    <lastmod>2024-05-20</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://yourdomain.com/complaint.html</loc>
-    <lastmod>2024-05-20</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
-  </url>
+
+  <!-- MAIN -->
+  <url><loc>https://insta-ai-guru.vercel.app/</loc></url>
+  <url><loc>https://insta-ai-guru.vercel.app/index.html</loc></url>
+  <url><loc>https://insta-ai-guru.vercel.app/blogs.html</loc></url>
+
+  <!-- TOOLS -->
+  <url><loc>https://insta-ai-guru.vercel.app/caption-generator.html</loc></url>
+  <url><loc>https://insta-ai-guru.vercel.app/hashtag-generator.html</loc></url>
+  <url><loc>https://insta-ai-guru.vercel.app/bio-generator.html</loc></url>
+  <url><loc>https://insta-ai-guru.vercel.app/reel-ideas.html</loc></url>
+
+  <!-- BLOGS -->
+  <url><loc>https://insta-ai-guru.vercel.app/blog1.html</loc></url>
+  <url><loc>https://insta-ai-guru.vercel.app/blog2.html</loc></url>
+  <url><loc>https://insta-ai-guru.vercel.app/blog3.html</loc></url>
+  <url><loc>https://insta-ai-guru.vercel.app/blog4.html</loc></url>
+  <url><loc>https://insta-ai-guru.vercel.app/blog5.html</loc></url>
+  <url><loc>https://insta-ai-guru.vercel.app/blog6.html</loc></url>
+  <url><loc>https://insta-ai-guru.vercel.app/blog7.html</loc></url>
+  <url><loc>https://insta-ai-guru.vercel.app/blog8.html</loc></url>
+  <url><loc>https://insta-ai-guru.vercel.app/blog9.html</loc></url>
+  <url><loc>https://insta-ai-guru.vercel.app/blog10.html</loc></url>
+
+  <!-- EXTRA PAGES -->
+  <url><loc>https://insta-ai-guru.vercel.app/contact.html</loc></url>
+  <url><loc>https://insta-ai-guru.vercel.app/complaint.html</loc></url>
+  <url><loc>https://insta-ai-guru.vercel.app/terms.html</loc></url>
+  <url><loc>https://insta-ai-guru.vercel.app/privacy.html</loc></url>
+
 </urlset>
