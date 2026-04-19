@@ -211,12 +211,21 @@ async function handleGeneration(e) {
     if(loader) loader.style.display = 'block';
 
     // Gather form data
-    const formData = new FormData(form);
-    const data = { mode: mode };
-    formData.forEach((value, key) => {
-        // Simple file skip for this demo if needed, usually we'd base64 it
-        if(key !== 'image') data[key] = value;
-    });
+ const formData = new FormData(form);
+const data = { mode: mode };
+
+for (const [key, value] of formData.entries()) {
+  if (key !== "image") {
+    data[key] = value;
+  }
+}
+
+const imageFile = formData.get("image");
+if (imageFile && imageFile.size > 0) {
+  const base64 = await fileToBase64(imageFile);
+  data.imageBase64 = base64;
+  data.imageMimeType = imageFile.type;
+}
 
     try {
         // Call Serverless API
@@ -312,6 +321,18 @@ floatCards.forEach(card => {
         card.style.left = (initialX + currentX) + 'px';
         card.style.top = (initialY + currentY) + 'px';
     }
+    function fileToBase64(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      const result = reader.result || "";
+      const base64 = String(result).split(",")[1];
+      resolve(base64);
+    };
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+}
 
     function dragEnd() {
         if(!isDragging) return;
