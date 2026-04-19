@@ -3,27 +3,111 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Insta AI Guru PRO - AI Powered Instagram Growth Toolkit</title>
-    <meta name="description" content="Dominate Instagram with AI. Generate captions, hashtags, bios, and reel ideas instantly with Insta AI Guru PRO.">
-    <meta name="keywords" content="Instagram AI, caption generator, hashtag generator, bio generator, reel ideas, AI social media toolkit">
+
+    <title>Insta AI Guru PRO - AI Caption, Hashtag, Bio & Reel Idea Generator</title>
+    <meta name="description" content="Insta AI Guru PRO is an AI-powered Instagram toolkit to generate captions, hashtags, bios, and reel ideas in seconds. Built for creators, brands, resellers, and agencies.">
+    <meta name="keywords" content="AI Instagram tools, caption generator, hashtag generator, bio generator, reel ideas generator, Instagram growth AI, Insta AI Guru">
+    <meta name="author" content="Insta AI Guru PRO">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <meta name="theme-color" content="#050505">
+
     <link rel="canonical" href="https://insta-ai-guru.vercel.app/">
 
+    <!-- Open Graph -->
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Insta AI Guru PRO">
-    <meta property="og:description" content="AI Powered Instagram Growth Toolkit">
+    <meta property="og:url" content="https://insta-ai-guru.vercel.app/">
+    <meta property="og:title" content="Insta AI Guru PRO - AI Instagram Growth Toolkit">
+    <meta property="og:description" content="Generate Instagram captions, hashtags, bios, and reel ideas with AI. Fast, clean, and built for creators, brands, and agencies.">
     <meta property="og:image" content="https://insta-ai-guru.vercel.app/og-image.jpg">
+    <meta property="og:site_name" content="Insta AI Guru PRO">
 
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Insta AI Guru PRO - AI Instagram Growth Toolkit">
+    <meta name="twitter:description" content="Generate captions, hashtags, bios, and reel ideas with AI for Instagram growth.">
+    <meta name="twitter:image" content="https://insta-ai-guru.vercel.app/og-image.jpg">
+
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <link rel="stylesheet" href="style.css">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Insta AI Guru PRO",
+      "url": "https://insta-ai-guru.vercel.app/",
+      "description": "AI-powered Instagram toolkit for captions, hashtags, bios, and reel ideas.",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://insta-ai-guru.vercel.app/"
+      }
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Insta AI Guru PRO",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Web",
+      "url": "https://insta-ai-guru.vercel.app/",
+      "description": "AI-powered web app for generating Instagram captions, hashtags, bios, and reel ideas.",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is Insta AI Guru PRO?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Insta AI Guru PRO is an AI-powered Instagram toolkit that helps users generate captions, hashtags, bios, and reel ideas."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Who can use Insta AI Guru PRO?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It is useful for creators, influencers, brands, resellers, businesses, and agencies looking to create Instagram content faster."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What tools are included?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The platform includes a caption generator, hashtag generator, bio generator, and reel idea generator."
+          }
+        }
+      ]
+    }
+    </script>
 </head>
 <body>
+    <!-- Background Effects -->
     <div class="mesh-bg"></div>
     <div class="bg-glow"></div>
 
     <!-- Navigation -->
     <nav class="navbar">
-        <a href="index.html" class="nav-brand">
+        <a href="index.html" class="nav-brand" aria-label="Insta AI Guru PRO Home">
             <i class="fa-solid fa-fire"></i><span>Insta</span>AI Guru
         </a>
 
@@ -37,7 +121,7 @@
         </div>
 
         <div class="nav-actions">
-            <button id="theme-toggle" class="theme-toggle-btn" title="Toggle Light/Dark Mode">
+            <button id="theme-toggle" class="theme-toggle-btn" title="Toggle Light/Dark Mode" aria-label="Toggle theme">
                 <i class="fa-solid fa-sun"></i>
             </button>
 
@@ -51,7 +135,7 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
+    <!-- Hero -->
     <header class="hero">
         <div class="floating-elements">
             <div class="float-card" style="top: 20%; left: 10%;">
@@ -71,16 +155,16 @@
         </div>
 
         <div class="hero-content">
-            <div class="hero-badge reveal">INSTAGRAM GROWTH REDEFINED</div>
+            <div class="hero-badge reveal">AI TOOLKIT FOR INSTAGRAM GROWTH</div>
 
             <h1 class="reveal" style="transition-delay: 0.1s;">
-                Grow Faster With <br>
+                Create Better Instagram Content With <br>
                 <span class="text-gradient">Insta AI Guru PRO</span>
             </h1>
 
             <p class="reveal" style="transition-delay: 0.2s;">
-                Your all-in-one AI toolkit for Instagram. Generate captions, targeted hashtags,
-                optimized bios, and reel ideas in seconds for creators, brands, and resellers.
+                Generate engaging captions, smarter hashtags, attractive bios, and fresh reel ideas in seconds.
+                Built for creators, brands, resellers, and agencies who want faster content creation and better Instagram growth.
             </p>
 
             <div class="hero-btns reveal" style="transition-delay: 0.3s;">
@@ -94,120 +178,220 @@
         </div>
     </header>
 
-    <!-- Tools Overview -->
+    <!-- Tools -->
     <section id="tools" class="section glass-panel" style="margin: 0 5%; border-radius: 24px;">
         <div class="section-header reveal">
-            <h2 class="text-gradient">The PRO Growth Arsenal</h2>
-            <p>Everything you need to create smarter Instagram content from one place.</p>
+            <h2 class="text-gradient">Everything You Need In One Instagram AI Toolkit</h2>
+            <p>
+                Use dedicated tools to write faster, stay consistent, and make your Instagram content more professional.
+            </p>
         </div>
 
         <div class="tools-grid reveal" style="transition-delay: 0.2s;">
-            <div class="tool-card glass-panel">
+            <article class="tool-card glass-panel">
                 <div class="tool-icon">
                     <i class="fa-solid fa-quote-left"></i>
                 </div>
-                <h3>Caption Generator</h3>
+                <h3>AI Caption Generator</h3>
                 <p>
-                    Create engaging captions from your post idea or image. Built to help you write faster,
-                    better, and with more clarity.
+                    Turn your post idea into engaging Instagram captions with the right tone, style, and clarity for your audience.
                 </p>
                 <a href="caption.html" class="btn btn-secondary">Generate Captions</a>
-            </div>
+            </article>
 
-            <div class="tool-card glass-panel">
+            <article class="tool-card glass-panel">
                 <div class="tool-icon">
                     <i class="fa-solid fa-hashtag"></i>
                 </div>
                 <h3>Hashtag Generator</h3>
                 <p>
-                    Get relevant hashtags for better reach, improved discoverability, and more targeted Instagram visibility.
+                    Find more relevant hashtags for better reach, improved discoverability, and smarter Instagram posting.
                 </p>
                 <a href="hashtags.html" class="btn btn-secondary">Find Hashtags</a>
-            </div>
+            </article>
 
-            <div class="tool-card glass-panel">
+            <article class="tool-card glass-panel">
                 <div class="tool-icon">
                     <i class="fa-solid fa-user-pen"></i>
                 </div>
                 <h3>Bio Generator</h3>
                 <p>
-                    Generate clean, professional, and attractive bios for creators, businesses, and personal brands.
+                    Create clean and powerful Instagram bios for creators, businesses, shops, and personal brands.
                 </p>
-                <a href="bio.html" class="btn btn-secondary">Craft Your Bio</a>
-            </div>
+                <a href="bio.html" class="btn btn-secondary">Create Bio</a>
+            </article>
 
-            <div class="tool-card glass-panel">
+            <article class="tool-card glass-panel">
                 <div class="tool-icon">
                     <i class="fa-solid fa-video"></i>
                 </div>
-                <h3>Reel Ideas Lab</h3>
+                <h3>Reel Ideas Generator</h3>
                 <p>
-                    Never run out of content. Get fresh reel ideas, hooks, and content directions for your niche.
+                    Get fresh reel ideas, content directions, and hooks when you are confused about what to post next.
                 </p>
                 <a href="reel-ideas.html" class="btn btn-secondary">Get Reel Ideas</a>
-            </div>
+            </article>
         </div>
     </section>
 
     <!-- Why Choose -->
     <section class="section">
         <div class="section-header reveal">
-            <h2>Why Choose <span class="text-primary">Insta AI Guru PRO</span>?</h2>
-            <p>Made for creators, brands, resellers, and agencies who want faster content creation.</p>
+            <h2>Why Users Choose <span class="text-primary">Insta AI Guru PRO</span></h2>
+            <p>
+                Built to save time, reduce creative confusion, and help users post better content more consistently.
+            </p>
         </div>
 
         <div class="tools-grid">
             <div class="glass-panel reveal" style="padding: 2rem; text-align: center;">
                 <i class="fa-solid fa-bolt text-primary" style="font-size: 2rem; margin-bottom: 1rem;"></i>
-                <h4>Lightning Fast</h4>
-                <p class="text-muted">Generate content in seconds and save time on daily Instagram posting.</p>
+                <h4>Fast Results</h4>
+                <p>Generate Instagram content in seconds instead of spending too much time writing manually.</p>
             </div>
 
             <div class="glass-panel reveal" style="padding: 2rem; text-align: center; transition-delay: 0.1s;">
                 <i class="fa-solid fa-brain text-primary" style="font-size: 2rem; margin-bottom: 1rem;"></i>
-                <h4>AI Powered</h4>
-                <p class="text-muted">Smart suggestions for captions, bios, hashtags, and reels from one toolkit.</p>
+                <h4>Smarter Ideas</h4>
+                <p>Use AI to improve captions, hashtags, bios, and reel planning with better content suggestions.</p>
             </div>
 
             <div class="glass-panel reveal" style="padding: 2rem; text-align: center; transition-delay: 0.2s;">
                 <i class="fa-solid fa-layer-group text-primary" style="font-size: 2rem; margin-bottom: 1rem;"></i>
                 <h4>All In One</h4>
-                <p class="text-muted">No need to jump between tools. Everything is organized in one clean workflow.</p>
+                <p>No need to use multiple websites. Get all major Instagram writing tools in one place.</p>
             </div>
         </div>
     </section>
 
-    <!-- Sample Use Cases -->
+    <!-- Audience -->
     <section class="section">
         <div class="section-header reveal">
-            <h2 class="text-gradient">Who Is It For?</h2>
-            <p>Whether you sell, create, teach, or grow a page, Insta AI Guru helps you move faster.</p>
+            <h2 class="text-gradient">Who Is Insta AI Guru PRO For?</h2>
+            <p>
+                Designed for anyone who wants to grow faster on Instagram with better content and clearer messaging.
+            </p>
         </div>
 
         <div class="tools-grid">
-            <div class="tool-card glass-panel reveal">
+            <article class="tool-card glass-panel reveal">
                 <div class="tool-icon">
                     <i class="fa-solid fa-camera"></i>
                 </div>
-                <h3>Creators</h3>
-                <p>Plan better captions, bios, and reels without wasting time thinking what to post next.</p>
-            </div>
+                <h3>Content Creators</h3>
+                <p>Write captions faster, plan better reels, and keep your content consistent without daily struggle.</p>
+            </article>
 
-            <div class="tool-card glass-panel reveal" style="transition-delay: 0.1s;">
+            <article class="tool-card glass-panel reveal" style="transition-delay: 0.1s;">
                 <div class="tool-icon">
                     <i class="fa-solid fa-store"></i>
                 </div>
-                <h3>Businesses</h3>
-                <p>Promote products with stronger captions, relevant hashtags, and more polished brand messaging.</p>
-            </div>
+                <h3>Brands & Shops</h3>
+                <p>Promote products with stronger captions, targeted hashtags, and clear brand messaging.</p>
+            </article>
 
-            <div class="tool-card glass-panel reveal" style="transition-delay: 0.2s;">
+            <article class="tool-card glass-panel reveal" style="transition-delay: 0.2s;">
                 <div class="tool-icon">
                     <i class="fa-solid fa-bullhorn"></i>
                 </div>
-                <h3>Agencies</h3>
-                <p>Speed up content production for clients and improve consistency across multiple accounts.</p>
+                <h3>Agencies & Freelancers</h3>
+                <p>Save time when creating content for clients and improve productivity with one organized workflow.</p>
+            </article>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="section glass-panel" style="margin: 0 5%; border-radius: 24px;">
+        <div class="section-header reveal">
+            <h2>How It Works</h2>
+            <p>Start using Insta AI Guru PRO in a few simple steps.</p>
+        </div>
+
+        <div class="tools-grid">
+            <div class="glass-panel reveal" style="padding: 2rem; text-align: center;">
+                <i class="fa-solid fa-1 text-primary" style="font-size: 2rem; margin-bottom: 1rem;"></i>
+                <h4>Choose A Tool</h4>
+                <p>Pick the tool you need, such as captions, hashtags, bios, or reel ideas.</p>
             </div>
+
+            <div class="glass-panel reveal" style="padding: 2rem; text-align: center; transition-delay: 0.1s;">
+                <i class="fa-solid fa-2 text-primary" style="font-size: 2rem; margin-bottom: 1rem;"></i>
+                <h4>Enter Your Idea</h4>
+                <p>Add your topic, niche, post concept, or content need to guide the AI output.</p>
+            </div>
+
+            <div class="glass-panel reveal" style="padding: 2rem; text-align: center; transition-delay: 0.2s;">
+                <i class="fa-solid fa-3 text-primary" style="font-size: 2rem; margin-bottom: 1rem;"></i>
+                <h4>Generate Instantly</h4>
+                <p>Get usable content quickly, then copy, edit, and publish it on Instagram.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section">
+        <div class="section-header reveal">
+            <h2>Frequently Asked Questions</h2>
+            <p>Quick answers to help users understand the platform better.</p>
+        </div>
+
+        <div class="tools-grid">
+            <article class="tool-card glass-panel reveal">
+                <h3>What does Insta AI Guru PRO do?</h3>
+                <p>
+                    Insta AI Guru PRO helps generate captions, hashtags, bios, and reel ideas with AI for Instagram users.
+                </p>
+            </article>
+
+            <article class="tool-card glass-panel reveal" style="transition-delay: 0.1s;">
+                <h3>Is it useful for businesses too?</h3>
+                <p>
+                    Yes, it is useful for creators, personal brands, shops, businesses, resellers, and agencies.
+                </p>
+            </article>
+
+            <article class="tool-card glass-panel reveal" style="transition-delay: 0.2s;">
+                <h3>Why would users come back again?</h3>
+                <p>
+                    Because they can use the platform regularly for new captions, new reel ideas, improved hashtags, and profile updates.
+                </p>
+            </article>
+        </div>
+    </section>
+
+    <!-- Internal Links / CTA -->
+    <section class="section">
+        <div class="section-header reveal">
+            <h2 class="text-gradient">Start Using The Right Tool Now</h2>
+            <p>
+                Pick a tool below and begin creating better Instagram content with less effort.
+            </p>
+        </div>
+
+        <div class="tools-grid reveal">
+            <a href="caption.html" class="tool-card glass-panel">
+                <div class="tool-icon"><i class="fa-solid fa-quote-left"></i></div>
+                <h3>Open Caption Tool</h3>
+                <p>Create captions for posts, products, offers, and content ideas.</p>
+            </a>
+
+            <a href="hashtags.html" class="tool-card glass-panel">
+                <div class="tool-icon"><i class="fa-solid fa-hashtag"></i></div>
+                <h3>Open Hashtag Tool</h3>
+                <p>Generate hashtags that match your niche and improve post visibility.</p>
+            </a>
+
+            <a href="bio.html" class="tool-card glass-panel">
+                <div class="tool-icon"><i class="fa-solid fa-user-pen"></i></div>
+                <h3>Open Bio Tool</h3>
+                <p>Build a better Instagram profile bio for personal or business use.</p>
+            </a>
+
+            <a href="reel-ideas.html" class="tool-card glass-panel">
+                <div class="tool-icon"><i class="fa-solid fa-video"></i></div>
+                <h3>Open Reel Ideas Tool</h3>
+                <p>Find your next content direction and avoid creative block.</p>
+            </a>
         </div>
     </section>
 
@@ -218,7 +402,9 @@
                 <a href="index.html" class="nav-brand">
                     <i class="fa-solid fa-fire"></i><span>Insta</span>AI Guru
                 </a>
-                <p>Your premium AI companion for Instagram growth. Built for creators, agencies, and brands.</p>
+                <p>
+                    Your premium AI companion for Instagram growth. Built for creators, businesses, resellers, and agencies.
+                </p>
             </div>
 
             <div class="footer-links">
@@ -227,7 +413,7 @@
                     <li><a href="caption.html">Caption Generator</a></li>
                     <li><a href="hashtags.html">Hashtag Generator</a></li>
                     <li><a href="bio.html">Bio Generator</a></li>
-                    <li><a href="reel-ideas.html">Reel Ideas</a></li>
+                    <li><a href="reel-ideas.html">Reel Ideas Generator</a></li>
                 </ul>
             </div>
 
@@ -236,8 +422,8 @@
                 <ul>
                     <li><a href="contact.html">Contact Us</a></li>
                     <li><a href="complaint.html">Feedback</a></li>
-                    <li><a href="#">Privacy Policy</a></li>
-                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#privacy.html">Privacy Policy</a></li>
+                    <li><a href="#terms.html">Terms of Service</a></li>
                 </ul>
             </div>
         </div>
