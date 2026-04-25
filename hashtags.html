@@ -1,82 +1,154 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hashtag Generator | Insta AI Guru PRO</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Instagram Hashtag Generator — Find Trending Hashtags with AI | Insta AI Guru PRO</title>
+  <meta name="description" content="Generate the best Instagram hashtags for any niche with AI. Get 30 optimized hashtags instantly to maximize your reach and grow your followers — free.">
+  <meta name="keywords" content="instagram hashtag generator, best hashtags for instagram, trending hashtags, hashtag finder, free hashtag tool, instagram reach booster">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://instaaiguru.vercel.app/hashtags.html">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Instagram Hashtag Generator | Insta AI Guru PRO">
+  <meta property="og:description" content="Generate 30 AI-optimized Instagram hashtags for maximum reach — free and instant.">
+  <meta property="og:url" content="https://instaaiguru.vercel.app/hashtags.html">
+  <meta property="og:image" content="https://instaaiguru.vercel.app/og-image.jpg">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Instagram Hashtag Generator",
+    "url": "https://instaaiguru.vercel.app/hashtags.html",
+    "applicationCategory": "SocialNetworkingApplication",
+    "description": "AI-powered Instagram hashtag generator for maximum reach.",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="mesh-bg"></div>
+  <div class="mesh-bg" aria-hidden="true"></div>
 
-    <nav class="navbar">
-        <a href="index.html" class="nav-brand">
-            <i class="fa-solid fa-fire"></i><span>Insta</span>AI Guru
-        </a>
-        <div class="nav-links">
-            <a href="index.html" class="nav-link">Home</a>
-            <a href="caption.html" class="nav-link">Captions</a>
-            <a href="hashtags.html" class="nav-link active">Hashtags</a>
-            <a href="bio.html" class="nav-link">Bios</a>
-            <a href="reel-ideas.html" class="nav-link">Reels</a>
+  <nav class="navbar" role="navigation" aria-label="Main navigation">
+    <a href="index.html" class="nav-brand" aria-label="Insta AI Guru PRO Home">
+      <i class="fa-solid fa-fire" aria-hidden="true"></i><span>Insta</span>AI Guru
+    </a>
+    <div class="nav-links" id="nav-links">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="caption.html" class="nav-link">Captions</a>
+      <a href="hashtags.html" class="nav-link active" aria-current="page">Hashtags</a>
+      <a href="bio.html" class="nav-link">Bios</a>
+      <a href="reel-ideas.html" class="nav-link">Reels</a>
+      <a href="contact.html" class="nav-link">Contact</a>
+    </div>
+    <div class="nav-actions">
+      <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle theme">
+        <i class="fa-solid fa-sun" aria-hidden="true"></i>
+      </button>
+      <div class="credit-badge" id="credit-count" aria-live="polite">
+        <i class="fa-solid fa-bolt" aria-hidden="true"></i> <span>-- Credits</span>
+      </div>
+      <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Open menu" aria-expanded="false">
+        <i class="fa-solid fa-bars" aria-hidden="true"></i>
+      </button>
+    </div>
+  </nav>
+
+  <main class="section" style="padding-top:8rem;">
+    <div class="section-header reveal">
+      <h1 class="text-gradient">Hashtag Matrix</h1>
+      <p>Generate optimized hashtag clusters for maximum Instagram algorithm reach.</p>
+    </div>
+
+    <div class="generator-layout reveal">
+      <div class="glass-panel generator-form">
+        <form id="generate-form" data-mode="hashtags" novalidate>
+          <div class="form-group">
+            <label for="topic">Main Topic or Niche <span style="color:var(--clr-red);">*</span></label>
+            <input type="text" id="topic" name="topic" class="form-control"
+              placeholder="e.g., Street Photography, Keto Diet, Fashion"
+              required aria-required="true">
+          </div>
+
+          <div class="form-group">
+            <label for="count">Number of Hashtags</label>
+            <select id="count" name="count" class="form-control">
+              <option value="15">15 Hashtags (Safe & Focused)</option>
+              <option value="30" selected>30 Hashtags (Maximum Reach)</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="lang">Language / Region</label>
+            <select id="lang" name="lang" class="form-control">
+              <option value="english">English (Global)</option>
+              <option value="hindi">Hindi (India)</option>
+              <option value="hinglish">Hinglish (India)</option>
+            </select>
+          </div>
+
+          <button type="submit" class="btn btn-primary" style="width:100%;">
+            <i class="fa-solid fa-hashtag" aria-hidden="true"></i> Generate Matrix
+          </button>
+        </form>
+      </div>
+
+      <div class="generator-result-area">
+        <div class="glass-panel result-card" aria-live="polite" aria-label="Generated hashtags output">
+          <div class="result-header">
+            <h2 style="font-size:1.1rem;">Hashtag Clusters</h2>
+            <span class="text-muted" style="font-size:0.85rem;">Ready to copy & paste</span>
+          </div>
+          <div class="loader" id="loader" role="status" aria-label="Generating..."></div>
+          <div id="result-content" class="result-content"></div>
+          <div class="empty-state" id="empty-state">
+            <i class="fa-solid fa-hashtag" aria-hidden="true"></i>
+            <p>Enter your topic to get trending and niche-specific tags.</p>
+          </div>
         </div>
-        <div class="nav-actions">
-            <button id="theme-toggle" class="theme-toggle-btn" title="Toggle Light/Dark Mode">
-                <i class="fa-solid fa-sun"></i>
-            </button>
-            <div class="credit-badge" id="credit-count">
-                <i class="fa-solid fa-bolt"></i> -- Credits
-            </div>
-            <button class="mobile-menu-btn"><i class="fa-solid fa-bars"></i></button>
-        </div>
-    </nav>
+      </div>
+    </div>
+  </main>
 
-    <main class="section" style="padding-top: 8rem;">
-        <div class="section-header reveal">
-            <h1 class="text-gradient">Hashtag Matrix</h1>
-            <p>Generate optimized hashtag clusters for maximum algorithm reach.</p>
-        </div>
+  <footer role="contentinfo">
+    <div class="footer-content">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-brand"><i class="fa-solid fa-fire" aria-hidden="true"></i><span>Insta</span>AI Guru</a>
+        <p>Your premium AI companion for Instagram dominance.</p>
+      </div>
+      <nav class="footer-links" aria-label="Tools links">
+        <h4>Tools</h4>
+        <ul>
+          <li><a href="caption.html">Caption Generator</a></li>
+          <li><a href="hashtags.html">Hashtag Matrix</a></li>
+          <li><a href="bio.html">Bio Optimizer</a></li>
+          <li><a href="reel-ideas.html">Reel Ideas</a></li>
+        </ul>
+      </nav>
+      <nav class="footer-links" aria-label="Support links">
+        <h4>Support</h4>
+        <ul>
+          <li><a href="contact.html">Contact Us</a></li>
+          <li><a href="complaint.html">Feedback</a></li>
+          <li><a href="privacy.html">Privacy Policy</a></li>
+          <li><a href="terms.html">Terms of Service</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; <span id="footer-year"></span> Insta AI Guru PRO. All rights reserved.</p>
+    </div>
+  </footer>
 
-        <div class="generator-layout reveal">
-            <div class="glass-panel generator-form">
-                <form id="generate-form" data-mode="hashtags">
-                    <div class="form-group">
-                        <label for="topic">Main Topic or Niche</label>
-                        <input type="text" id="topic" name="topic" class="form-control" placeholder="e.g., Street Photography, Keto Diet" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="count">Amount</label>
-                        <select id="count" name="count" class="form-control">
-                            <option value="15">15 Hashtags (Safe)</option>
-                            <option value="30" selected>30 Hashtags (Max Reach)</option>
-                        </select>
-                    </div>
-
-                    <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">
-                        <i class="fa-solid fa-hashtag"></i> Generate Matrix
-                    </button>
-                </form>
-            </div>
-
-            <div class="generator-result-area">
-                <div class="glass-panel result-card">
-                    <div class="result-header">
-                        <h3>Hashtag Clusters</h3>
-                    </div>
-                    <div class="loader" id="loader"></div>
-                    <div id="result-content" class="result-content"></div>
-                    <div class="empty-state" id="empty-state">
-                        <i class="fa-solid fa-hashtag"></i>
-                        <p>Enter your topic to get trending and niche-specific tags.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </main>
-
-    <script src="script.js"></script>
+  <script src="script.js"></script>
+  <script>document.getElementById('footer-year').textContent = new Date().getFullYear();</script>
 </body>
 </html>
